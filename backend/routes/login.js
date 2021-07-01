@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const { AppUser} = require('../model/user');
@@ -8,10 +9,13 @@ router.post('/', async (req, res) => {
     const {error} = validateUser(req.body);
     if (error) return res.status(400).send(error.message);
 
-    let result = await AppUser.findOne({email: req.body.email, password: req.body.password});
-    if (!result) return res.status(400).send('Oops please check credentials...');
+    let user = await AppUser.findOne({email: req.body.email});
+    if (!user) return res.status(400).send('Invalid email or password.');
 
-    res.send(result);
+    const validPassword = await bcrypt.compare(req.body.password, user.password);
+    if (!validPassword) return res.status(400).send('Invalid email or password.');
+
+    res.send(true);
 });
 
 function validateUser(user) {

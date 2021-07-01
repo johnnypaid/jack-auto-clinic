@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const { AppUser, validate } = require('../model/user');
@@ -23,11 +24,14 @@ router.post('/', async (req, res) => {
     let result = await AppUser.findOne({email: req.body.email});
     if (result) return res.status(400).send('User already registered.');
 
+    // hash password
     appuser = new AppUser(_.pick(req.body, ['name', 'email', 'password', 'isAdmin']));
+    const salt = await bcrypt.genSalt(10);
+    appuser.password = await bcrypt.hash(appuser.password, salt)
 
     const newuser = await appuser.save();
 
-    res.send(_.pick(appuser, ['name', 'email', 'isAdmin']));
+    res.send(_.pick(appuser, ['_id', 'name', 'email', 'isAdmin']));
 });
 
 router.put('/:id', (req, res) => {

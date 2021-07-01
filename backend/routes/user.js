@@ -1,3 +1,4 @@
+const auth = require('../middlewaare/auth');
 const _ = require('lodash');
 const bcrypt = require('bcrypt');
 const express = require('express');
@@ -5,19 +6,19 @@ const router = express.Router();
 const { AppUser, validate } = require('../model/user');
 
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     const result = await AppUser.find();
     res.send(result);
 });
 
-router.get('/:name', async (req, res) => {
+router.get('/:name', auth, async (req, res) => {
     let result = await AppUser.findOne({name: req.params.name});
     if (!result) return res.status(400).send('No user found..');
 
     res.send(result);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.message);
 
@@ -49,11 +50,11 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req,res) => {
-    const user = users.find(el => el.id === parseInt(req.params.id));
+    const user = AppUser.find(el => el.id === parseInt(req.params.id));
     if (!user) return res.status(404).send('No user to delete...');
 
-    const index = users.indexOf(user);
-    users.splice(index, 1);
+    const index = AppUser.indexOf(user);
+    AppUser.splice(index, 1);
 
     res.send(users);
 });

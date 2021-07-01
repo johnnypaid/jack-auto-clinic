@@ -11,6 +11,12 @@ const app = express();
 const user = require('./routes/user');
 const login = require('./routes/login');
 
+// load the environment variable first
+if(!config.get('jwtPrivateKey')) {
+    console.log('FATAL ERROR: jwtPrivateKey is not defined.');
+    // exite process in case of error..
+    process.exit(1);
+}
 // db connection
 mongoose.connect('mongodb://localhost:27017/auto-clnic', {useNewUrlParser: true, useUnifiedTopology: true});
 

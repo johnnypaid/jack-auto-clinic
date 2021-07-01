@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const express = require('express');
 const router = express.Router();
 const { AppUser, validate } = require('../model/user');
@@ -20,16 +21,13 @@ router.post('/', async (req, res) => {
     if (error) return res.status(400).send(error.message);
 
     let result = await AppUser.findOne({email: req.body.email});
-    if (result) return res.status(400).send('User already registered..');
+    if (result) return res.status(400).send('User already registered.');
 
-    appuser = new AppUser({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    });
+    appuser = new AppUser(_.pick(req.body, ['name', 'email', 'password', 'isAdmin']));
 
     const newuser = await appuser.save();
-    res.send(newuser);
+
+    res.send(_.pick(appuser, ['name', 'email', 'isAdmin']));
 });
 
 router.put('/:id', (req, res) => {

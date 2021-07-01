@@ -9,6 +9,7 @@ const log = require('./middlewaare/logger');
 const app = express();  
 
 const user = require('./routes/user');
+const login = require('./routes/login');
 
 // db connection
 mongoose.connect('mongodb://localhost:27017/auto-clnic', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -19,29 +20,6 @@ db.once('open', function() {
  console.log('Connected to database..')
 });
 
-// const userSchema = new mongoose.Schema({
-//     name: String,
-//     email: String,
-//     password: String,
-//     isAdmin: Boolean
-// });
-
-// const AppUser = mongoose.model('AppUser', userSchema);
-
-// async function users() {
-//     const appuser = new AppUser({
-//         name: 'teryo',
-//         email: 'test@y.com',
-//         password: '12345',
-//         isAdmin: true
-//     });
-    
-//     const result = await appuser.save();
-//     console.log(result);
-// }
-
-// users();
-
 // middleware
 app.use(express.json());
 app.use(log);
@@ -50,6 +28,7 @@ app.use(express.static('public'));
 app.use(helmet());
 
 // routes
+app.use('/', login);
 app.use('/api/users', user);
 
 // configuration

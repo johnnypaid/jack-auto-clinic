@@ -1,0 +1,34 @@
+<section>
+  <app-dash-nav></app-dash-nav>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" type="button" (click)="getNotification(0)">
+                <i-feather name="home"></i-feather>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i-feather name="bar-chart-2"></i-feather>
+                Reports
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+    <ng-template [ngIf]="entryCards === true">
+      <app-admin-card (notifyParent)="getNotification($event)"></app-admin-card>
+    </ng-template>
+    <ng-template [ngIf]="userForm === true">
+      <app-user></app-user>
+    </ng-template>
+  </main>
+  </div>
+</section>
+

@@ -1,0 +1,6 @@
+{
+    "name": "Jack's Auto Clinic - Production",
+    "mail": {
+        "host": "prod-mail-server"
+    }
+}

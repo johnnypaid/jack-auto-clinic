@@ -22,9 +22,8 @@ const icons = {
 };
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
+  {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent }
 
 ]

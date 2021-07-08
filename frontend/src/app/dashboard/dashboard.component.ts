@@ -25,7 +25,7 @@ export class DashboardComponent implements OnInit {
     console.log(this.headerStatus.getHeaderStatus());
     this.headStat = this.headerStatus.getHeaderStatus();
     if (this.headStat === undefined) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['']);
     }
   }
 

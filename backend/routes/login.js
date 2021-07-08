@@ -9,6 +9,7 @@ const { AppUser} = require('../model/user');
 const Joi = require('joi');
 
 router.post('/', async (req, res) => {
+    console.log(req.body);
     const {error} = validateUser(req.body);
     if (error) return res.status(400).send(error.message);
 

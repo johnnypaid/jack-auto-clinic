@@ -7,6 +7,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const auth = require('./middleware/auth');
 const log = require('./middleware/logger');
+const path = require('path');
 const app = express();  
 
 const user = require('./routes/user');
@@ -33,17 +34,19 @@ app.use(cors({
     exposedHeaders: ['Content-Length', 'x-auth-token']
 }));
 app.use(express.json());
-app.use(log);
-app.use(express.static('public'));
+// app.use(log);
+app.use(express.static(__dirname + '/public/'));
 app.use(helmet());
 
 
 // login route
-app.use('/', login);
+app.use('/login', login);
 // route guard
 app.use(auth);
-app.use('/api/users', user);
-app.use('/dashboard', user);
+app.get('*', (req, res) => {
+    console.log(req.body);
+    res.sendFile(path.join(__dirname +' /public/index.html'));
+});
 
 // configuration
 console.log('Application Name:' + config.get('name'));

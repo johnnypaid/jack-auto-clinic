@@ -16,6 +16,9 @@ import { DashNavComponent } from './dash-nav/dash-nav.component';
 import { AdminCardComponent } from './admin-card/admin-card.component';
 import { Home, File, BarChart2, Meh, Layers } from 'angular-feather/icons';
 import { UserComponent } from './user/user.component';
+import { EntryComponent } from './entry/entry.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { ProductionComponent } from './production/production.component';
 
 const icons = {
   Home, File, BarChart2, Meh, Layers
@@ -35,7 +38,10 @@ const routes: Routes = [
     PageNotFoundComponent,
     DashNavComponent,
     AdminCardComponent,
-    UserComponent
+    UserComponent,
+    EntryComponent,
+    RegistrationComponent,
+    ProductionComponent
   ],
   imports: [
     BrowserModule,

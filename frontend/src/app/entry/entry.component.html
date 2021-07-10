@@ -1,0 +1,19 @@
+<section>
+    <div class="container" id="container-user">
+      <h3>New Entry</h3>
+      <div class="user-error" *ngIf="showErr">
+        {{ error }}
+      </div>
+      <form class="form-entry" [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+          <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
+          <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
+          <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+          <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+          <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+          <input class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc" required>
+          <div>
+            <button class="btn btn-secondary entry-form" type="submit">Submit</button>
+          </div>
+        </form>
+    </div>
+  </section>

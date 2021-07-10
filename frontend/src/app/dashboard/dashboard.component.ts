@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   headStat: any;
   userForm = false;
   registryForm = false;
+  newEntryForm = false;
   entryCards = true;
 
   user: any;
@@ -37,12 +38,14 @@ export class DashboardComponent implements OnInit {
       case 1: {
         this.userForm = true;
         this.entryCards = false;
+        this.newEntryForm = false;
         break;
       }
       case 2: {
         console.log(evt);
         this.userForm = false;
         this.entryCards = false;
+        this.newEntryForm = true;
         break;
       }
       case 3: {

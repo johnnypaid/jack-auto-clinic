@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
 
-  headerStatus: any;
+  pageData = '';
 
   constructor() { }
 
-  setHeaderStatus(status: any) {
-    this.headerStatus = status;
+  setUserData(data: any) {
+    this.pageData = data;
   }
 
-  getHeaderStatus() {
-    return this.headerStatus;
+  getUserData() {
+    return this.pageData;
   }
 }

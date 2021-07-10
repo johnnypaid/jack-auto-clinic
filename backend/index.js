@@ -30,7 +30,7 @@ db.once('open', function() {
 
 // middleware
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: '*',
     exposedHeaders: ['Content-Length', 'x-auth-token']
 }));
 app.use(express.json());
@@ -38,13 +38,12 @@ app.use(express.json());
 app.use(express.static(__dirname + '/public/'));
 app.use(helmet());
 
-
 // login route
 app.use('/login', login);
 // route guard
 app.use(auth);
+app.use('/api/users', user);
 app.get('*', (req, res) => {
-    console.log(req.body);
     res.sendFile(path.join(__dirname +' /public/index.html'));
 });
 
@@ -59,7 +58,8 @@ if (app.get('env') === 'development') {
 }
 
 const port = process.env.PORT || 3000;
+console.log(port);
 
-app.listen(port, () => {
+app.listen(port, '192.168.254.103', () => {
     console.log(`Server is listening at port: ${port}`);
 });

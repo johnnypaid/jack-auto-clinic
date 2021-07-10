@@ -22,9 +22,9 @@ const icons = {
 };
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent},
-  { path: '**', component: PageNotFoundComponent }
+  {path: '', component: LoginComponent},
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 
 ]
 @NgModule({

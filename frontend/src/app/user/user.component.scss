@@ -2,8 +2,16 @@
   &-form {
     margin-top: 20px;
   }
+  &-error {
+    color: red;
+  }
+  &-success {
+    color: green;
+  }
 }
 
 .form-control {
   max-width: 400px !important;
 }
+
+

@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
-    private responseStatus: CommonService,
+    private common: CommonService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -33,12 +33,15 @@ export class LoginComponent implements OnInit {
       .subscribe(resdata => {
         this.userData = resdata;
         const passport = this.userData.headers.get('x-auth-token');
-        console.log(passport);
-        localStorage.setItem('teryo', passport);
+        localStorage.setItem('token', passport);
         if (this.userData.status === 200) {
-          this.responseStatus.setHeaderStatus(this.userData);
+          this.common.setUserData(this.userData.body);
           this.router.navigate(['/dashboard']);
         }
       });
   }
 }
+function token(token: any, passport: any) {
+  throw new Error('Function not implemented.');
+}
+

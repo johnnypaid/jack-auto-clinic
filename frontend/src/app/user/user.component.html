@@ -1,6 +1,9 @@
 <section>
   <div class="container" id="container-user">
     <h3>Add New User</h3>
+    <div class="user-error" *ngIf="showErr">
+      {{ error }}
+    </div>
     <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <label for="inputName" class="sr-only user-form">User Name</label>
         <input type="text" id="inputName" class="form-control user-form" placeholder="User Name" formControlName="name" required>
@@ -10,13 +13,12 @@
         <input type="password" id="inputPassword" class="form-control user-form" placeholder="Password" formControlName="password" required>
         <label for="inputPassword" class="sr-only user-form">Role</label>
         <select class="form-control user-form" id="isAdmin" formControlName="isAdmin" placeholder="Role">
-          <option>Admin</option>
-          <option>User</option>
+          <option value="true">Admin</option>
+          <option value="false">User</option>
         </select>
         <div>
           <button class="btn btn-secondary user-form" type="submit">Add User</button>
         </div>
       </form>
-
   </div>
 </section>

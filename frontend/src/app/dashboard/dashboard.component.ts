@@ -14,19 +14,22 @@ export class DashboardComponent implements OnInit {
   registryForm = false;
   entryCards = true;
 
-  constructor(private headerStatus: CommonService, private router: Router) { }
+  user: any;
+
+  constructor(private common: CommonService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getHeader();
+    
+    if (localStorage.getItem('token') === undefined || localStorage.getItem('token') === null) {
+      this.router.navigate(['/']);
+    }
+
+    this.getUser();
     this.entryCards = true;
   }
 
-  getHeader() {
-    console.log(this.headerStatus.getHeaderStatus());
-    this.headStat = this.headerStatus.getHeaderStatus();
-    if (this.headStat === undefined) {
-      this.router.navigate(['']);
-    }
+  getUser() {
+     console.log(this.common.getUserData());
   }
 
   getNotification(evt: any) {

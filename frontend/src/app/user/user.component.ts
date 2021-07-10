@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonService } from './../service/common.service';
+import { UserService } from './../service/user.service';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { PromptMessageService } from '../service/prompt-message.service';
 
 @Component({
   selector: 'app-user',
@@ -15,14 +18,47 @@ export class UserComponent implements OnInit {
     isAdmin: ['', Validators.required]
   });
 
-  constructor(private formBuilder: FormBuilder) { }
+  passport: any;
+  error = '';
+  success = '';
+  showErr = false;
+  showSuccess = false;
+  resData: any;
+  resStatus = 0;
 
-  ngOnInit(): void {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private userService: UserService, 
+    private common: CommonService,
+    private message: PromptMessageService,
+    private element: ElementRef) { }
+
+  ngOnInit(): void { 
+    this.showErr = false;
+    this.showSuccess = false;
+    this.passport = localStorage.getItem('token');
   }
 
   onSubmit() {
+    this.showErr = false;
+    this.showSuccess = false;
+    console.log(this.userForm.value);
     if (this.userForm.status === 'VALID') {
-      console.log(this.userForm)
-    };
+      this.userService.createUser(this.userForm.value, this.passport)
+        .subscribe(resdata => {
+          this.showErr = false;
+          this.resData = resdata;
+          this.message.setMessage('User added succesfully.');
+          this.userForm.reset();
+        }, error => {
+          if (error) {
+            this.error = error.error;
+            this.showErr = true;
+          }
+        });
+    } else {
+      this.error = 'Please fillup user details.';
+      this.showErr = true;
+    }
   }
 }

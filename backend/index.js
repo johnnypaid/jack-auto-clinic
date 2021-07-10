@@ -12,6 +12,7 @@ const app = express();
 
 const user = require('./routes/user');
 const login = require('./routes/login');
+const entry = require('./routes/entry');
 
 // load the environment variable first
 if(!config.get('jwtPrivateKey')) {
@@ -43,6 +44,7 @@ app.use('/login', login);
 // route guard
 app.use(auth);
 app.use('/api/users', user);
+app.use('/api/entry', entry);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname +' /public/index.html'));
 });

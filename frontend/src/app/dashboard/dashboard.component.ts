@@ -64,6 +64,7 @@ export class DashboardComponent implements OnInit {
       default: {
         this.newEntryForm = false;
         this.userForm = false;
+        this.entryTbl = false;
         this.entryCards = true;
         break;
       }

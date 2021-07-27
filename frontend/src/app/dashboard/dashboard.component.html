@@ -11,10 +11,42 @@
                 Dashboard
               </a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="#">
                 <i-feather name="bar-chart-2"></i-feather>
                 Reports
+              </a>
+            </li> -->
+          </ul>
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Saved reports</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a type="button" class="nav-link" (click)="getReports(1)">
+                <i-feather name="file-text"></i-feather>
+                Entry
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i-feather name="file-text"></i-feather>
+                Registration
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i-feather name="file-text"></i-feather>
+                Production
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i-feather name="file-text"></i-feather>
+                Users
               </a>
             </li>
           </ul>
@@ -30,6 +62,9 @@
     </ng-template>
     <ng-template [ngIf]="newEntryForm === true">
       <app-entry></app-entry>
+    </ng-template>
+    <ng-template [ngIf]="entryTbl === true">
+      <app-entry-tbl></app-entry-tbl>
     </ng-template>
   </main>
   </div>

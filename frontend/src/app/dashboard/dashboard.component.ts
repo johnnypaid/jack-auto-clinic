@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   registryForm = false;
   newEntryForm = false;
   entryCards = true;
+  entryTbl = false;
 
   user: any;
 
@@ -68,4 +69,13 @@ export class DashboardComponent implements OnInit {
       }
     }
   }
+
+  getReports(num: number) {
+    console.log(num);
+    this.entryTbl = true;
+    this.entryCards = false;
+    this.newEntryForm = false;
+    this.userForm = false;
+  }
+
 }

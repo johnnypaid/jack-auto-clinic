@@ -18,7 +18,7 @@ router.get('/:name', auth, async (req, res) => {
     res.send(result);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     console.log('users')
     console.log(req.body);
     const {error} = validate(req.body);

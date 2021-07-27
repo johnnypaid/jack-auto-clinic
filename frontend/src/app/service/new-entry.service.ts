@@ -12,8 +12,12 @@ export class NewEntryService {
 
   constructor(private http: HttpClient, private common: CommonService, private apiError: ApiError) { }
 
-  getAllUsers() {
-   
+  getAllUsers(_passport: string) {
+    return this.http.get(this.endpoint, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('x-auth-token', _passport),  observe: 'response'
+    }).pipe();
   }
 
   newEntry(data: any, _passport: string) {

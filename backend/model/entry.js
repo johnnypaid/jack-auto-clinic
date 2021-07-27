@@ -39,7 +39,7 @@ function validateEntry(entry) {
         bodyCode: Joi.string().required(),
         supplier: Joi.string().required(),
         containerNum: Joi.string().required(),
-        unitDesc: Joi.string()
+        unitDesc: Joi.string().allow('')
     });
 
    return schema.validate(entry);

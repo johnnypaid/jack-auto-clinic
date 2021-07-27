@@ -1,18 +1,24 @@
 <section>
-    <div class="container" id="container-user">
+    <div class="container entry-user">
       <h3>New Entry</h3>
-      <div class="user-error" *ngIf="showErr">
-        {{ error }}
-      </div>
       <form class="form-entry" [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+          <label class="entry-label" for="chassis">Chasis Number</label>
           <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
+          <label class="entry-label" for="chassis">Engine Numbers</label>
           <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
+          <label class="entry-label" for="chassis">Body Code</label>
           <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+          <label class="entry-label" for="chassis">Supplier</label>
           <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+          <label class="entry-label" for="chassis">Container Number</label>
           <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
-          <input class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc" required>
+          <label class="entry-label" for="chassis">Unit Descripton</label>
+          <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
+          <div class="entry-error" *ngIf="showErr">
+            {{ error }}
+          </div>
           <div>
-            <button class="btn btn-secondary entry-form" type="submit">Submit</button>
+            <button class="btn btn-secondary entry-btn" type="submit">Submit</button>
           </div>
         </form>
     </div>

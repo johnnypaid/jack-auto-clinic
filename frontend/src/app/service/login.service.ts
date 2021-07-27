@@ -19,6 +19,5 @@ export class LoginService {
       .set('Content-Type', 'application/json'), observe: 'response' }).pipe(
         catchError(this.apiError.handleError)
       );
-
   }
 }

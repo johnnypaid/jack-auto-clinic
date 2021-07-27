@@ -1,6 +1,7 @@
 import { NewEntryService } from './../service/new-entry.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { PromptMessageService } from '../service/prompt-message.service';
 
 @Component({
   selector: 'app-entry',
@@ -11,7 +12,8 @@ export class EntryComponent implements OnInit {
 
   error = ''
   showErr = false;
-  passport: any
+  passport: any;
+  submit = false;
 
   entryForm = this.formBuilder.group({
     chassisNum: ['', Validators.required],
@@ -19,20 +21,47 @@ export class EntryComponent implements OnInit {
     bodyCode: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
-    unitDesc: ['', Validators.required],
+    unitDesc: ['default'],
   });
+  
 
-  constructor(private formBuilder: FormBuilder, private newEntry: NewEntryService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private newEntry: NewEntryService, 
+    private message: PromptMessageService) { }
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
+
+    this.newEntry.getAllUsers(this.passport)
+    .subscribe(resdata => {
+      console.log(resdata);
+    })
   }
 
   onSubmit() {
     console.log(this.entryForm.value);
-    this.newEntry.newEntry(this.entryForm.value, this.passport)
-      .subscribe(resdata => {
-        console.log(resdata)
-      })
+    if (this.entryForm.valid === true) {
+      console.log(this.entryForm.valid);
+       try {
+        this.newEntry.newEntry(this.entryForm.value, this.passport)
+        .subscribe(resdata => {
+          console.log(resdata);
+          this.showErr = false;
+          this.message.setMessage('User added succesfully.');
+          this.entryForm.reset();
+        }, error => {
+          this.error = error.error;
+          console.log(error);
+          this.showErr = true;
+        })
+       } catch (error) {
+        this.error = error;
+        this.showErr = true;
+       }
+    } else {
+      this.error = 'Please complete details.';
+      this.showErr = true;
+    }
   }
 }

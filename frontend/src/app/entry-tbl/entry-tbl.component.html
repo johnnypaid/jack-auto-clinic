@@ -8,13 +8,33 @@
       <th scope="col">Supplier</th>
       <th scope="col">Container #</th>
       <th scope="col">Description</th>
+      <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
+    <tr *ngFor="let entry of entryTable; index as i">
+      <th scope="row">{{ i + 1 }}</th>
       <td>
-        
+        {{entry.chassisNum}}
+      </td>
+      <td>
+        {{entry.engineNum}}
+      </td>
+      <td>
+        {{entry.bodyCode}}
+      </td>
+      <td>
+        {{entry.supplier}}
+      </td>
+      <td>
+        {{entry.containerNum}}
+      </td>
+      <td>
+        {{entry.unitDesc}}
+      </td>
+      <td>
+        <a class="entry-edit" title="Delete" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+        <a class="entry-delete" title="Delete" data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
       </td>
     </tr>
     </tbody>

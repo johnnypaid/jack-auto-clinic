@@ -21,13 +21,14 @@ export class DashboardComponent implements OnInit {
   constructor(private common: CommonService, private router: Router) { }
 
   ngOnInit(): void {
-    
     if (localStorage.getItem('token') === undefined || localStorage.getItem('token') === null) {
       this.router.navigate(['/']);
     }
 
+    const current = JSON.parse(localStorage.getItem('current') || '{}');
+
+    this.getNotification(parseInt(current));
     this.getUser();
-    this.entryCards = true;
   }
 
   getUser() {
@@ -35,30 +36,39 @@ export class DashboardComponent implements OnInit {
   }
 
   getNotification(evt: any) {
-    switch (evt) {
+    switch (parseInt(evt)) {
       case 1: {
         this.userForm = true;
         this.entryCards = false;
         this.newEntryForm = false;
+        this.setLocal(1);
         break;
       }
       case 2: {
-        console.log(evt);
         this.userForm = false;
         this.entryCards = false;
         this.newEntryForm = true;
+        this.setLocal(2);
         break;
       }
       case 3: {
-        console.log(evt);
         this.userForm = false;
         this.entryCards = false;
+        this.setLocal(3);
         break;
       }
       case 4: {
-        console.log(evt);
         this.userForm = false;
         this.entryCards = false;
+        this.setLocal(4);
+        break;
+      }
+      case 5: {
+        this.entryTbl = true;
+        this.entryCards = false;
+        this.newEntryForm = false;
+        this.userForm = false;
+        this.setLocal(5);
         break;
       }
       default: {
@@ -66,17 +76,13 @@ export class DashboardComponent implements OnInit {
         this.userForm = false;
         this.entryTbl = false;
         this.entryCards = true;
+        this.setLocal(0);
         break;
       }
     }
   }
 
-  getReports(num: number) {
-    console.log(num);
-    this.entryTbl = true;
-    this.entryCards = false;
-    this.newEntryForm = false;
-    this.userForm = false;
+  setLocal(num: any) {
+    localStorage.setItem('current', num);
   }
-
 }

@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
 import { ApiError } from 'src/error/api-error';
 import { CommonService } from './common.service';
 
@@ -8,7 +9,8 @@ import { CommonService } from './common.service';
 })
 export class NewEntryService {
 
-  endpoint = 'http://192.168.254.103:3000/api/entry';
+  // endpoint = 'http://192.168.254.103:3000/api/entry';
+  endpoint = 'http://192.168.254.105:3000/api/entry';
 
   constructor(private http: HttpClient, private common: CommonService, private apiError: ApiError) { }
 
@@ -17,7 +19,11 @@ export class NewEntryService {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('x-auth-token', _passport),  observe: 'response'
-    }).pipe();
+    }).pipe(
+      map(data => {
+        return data;
+      })
+    );
   }
 
   newEntry(data: any, _passport: string) {

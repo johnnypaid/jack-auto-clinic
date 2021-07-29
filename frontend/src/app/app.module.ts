@@ -14,21 +14,22 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FeatherModule } from 'angular-feather';
 import { DashNavComponent } from './dash-nav/dash-nav.component';
 import { AdminCardComponent } from './admin-card/admin-card.component';
-import { Home, File, BarChart2, Meh, Layers, FileText } from 'angular-feather/icons';
+import { Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon } from 'angular-feather/icons';
 import { UserComponent } from './user/user.component';
 import { EntryComponent } from './entry/entry.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductionComponent } from './production/production.component';
 import { EntryTblComponent } from './entry-tbl/entry-tbl.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
 
 const icons = {
-  Home, File, BarChart2, Meh, Layers, FileText
+  Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon
 };
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: '', component: LoginComponent},
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 
 ]
 @NgModule({
@@ -43,7 +44,8 @@ const routes: Routes = [
     EntryComponent,
     RegistrationComponent,
     ProductionComponent,
-    EntryTblComponent
+    EntryTblComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

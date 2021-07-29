@@ -1,0 +1,18 @@
+.entry {
+  &-delete {
+    color: red;
+  }
+
+  &-delete :hover{
+    color: #343a40;
+    cursor: pointer;
+  }
+  &-edit :hover{
+    color: #343a40;
+    cursor: pointer;
+  }
+
+  &-edit {
+    color: #343a40;
+  }
+}

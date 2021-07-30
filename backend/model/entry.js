@@ -27,13 +27,15 @@ const entrySchema = new mongoose.Schema({
     },
     unitDesc: {
         type: String
-    }
+    },
+    date: { type: Date, default: Date.now },
 });
 
 const AppEntry = mongoose.model('AppEntry', entrySchema);
 
 function validateEntry(entry) {
     const schema = Joi.object({
+        id: Joi.string().optional(),
         chassisNum: Joi.string().required(),
         engineNum: Joi.string().required(),
         bodyCode: Joi.string().required(),

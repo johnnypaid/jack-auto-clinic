@@ -11,6 +11,7 @@ export class UserService {
 
   // endpoint = 'http://192.168.254.103:3000/api/users';
   endpoint = 'http://192.168.254.105:3000/api/users';
+  // endpoint = 'http://192.168.1.20:3000/api/users';
 
   constructor(private http: HttpClient, private common: CommonService, private apiError: ApiError) { }
 

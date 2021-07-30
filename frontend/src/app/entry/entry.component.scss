@@ -1,7 +1,7 @@
 .entry {
     &-form {
         margin-bottom: 2%;
-    }   
+    }
     &-user {
         padding-right: 10%;
         padding-left: 10%;
@@ -18,5 +18,8 @@
     }
     &-btn {
         margin-bottom: 2%;
+    }
+    &-error {
+      padding: 15px;
     }
 }

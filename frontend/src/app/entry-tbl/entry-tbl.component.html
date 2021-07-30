@@ -1,19 +1,24 @@
-<table class="table table-striped">
+<section>
+  <table class="table table-striped">
     <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Chassis #</th>
-      <th scope="col">Engine #</th>
-      <th scope="col">Body Code</th>
+      <!-- <th scope="col">#</th> -->
+      <th scope="col">Id</th>
+      <th scope="col">Chassis</th>
+      <th scope="col">Engine</th>
+      <th scope="col">Body-C</th>
       <th scope="col">Supplier</th>
-      <th scope="col">Container #</th>
+      <th scope="col">Container</th>
       <th scope="col">Description</th>
       <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let entry of entryTable; index as i">
-      <th scope="row">{{ i + 1 }}</th>
+      <!-- <th scope="row">{{ i + 1 }}</th> -->
+      <td>
+        {{entry._id}}
+      </td>
       <td>
         {{entry.chassisNum}}
       </td>
@@ -33,9 +38,92 @@
         {{entry.unitDesc}}
       </td>
       <td>
-        <a class="entry-edit" title="Delete" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-        <a class="entry-delete" title="Delete" data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+        <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+        <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
       </td>
     </tr>
     </tbody>
   </table>
+</section>
+
+<section>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Entry Update</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="entryFormUpdate">
+        <div class="form-group">
+          <label for="dateOfBirth">Id</label>
+          <div class="input-group">
+            <input class="entry-form" type="text" id="id" class="form-control entry-form " placeholder="Id" formControlName="id">
+          </div>
+          <label for="dateOfBirth">Engine Numbers</label>
+          <div class="input-group">
+            <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
+          </div>
+          <label for="dateOfBirth">Chasis Number</label>
+          <div class="input-group">
+            <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
+          </div>
+          <label for="dateOfBirth">Body Code</label>
+          <div class="input-group">
+          <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+          </div>
+          <label for="dateOfBirth">Supplier</label>
+          <div class="input-group">
+          <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+          </div>
+          <label for="dateOfBirth">Container Number</label>
+          <div class="input-group">
+            <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+          </div>
+          <label for="dateOfBirth">Unit Descripton</label>
+          <div class="input-group">
+          <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Save</button>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+  </ng-template>
+  <hr>
+</section>
+<section>
+  <ng-template #del let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Entry</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="entryFormUpdate">
+        <div class="modal-body">
+          <div *ngIf="delSuccess === true ; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock><span class="text-success">{{ delMessage }}</span></ng-template>
+          <ng-template #elseBlock>
+            <p>Are you sure you want to delete this data?</p>
+            <p>Engine #: {{ engineNum }}, Chassis #: {{ chassisNum }}, Body Code: {{ bodyCode }}</p>
+            <p>All information associated to this entry will be permanently deleted.
+            <span class="text-danger">This operation can not be undone.</span>
+            </p>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+      <button type="button" class="btn btn-outline-dark" (click)="onDelete()">Delete</button>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+  </ng-template>
+  <hr>
+</section>
+
+

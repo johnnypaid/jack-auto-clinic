@@ -21,19 +21,19 @@ export class EntryComponent implements OnInit {
     bodyCode: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
-    unitDesc: ['default'],
+    unitDesc: ['Edit here for unit description.'],
   });
-  
+
 
   constructor(
-    private formBuilder: FormBuilder, 
-    private newEntry: NewEntryService, 
+    private formBuilder: FormBuilder,
+    private newEntry: NewEntryService,
     private message: PromptMessageService) { }
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
 
-    this.newEntry.getAllUsers(this.passport)
+    this.newEntry.getAllEntry(this.passport)
     .subscribe(resdata => {
       console.log(resdata);
     })

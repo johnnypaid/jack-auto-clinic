@@ -15,6 +15,7 @@ export class DashNavComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('current');
     console.log(localStorage.removeItem('token'));
     this.router.navigate(['']);
   }

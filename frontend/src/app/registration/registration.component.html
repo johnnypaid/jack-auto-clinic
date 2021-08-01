@@ -1,1 +1,25 @@
-<p>registration works!</p>
+<section>
+  <div class="container entry-user">
+    <h3>Registration</h3>
+    <form class="form-entry">
+        <label class="entry-label" for="chassis">Chasis Number</label>
+        <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #"  required>
+        <label class="entry-label" for="chassis">Engine Numbers</label>
+        <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #"  required>
+        <label class="entry-label" for="chassis">Body Code</label>
+        <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" required>
+        <label class="entry-label" for="chassis">Supplier</label>
+        <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" required>
+        <label class="entry-label" for="chassis">Container Number</label>
+        <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" required>
+        <label class="entry-label" for="chassis">Unit Descripton</label>
+        <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" ></textarea>
+        <!-- <div class="entry-error" *ngIf="showErr">
+          {{ error }}
+        </div> -->
+        <div>
+          <button class="btn btn-secondary entry-btn" type="submit">Submit</button>
+        </div>
+      </form>
+  </div>
+</section>

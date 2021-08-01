@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ModalDismissReasons, NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbActiveModal, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewEntryService } from '../service/new-entry.service';
 
 @Component({
@@ -14,15 +14,21 @@ export class EntryTblComponent implements OnInit {
   entryTblData: any
   entryTable: any[] = [];
   closeResult = '';
+  model: NgbDateStruct | undefined;
 
   delSuccess = false;
+  editSuccess = false;
   delMessage = '';
+  editMessage = '';
   delId = '';
   chassisNum = '';
   engineNum = '';
   bodyCode = '';
   supplier = '';
   unitDesc = '';
+
+  mainTable = true;
+  searchTable = false;
 
   entryFormUpdate = this.formBuilder.group({
     id: [{value: '', disabled: true}],
@@ -33,6 +39,14 @@ export class EntryTblComponent implements OnInit {
     containerNum: ['', Validators.required],
     unitDesc: [''],
   });
+
+  searchForm = this.formBuilder.group({
+    searchInput: '',
+    searhOption: '',
+    date: ''
+  });
+  isSelected = true;
+  inputKey = false;
 
 
   constructor(
@@ -48,6 +62,10 @@ export class EntryTblComponent implements OnInit {
       this.entryTable = this.entryTblData;
       console.log(this.entryTable[0]);
     });
+
+    this.mainTable = true;
+    this.searchTable = false;
+    this.inputKey = true;
   }
 
   open(content: any, entry: any) {
@@ -56,8 +74,10 @@ export class EntryTblComponent implements OnInit {
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.editSuccess = false;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      this.editSuccess = false;
     });
   }
 
@@ -77,6 +97,8 @@ export class EntryTblComponent implements OnInit {
       .subscribe(resdata => {
         console.log(resdata.status);
         if (resdata.status === 200) {
+          this.editSuccess = true;
+          this.editMessage = 'Succesfully edited the data.';
           this.ngOnInit();
         }
       });
@@ -123,4 +145,75 @@ export class EntryTblComponent implements OnInit {
       this.delSuccess = false;
     });
   }
+
+  search() {
+    let option: any;
+
+    if (this.searchForm.value.searchInput !== '' && this.searchForm.value.searhOption !== '') {
+      switch (parseInt(this.searchForm.value.searhOption)) {
+        case 1: {
+          this.inputKey = true;
+          option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
+          this.searchEntry(option);
+          break;
+        }
+        case 2: {
+          this.inputKey = true;
+          option = {field: 'chassisNum', keyword: this.searchForm.value.searchInput};
+          this.searchEntry(option);
+          break;
+        }
+        case 3: {
+          this.inputKey = true;
+          this.searchForm.value.searhOption = 'bodyCode';
+          option = {field: 'bodyCode', keyword: this.searchForm.value.searchInput};
+          this.searchEntry(option);
+          break;
+        }
+        default: {
+          this.inputKey = true;
+          break;
+        }
+      }
+    } else {
+      this.ngOnInit();
+    }
+
+    if (parseInt(this.searchForm.value.searhOption) === 4) {
+
+      this.inputKey = false;
+
+      if (this.searchForm.value.searchInput.date !== "") {
+        const year = this.searchForm.value.date.year;
+        let month = this.searchForm.value.date.month;
+        let day = this.searchForm.value.date.day;
+
+        if (year !== undefined || month !== undefined || day !== undefined) {
+          if (month < 10) {
+            month = '0' + month;
+          }
+          if (day < 10) {
+            day = '0' + day;
+          }
+          let newDate = year + '-' + month + '-' + day;
+          option = {field: 'date', keyword: newDate};
+          this.searchEntry(option);
+        }
+      }
+    }
+  }
+
+  searchEntry (option: any) {
+    this.entryTbl.entrySearch(option, this.passport)
+      .subscribe(resdata => {
+        console.log(resdata)
+        this.entryTable = [];
+        this.entryTblData = resdata.body;
+        this.entryTable = this.entryTblData;
+        this.entryTbl.setTable(resdata.body);
+        this.mainTable = false;
+        this.searchTable = true;
+      });
+  }
+
 }

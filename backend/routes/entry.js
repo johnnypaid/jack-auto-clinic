@@ -10,6 +10,38 @@ router.get('/', async (req, res) => {
     const result = await AppEntry.find();
     res.send(result);
 });
+router.get('/:option/:key', async (req, res) => {
+
+    const field = req.params.option;
+    const key = req.params.key;
+    let result = {};
+
+    try {
+        if (field === 'engineNum') {
+            result = await AppEntry.find({'engineNum': key });
+        }
+    
+        if (field === 'chassisNum') {
+            result = await AppEntry.find({'chassisNum': key });
+        }
+    
+        if (field === 'bodyCode') {
+            result = await AppEntry.find({'bodyCode': key });
+        }
+
+        if (field === 'date') {
+            console.log(key);
+
+            var sDate = new Date('2021-08-01');
+            result = await AppEntry.find({'date': { "$gte": new Date(key)}});
+        }
+
+        console.log(result);
+        res.send(result);
+    } catch (error) {
+        res.send(error);
+    }
+});
 
 router.post('/', async (req, res) => {
 

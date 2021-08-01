@@ -1,49 +1,123 @@
 <section>
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <!-- <th scope="col">#</th> -->
-      <th scope="col">Id</th>
-      <th scope="col">Chassis</th>
-      <th scope="col">Engine</th>
-      <th scope="col">Body-C</th>
-      <th scope="col">Supplier</th>
-      <th scope="col">Container</th>
-      <th scope="col">Description</th>
-      <th scope="col">Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let entry of entryTable; index as i">
-      <!-- <th scope="row">{{ i + 1 }}</th> -->
-      <td>
-        {{entry._id}}
-      </td>
-      <td>
-        {{entry.chassisNum}}
-      </td>
-      <td>
-        {{entry.engineNum}}
-      </td>
-      <td>
-        {{entry.bodyCode}}
-      </td>
-      <td>
-        {{entry.supplier}}
-      </td>
-      <td>
-        {{entry.containerNum}}
-      </td>
-      <td>
-        {{entry.unitDesc}}
-      </td>
-      <td>
-        <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-        <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container entry-search text-right">
+    <form [formGroup]="searchForm">
+      <div class=" ">
+        <div class="input-group entry-date" *ngIf="inputKey === false">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="date">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+        <input *ngIf="inputKey === true" class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
+        <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option" (change)="search()">
+          <option [selected]="isSelected">Default</option>
+          <option value="1">Engine</option>
+          <option value="2">Chassis</option>
+          <option value="3">Body</option>
+          <option value="4">Date</option>
+        </select>
+        <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <ng-template [ngIf]="mainTable === true">
+    <table class="table table-striped" >
+      <thead>
+      <tr>
+        <!-- <th scope="col">#</th> -->
+        <th scope="col">Id</th>
+        <th scope="col">Chassis</th>
+        <th scope="col">Engine</th>
+        <th scope="col">Body-C</th>
+        <th scope="col">Supplier</th>
+        <th scope="col">Container</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let entry of entryTable; index as i">
+        <!-- <th scope="row">{{ i + 1 }}</th> -->
+        <td>
+          {{entry._id}}
+        </td>
+        <td>
+          {{entry.chassisNum}}
+        </td>
+        <td>
+          {{entry.engineNum}}
+        </td>
+        <td>
+          {{entry.bodyCode}}
+        </td>
+        <td>
+          {{entry.supplier}}
+        </td>
+        <td>
+          {{entry.containerNum}}
+        </td>
+        <td>
+          {{entry.unitDesc}}
+        </td>
+        <td>
+          <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+          <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-template>
+
+  <ng-template [ngIf]="searchTable === true">
+    <table class="table table-striped" >
+      <thead>
+      <tr>
+        <!-- <th scope="col">#</th> -->
+        <th scope="col">Id</th>
+        <th scope="col">Chassis</th>
+        <th scope="col">Engine</th>
+        <th scope="col">Body-C</th>
+        <th scope="col">Supplier</th>
+        <th scope="col">Container</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let entry of entryTable; index as i">
+        <!-- <th scope="row">{{ i + 1 }}</th> -->
+        <td>
+          {{entry._id}}
+        </td>
+        <td>
+          {{entry.chassisNum}}
+        </td>
+        <td>
+          {{entry.engineNum}}
+        </td>
+        <td>
+          {{entry.bodyCode}}
+        </td>
+        <td>
+          {{entry.supplier}}
+        </td>
+        <td>
+          {{entry.containerNum}}
+        </td>
+        <td>
+          {{entry.unitDesc}}
+        </td>
+        <td>
+          <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+          <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </ng-template>
+
 </section>
 
 <section>
@@ -53,41 +127,49 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="entryFormUpdate">
-        <div class="form-group">
-          <label for="dateOfBirth">Id</label>
-          <div class="input-group">
-            <input class="entry-form" type="text" id="id" class="form-control entry-form " placeholder="Id" formControlName="id">
-          </div>
-          <label for="dateOfBirth">Engine Numbers</label>
-          <div class="input-group">
-            <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
-          </div>
-          <label for="dateOfBirth">Chasis Number</label>
-          <div class="input-group">
-            <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
-          </div>
-          <label for="dateOfBirth">Body Code</label>
-          <div class="input-group">
-          <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
-          </div>
-          <label for="dateOfBirth">Supplier</label>
-          <div class="input-group">
-          <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
-          </div>
-          <label for="dateOfBirth">Container Number</label>
-          <div class="input-group">
-            <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
-          </div>
-          <label for="dateOfBirth">Unit Descripton</label>
-          <div class="input-group">
-          <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
-          </div>
-        </div>
+        <div *ngIf="editSuccess === true ; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock><span class="text-success">{{ editMessage }}</span></ng-template>
+          <ng-template #elseBlock>
+            <div class="form-group">
+              <label for="dateOfBirth">Id</label>
+              <div class="input-group">
+                <input class="entry-form" type="text" id="id" class="form-control entry-form " placeholder="Id" formControlName="id">
+              </div>
+              <label for="dateOfBirth">Engine Numbers</label>
+              <div class="input-group">
+                <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
+              </div>
+              <label for="dateOfBirth">Chasis Number</label>
+              <div class="input-group">
+                <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
+              </div>
+              <label for="dateOfBirth">Body Code</label>
+              <div class="input-group">
+              <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+              </div>
+              <label for="dateOfBirth">Supplier</label>
+              <div class="input-group">
+              <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+              </div>
+              <label for="dateOfBirth">Container Number</label>
+              <div class="input-group">
+                <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+              </div>
+              <label for="dateOfBirth">Unit Descripton</label>
+              <div class="input-group">
+              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
+              </div>
+            </div>
+          </ng-template>
       </form>
     </div>
-    <div class="modal-footer">
+
+    <div class="modal-footer" *ngIf="editSuccess === false">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
       <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Save</button>
+    </div>
+    <div class="modal-footer" *ngIf="editSuccess === true">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
     </div>
     <div class="modal-footer">
 
@@ -123,7 +205,6 @@
 
     </div>
   </ng-template>
-  <hr>
 </section>
 
 

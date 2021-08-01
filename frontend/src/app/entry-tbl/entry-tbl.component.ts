@@ -99,6 +99,7 @@ export class EntryTblComponent implements OnInit {
         if (resdata.status === 200) {
           this.editSuccess = true;
           this.editMessage = 'Succesfully edited the data.';
+          this.inputKey = false;
           this.ngOnInit();
         }
       });

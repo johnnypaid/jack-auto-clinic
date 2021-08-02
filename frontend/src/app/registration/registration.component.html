@@ -1,24 +1,48 @@
 <section>
   <div class="container entry-user">
     <h3>Registration</h3>
-    <form class="form-entry">
+    <form class="form-entry" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <label class="entry-label" for="chassis">Date of Transaction</label>
+        <div class="input-group entry-date">
+          <input class="form-control reg-date" placeholder="yyyy-mm-dd"
+                 name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="date">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+          </div>
+        </div>
+        <label class="entry-label" for="chassis">Name</label>
+        <input type="text" id="engine" class="form-control entry-form " placeholder="" formControlName="name" required>
         <label class="entry-label" for="chassis">Chasis Number</label>
-        <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #"  required>
-        <label class="entry-label" for="chassis">Engine Numbers</label>
-        <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #"  required>
-        <label class="entry-label" for="chassis">Body Code</label>
-        <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" required>
-        <label class="entry-label" for="chassis">Supplier</label>
-        <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" required>
-        <label class="entry-label" for="chassis">Container Number</label>
-        <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" required>
-        <label class="entry-label" for="chassis">Unit Descripton</label>
-        <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" ></textarea>
-        <!-- <div class="entry-error" *ngIf="showErr">
+        <input type="text" id="body-code" class="form-control entry-form" placeholder="" formControlName="chassisNum" required>
+        <label class="entry-label" for="chassis">Engine Number</label>
+        <input type="text" id="supplier" class="form-control entry-form" placeholder="" formControlName="engineNum" required>
+        <label class="entry-label" for="chassis">Plate Number</label>
+        <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="plateNum" required>
+        <label class="entry-label" for="chassis">MV File</label>
+        <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="mvNum" required>
+        <label class="entry-label" for="chassis">Body Type</label>
+        <!-- <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="bodyType" required> -->
+        <input class="form-control entry-form" list="bodyT" name="body" id="body" formControlName="bodyType" required>
+          <datalist id="bodyT">
+            <option value="Round">
+            <option value="Square">
+            <option value="Big">
+          </datalist>
+        <label class="entry-label" for="chassis">Color</label>
+        <!-- <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="" formControlName="color" required> -->
+        <input class="form-control entry-form" list="colors" name="color" id="color" formControlName="color" required>
+          <datalist id="colors">
+            <option value="White">
+            <option value="Black">
+            <option value="Red">
+            <option value="Blue">
+            <option value="Grey">
+          </datalist>
+        <div class="reg-error" *ngIf="showErr">
           {{ error }}
-        </div> -->
+        </div>
         <div>
-          <button class="btn btn-secondary entry-btn" type="submit">Submit</button>
+          <button class="btn btn-secondary reg-btn" type="submit">Submit</button>
         </div>
       </form>
   </div>

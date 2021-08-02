@@ -4,31 +4,43 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 const registerSchema = new mongoose.Schema({
-    chassisNum: {
+    bodyType: {
         type: String,
         required: true,
     },
-    engineNum: {
+    chassisNum: {
         type: String,
         required: true,
         unique: true
     },
-    bodyCode: {
+    color: {
         type: String,
         required: true,
     },
-    supplier: {
+    date: { 
+        type: Date,
+        required: true
+    },
+    dateEdited: { 
+        type: Date,
+        default: Date.now
+    },
+    engineNum: { 
         type: String,
-        required: true,
+        required: true
     },
-    containerNum: {
+    mvNum: { 
         type: String,
-        required: true,
+        required: true
     },
-    unitDesc: {
-        type: String
+    name: { 
+        type: String,
+        required: true
     },
-    date: { type: Date, default: Date.now },
+    plateNum: { 
+        type: String,
+        required: true
+    },
 });
 
 const AppRegister = mongoose.model('AppRegister', registerSchema);
@@ -36,12 +48,15 @@ const AppRegister = mongoose.model('AppRegister', registerSchema);
 function validateEntry(entry) {
     const schema = Joi.object({
         id: Joi.string().optional(),
+        bodyType: Joi.string().required(),
         chassisNum: Joi.string().required(),
+        color: Joi.string().required(),
+        date: Joi.string().required(),
+        dateEdited: Joi.string().optional(),
         engineNum: Joi.string().required(),
-        bodyCode: Joi.string().required(),
-        supplier: Joi.string().required(),
-        containerNum: Joi.string().required(),
-        unitDesc: Joi.string().allow('')
+        mvNum: Joi.string().required(),
+        name: Joi.string().required(),
+        plateNum: Joi.string().required(),
     });
 
    return schema.validate(entry);

@@ -14,6 +14,7 @@ export class EntryComponent implements OnInit {
   showErr = false;
   passport: any;
   submit = false;
+  isSelected = true;
 
   entryForm = this.formBuilder.group({
     chassisNum: ['', Validators.required],

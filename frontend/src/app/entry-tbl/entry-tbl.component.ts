@@ -50,7 +50,7 @@ export class EntryTblComponent implements OnInit {
 
   page = 1;
   count = 0;
-  tableSize = 1;
+  tableSize = 10;
   tableSizes = [10, 1];
 
 

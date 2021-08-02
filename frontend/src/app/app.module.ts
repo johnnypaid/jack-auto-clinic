@@ -24,6 +24,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { TableComponent } from './table/table.component';
 import { RegisterTblComponent } from './register-tbl/register-tbl.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ProductionTblComponent } from './production-tbl/production-tbl.component';
 
 const icons = {
   Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon, PlusSquare
@@ -50,7 +51,8 @@ const routes: Routes = [
     EntryTblComponent,
     SideNavComponent,
     TableComponent,
-    RegisterTblComponent
+    RegisterTblComponent,
+    ProductionTblComponent
   ],
   imports: [
     BrowserModule,

@@ -32,7 +32,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" type="button" >
                 <i-feather name="file-text"></i-feather>
                 Production
               </a>
@@ -59,6 +59,9 @@
     </ng-template>
     <ng-template [ngIf]="registryForm === true">
       <app-registration></app-registration>
+    </ng-template>
+    <ng-template [ngIf]="prodForm === true">
+      <app-production></app-production>
     </ng-template>
     <ng-template [ngIf]="entryTbl === true">
       <app-entry-tbl></app-entry-tbl>

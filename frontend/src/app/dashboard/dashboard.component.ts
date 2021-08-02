@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   entryCards = true;
   entryTbl = false;
   registerTbl = false;
+  prodForm = false;
 
   user: any;
 
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
         this.entryCards = false;
         this.newEntryForm = true;
         this.registerTbl = false;
+        this.prodForm = false;
         this.setLocal(2);
         break;
       }
@@ -58,10 +60,13 @@ export class DashboardComponent implements OnInit {
         this.entryCards = false;
         this.registerTbl = false;
         this.registryForm = true;
+        this.prodForm = false;
         this.setLocal(3);
         break;
       }
       case 4: {
+        console.log(evt);
+        this.prodForm = true;
         this.userForm = false;
         this.entryCards = false;
         this.registerTbl = false;
@@ -75,6 +80,7 @@ export class DashboardComponent implements OnInit {
         this.newEntryForm = false;
         this.userForm = false;
         this.registryForm = false;
+        this.prodForm = false;
         this.setLocal(5);
         break;
       }
@@ -85,15 +91,28 @@ export class DashboardComponent implements OnInit {
         this.newEntryForm = false;
         this.userForm = false;
         this.registryForm = false;
+        this.prodForm = false;
         this.setLocal(6);
         break;
       }
+      // case 7: {
+      //   this.prodForm = true;
+      //   this.registerTbl = false;
+      //   this.entryTbl = false;
+      //   this.entryCards = false;
+      //   this.newEntryForm = false;
+      //   this.userForm = false;
+      //   this.registryForm = false;
+      //   this.setLocal(7);
+      //   break;
+      // }
       default: {
         this.newEntryForm = false;
         this.registerTbl = false;
         this.userForm = false;
         this.entryTbl = false;
         this.registryForm = false;
+        this.prodForm = false;
         this.entryCards = true;
         this.setLocal(0);
         break;

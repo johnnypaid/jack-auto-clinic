@@ -24,7 +24,7 @@ export class RegisterTblComponent implements OnInit {
   delId = '';
   chassisNum = '';
   engineNum = '';
-  bodyCode = '';
+  bodyType = '';
   supplier = '';
   unitDesc = '';
 
@@ -49,6 +49,11 @@ export class RegisterTblComponent implements OnInit {
   });
   isSelected = true;
   inputKey = false;
+
+  page = 1;
+  count = 0;
+  tableSize = 10;
+  tableSizes = [10, 1];
 
 
   constructor(
@@ -125,7 +130,7 @@ export class RegisterTblComponent implements OnInit {
     if (this.delId === '' || this.delId === null) {
       this.delMessage = 'No data to delete.'
     } else {
-      this.entryTbl.delEntry(this.delId, this.passport)
+      this.regTbl.delEntry(this.delId, this.passport)
       .subscribe(resdata => {
         console.log(resdata);
         if (resdata.status === 200) {
@@ -142,7 +147,7 @@ export class RegisterTblComponent implements OnInit {
     this.delId = entry._id;
     this.chassisNum = entry.chassisNum;
     this.engineNum = entry.engineNum;
-    this.bodyCode = entry.bodyCode;
+    this.bodyType = entry.bodyType;
 
     this.modalService.open(del, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -219,7 +224,19 @@ export class RegisterTblComponent implements OnInit {
         this.entryTbl.setTable(resdata.body);
         this.mainTable = false;
         this.searchTable = true;
+        this.onTableDataChange(event);
       });
+  }
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.regTbl = this.regTbl;
+  }
+
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.regTbl  = this.regTbl;
   }
 
 }

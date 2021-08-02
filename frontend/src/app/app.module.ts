@@ -14,7 +14,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FeatherModule } from 'angular-feather';
 import { DashNavComponent } from './dash-nav/dash-nav.component';
 import { AdminCardComponent } from './admin-card/admin-card.component';
-import { Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon } from 'angular-feather/icons';
+import { Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon, PlusSquare } from 'angular-feather/icons';
 import { UserComponent } from './user/user.component';
 import { EntryComponent } from './entry/entry.component';
 import { RegistrationComponent } from './registration/registration.component';
@@ -23,9 +23,10 @@ import { EntryTblComponent } from './entry-tbl/entry-tbl.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TableComponent } from './table/table.component';
 import { RegisterTblComponent } from './register-tbl/register-tbl.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const icons = {
-  Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon
+  Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon, PlusSquare
 };
 
 const routes: Routes = [
@@ -58,7 +59,8 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FeatherModule.pick(icons)
+    FeatherModule.pick(icons),
+    NgxPaginationModule
   ],
   providers: [
     LoginService,

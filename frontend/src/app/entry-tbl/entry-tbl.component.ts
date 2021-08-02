@@ -48,6 +48,11 @@ export class EntryTblComponent implements OnInit {
   isSelected = true;
   inputKey = false;
 
+  page = 1;
+  count = 0;
+  tableSize = 1;
+  tableSizes = [10, 1];
+
 
   constructor(
     private entryTbl: NewEntryService,
@@ -214,7 +219,19 @@ export class EntryTblComponent implements OnInit {
         this.entryTbl.setTable(resdata.body);
         this.mainTable = false;
         this.searchTable = true;
+        this.onTableDataChange(event);
       });
+  }
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.entryTable = this.entryTable;
+  }
+
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.entryTable  = this.entryTable;
   }
 
 }

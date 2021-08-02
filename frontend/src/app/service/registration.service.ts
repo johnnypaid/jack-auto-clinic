@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
 })
 export class RegistrationService {
 
-  endpoint = 'http://192.168.254.105:3000/api/registration';
+  // endpoint = 'http://192.168.254.105:3000/api/registration';
+  endpoint = 'http://192.168.1.20:3000/api/registration';
 
   constructor(private http: HttpClient) { }
 
@@ -50,6 +51,16 @@ export class RegistrationService {
   newEntryUpdate(data: any, _passport: string) {
     console.log(this.endpoint + '/' + data.id)
     return this.http.put(this.endpoint + '/' + data.id , data, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('x-auth-token', _passport),  observe: 'response'
+    }).pipe(
+    );
+  }
+
+  delEntry(id: any, _passport: string) {
+    console.log(this.endpoint + '/' + id)
+    return this.http.delete(this.endpoint + '/' + id, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('x-auth-token', _passport),  observe: 'response'

@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   newEntryForm = false;
   entryCards = true;
   entryTbl = false;
+  registerTbl = false;
 
   user: any;
 
@@ -48,12 +49,14 @@ export class DashboardComponent implements OnInit {
         this.userForm = false;
         this.entryCards = false;
         this.newEntryForm = true;
+        this.registerTbl = false;
         this.setLocal(2);
         break;
       }
       case 3: {
         this.userForm = false;
         this.entryCards = false;
+        this.registerTbl = false;
         this.registryForm = true;
         this.setLocal(3);
         break;
@@ -61,11 +64,13 @@ export class DashboardComponent implements OnInit {
       case 4: {
         this.userForm = false;
         this.entryCards = false;
+        this.registerTbl = false;
         this.setLocal(4);
         break;
       }
       case 5: {
         this.entryTbl = true;
+        this.registerTbl = false;
         this.entryCards = false;
         this.newEntryForm = false;
         this.userForm = false;
@@ -73,8 +78,19 @@ export class DashboardComponent implements OnInit {
         this.setLocal(5);
         break;
       }
+      case 6: {
+        this.registerTbl = true;
+        this.entryTbl = false;
+        this.entryCards = false;
+        this.newEntryForm = false;
+        this.userForm = false;
+        this.registryForm = false;
+        this.setLocal(6);
+        break;
+      }
       default: {
         this.newEntryForm = false;
+        this.registerTbl = false;
         this.userForm = false;
         this.entryTbl = false;
         this.registryForm = false;

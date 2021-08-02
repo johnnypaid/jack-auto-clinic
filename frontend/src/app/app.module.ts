@@ -22,6 +22,7 @@ import { ProductionComponent } from './production/production.component';
 import { EntryTblComponent } from './entry-tbl/entry-tbl.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { TableComponent } from './table/table.component';
+import { RegisterTblComponent } from './register-tbl/register-tbl.component';
 
 const icons = {
   Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon
@@ -47,7 +48,8 @@ const routes: Routes = [
     ProductionComponent,
     EntryTblComponent,
     SideNavComponent,
-    TableComponent
+    TableComponent,
+    RegisterTblComponent
   ],
   imports: [
     BrowserModule,

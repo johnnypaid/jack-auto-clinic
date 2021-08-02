@@ -1,5 +1,5 @@
 <section>
-  <h3>Entry Data</h3>
+  <h3>Registration Data</h3>
   <div class="container entry-search text-right">
     <form [formGroup]="searchForm">
       <div class=" ">
@@ -15,7 +15,7 @@
           <option [selected]="isSelected">Default</option>
           <option value="1">Engine</option>
           <option value="2">Chassis</option>
-          <option value="3">Body</option>
+          <option value="3">Body Type</option>
           <option value="4">Date</option>
         </select>
         <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
@@ -31,11 +31,14 @@
         <th scope="col">Id</th>
         <th scope="col">Chassis</th>
         <th scope="col">Engine</th>
-        <th scope="col">Body-C</th>
-        <th scope="col">Supplier</th>
-        <th scope="col">Container</th>
-        <th scope="col">Description</th>
+        <th scope="col">Body Type</th>
+        <th scope="col">Name</th>
+        <th scope="col">Plate</th>
+        <th scope="col">MvNum</th>
+        <th scope="col">Color</th>
+        <th scope="col">Date</th>
         <th scope="col">Actions</th>
+
       </tr>
       </thead>
       <tbody>
@@ -51,16 +54,22 @@
           {{entry.engineNum}}
         </td>
         <td>
-          {{entry.bodyCode}}
+          {{entry.bodyType}}
         </td>
         <td>
-          {{entry.supplier}}
+          {{entry.name}}
         </td>
         <td>
-          {{entry.containerNum}}
+          {{entry.plateNum}}
         </td>
         <td>
-          {{entry.unitDesc}}
+          {{entry.mvNum}}
+        </td>
+        <td>
+          {{entry.color}}
+        </td>
+        <td>
+          {{entry.date}}
         </td>
         <td>
           <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
@@ -74,42 +83,51 @@
   <ng-template [ngIf]="searchTable === true">
     <table class="table table-striped" >
       <thead>
-      <tr>
-        <!-- <th scope="col">#</th> -->
-        <th scope="col">Id</th>
-        <th scope="col">Chassis</th>
-        <th scope="col">Engine</th>
-        <th scope="col">Body-C</th>
-        <th scope="col">Supplier</th>
-        <th scope="col">Container</th>
-        <th scope="col">Description</th>
-        <th scope="col">Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let entry of entryTable; index as i">
-        <!-- <th scope="row">{{ i + 1 }}</th> -->
-        <td>
-          {{entry._id}}
-        </td>
-        <td>
-          {{entry.chassisNum}}
-        </td>
-        <td>
-          {{entry.engineNum}}
-        </td>
-        <td>
-          {{entry.bodyCode}}
-        </td>
-        <td>
-          {{entry.supplier}}
-        </td>
-        <td>
-          {{entry.containerNum}}
-        </td>
-        <td>
-          {{entry.unitDesc}}
-        </td>
+        <tr>
+          <!-- <th scope="col">#</th> -->
+          <th scope="col">Id</th>
+          <th scope="col">Chassis</th>
+          <th scope="col">Engine</th>
+          <th scope="col">Body Type</th>
+          <th scope="col">Name</th>
+          <th scope="col">Plate</th>
+          <th scope="col">MvNum</th>
+          <th scope="col">Color</th>
+          <th scope="col">Date</th>
+          <th scope="col">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let entry of entryTable; index as i">
+          <!-- <th scope="row">{{ i + 1 }}</th> -->
+          <td>
+            {{entry._id}}
+          </td>
+          <td>
+            {{entry.chassisNum}}
+          </td>
+          <td>
+            {{entry.engineNum}}
+          </td>
+          <td>
+            {{entry.bodyType}}
+          </td>
+          <td>
+            {{entry.name}}
+          </td>
+          <td>
+            {{entry.plateNum}}
+          </td>
+          <td>
+            {{entry.mvNum}}
+          </td>
+          <td>
+            {{entry.color}}
+          </td>
+          <td>
+            {{entry.date}}
+          </td>
         <td>
           <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
           <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
@@ -124,7 +142,7 @@
 <section>
   <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Entry Update</h4>
+      <h4 class="modal-title" id="modal-basic-title">Registration Update</h4>
     </div>
     <div class="modal-body">
       <form [formGroup]="entryFormUpdate">
@@ -134,31 +152,35 @@
             <div class="form-group">
               <label for="dateOfBirth">Id</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="id" class="form-control entry-form " placeholder="Id" formControlName="id">
-              </div>
-              <label for="dateOfBirth">Engine Numbers</label>
-              <div class="input-group">
-                <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
+                <input class="entry-form" type="text" id="id" class="form-control entry-form " formControlName="id">
               </div>
               <label for="dateOfBirth">Chasis Number</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
+                <input class="entry-form" type="text" id="chassis" class="form-control entry-form" formControlName="chassisNum" required>
               </div>
-              <label for="dateOfBirth">Body Code</label>
+              <label for="dateOfBirth">Engine Numbers</label>
               <div class="input-group">
-              <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+                <input class="entry-form" type="text" id="engine" class="form-control entry-form " formControlName="engineNum" required>
               </div>
-              <label for="dateOfBirth">Supplier</label>
+              <label for="dateOfBirth">Body Type</label>
               <div class="input-group">
-              <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+              <input class="entry-form" type="text" id="body-code" class="form-control entry-form" formControlName="bodyType" required>
               </div>
-              <label for="dateOfBirth">Container Number</label>
+              <label for="dateOfBirth">Name</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+              <input class="entry-form" type="text" id="supplier" class="form-control entry-form" formControlName="name" required>
               </div>
-              <label for="dateOfBirth">Unit Descripton</label>
+              <label for="dateOfBirth">Plate Number</label>
               <div class="input-group">
-              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
+                <input class="entry-form" type="text" id="container" class="form-control entry-form" formControlName="plateNum" required>
+              </div>
+              <label for="dateOfBirth">MV Num</label>
+              <div class="input-group">
+              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" formControlName="mvNum"></textarea>
+              </div>
+              <label for="dateOfBirth">Color</label>
+              <div class="input-group">
+              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" formControlName="color"></textarea>
               </div>
             </div>
           </ng-template>
@@ -190,7 +212,7 @@
           <ng-template #thenBlock><span class="text-success">{{ delMessage }}</span></ng-template>
           <ng-template #elseBlock>
             <p>Are you sure you want to delete this data?</p>
-            <p>Engine #: {{ engineNum }}, Chassis #: {{ chassisNum }}, Body Code: {{ bodyCode }}</p>
+            <!-- <p>Engine #: {{ engineNum }}, Chassis #: {{ chassisNum }}, Body Code: {{ bodyCode }}</p> -->
             <p>All information associated to this entry will be permanently deleted.
             <span class="text-danger">This operation can not be undone.</span>
             </p>

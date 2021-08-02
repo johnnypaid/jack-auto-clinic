@@ -18,8 +18,7 @@ const registerSchema = new mongoose.Schema({
         required: true,
     },
     date: { 
-        type: Date,
-        required: true
+        type: Date
     },
     dateEdited: { 
         type: Date,
@@ -51,7 +50,7 @@ function validateEntry(entry) {
         bodyType: Joi.string().required(),
         chassisNum: Joi.string().required(),
         color: Joi.string().required(),
-        date: Joi.string().required(),
+        date: Joi.string().optional(),
         dateEdited: Joi.string().optional(),
         engineNum: Joi.string().required(),
         mvNum: Joi.string().required(),

@@ -25,8 +25,8 @@ router.get('/:option/:key', async (req, res) => {
             result = await AppRegister.find({'chassisNum': key });
         }
     
-        if (field === 'bodyCode') {
-            result = await AppRegister.find({'bodyCode': key });
+        if (field === 'bodyType') {
+            result = await AppRegister.find({'bodyType': key });
         }
 
         if (field === 'date') {
@@ -71,7 +71,7 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     // console.log(req.params.id);
 
     const {error} = validate(req.body);
@@ -82,10 +82,12 @@ router.put('/:id', async (req, res) => {
             {   
                 chassisNum: req.body.chassisNum,
                 engineNum: req.body.engineNum,
-                bodyCode: req.body.bodyCode,
-                supplier: req.body.supplier,
-                containerNum: req.body.containerNum,
-                unitDesc: req.body.unitDesc
+                bodyType: req.body.bodyType,
+                name: req.body.name,
+                color: req.body.color,
+                dateEdited: new Date(),
+                mvNum: req.body.mvNum
+
             },{new: true});
 
         if (!findEntry) return res.status(404).send('Cand find entry with the given engine number.');

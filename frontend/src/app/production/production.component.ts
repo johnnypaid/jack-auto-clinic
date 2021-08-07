@@ -195,6 +195,10 @@ export class ProductionComponent implements OnInit {
         this.prodService.newProduction(this.productionForm.value, this.passport)
           .subscribe(resdata => {
             console.log(resdata);
+            if (resdata.status === 200) {
+              this.message.setMessage('User added succesfully.');
+              this.productionForm.reset();
+            }
           }, error => {
             console.log(error.error);
           });

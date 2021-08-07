@@ -1,10 +1,10 @@
 <section>
-  <div class="container" id="container-user">
+  <div class="container">
     <h3>Add New User</h3>
     <div class="user-error" *ngIf="showErr">
       {{ error }}
     </div>
-    <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <form class="form-signin" id="user-cont" [formGroup]="userForm" (ngSubmit)="onSubmit()">
         <label for="inputName" class="sr-only user-form">User Name</label>
         <input type="text" id="inputName" class="form-control user-form" placeholder="User Name" formControlName="name" required>
         <label for="inputEmail" class="sr-only user-form">Email address</label>
@@ -17,7 +17,7 @@
           <option value="false">User</option>
         </select>
         <div>
-          <button class="btn btn-secondary user-form" type="submit">Add User</button>
+          <button class="btn btn-secondary user-form user-btn" type="submit">Add User</button>
         </div>
       </form>
   </div>

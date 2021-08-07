@@ -2,3 +2,8 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+label {
+  position: inherit !important;
+  float: left !important
+}

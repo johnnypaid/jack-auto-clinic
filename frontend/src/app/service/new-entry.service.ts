@@ -10,8 +10,8 @@ import { CommonService } from './common.service';
 export class NewEntryService {
 
   // endpoint = 'http://192.168.254.103:3000/api/entry';
-  // endpoint = 'http://192.168.254.105:3000/api/entry';
-  endpoint = 'http://192.168.1.20:3000/api/entry';
+  endpoint = 'http://192.168.254.105:3000/api/entry';
+  // endpoint = 'http://192.168.1.20:3000/api/entry';
 
   tableData: any;
 

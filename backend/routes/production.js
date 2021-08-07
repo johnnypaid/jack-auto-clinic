@@ -49,17 +49,22 @@ router.post('/', async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.message);
 
-    let result = await AppProd.findOne({engineNum: req.body.engineNum});
-    if (result) return res.status(400).send('Registration data already exist..');
-
-    let chasis = await AppProd.findOne({plateNum: req.body.plateNum});
-    if (chasis) return res.status(400).send('Registration data already exist..');
-
-    let bodycode = await AppProd.findOne({chassisNum: req.body.chassisNum});
-    if (bodycode) return res.status(400).send('Body code already exist..');
+    let chassis = await AppProd.findOne({chassisNum: req.body.chassisNum});
+    if (chassis) return res.status(400).send('Chassis number already exist..');
 
     try {
-        newEntry = new AppProd(_.pick(req.body, ['_id','bodyType', 'chassisNum', 'color', 'date', 'engineNum', 'mvNum', 'name', 'plateNum']));
+        newEntry = new AppProd(_.pick(req.body, 
+            [
+                'chassisNum', 'conDate', 
+                'painting', 'paint_started', 'paint_stat', 
+                'mechanical', 'mec_started', 'mec_stat',
+                'electrical', 'elect_started', 'elect_stat',
+                'upholstery', 'up_started', 'up_stat',
+                'trimmer', 'trim_started', 'trim_stat',
+                'dashboard', 'dash_started', 'dash_stat',
+                'detailing', 'det_started', 'det_stat',
+                'qc', 'qc_started', 'qc_stat', 'sold_to'                                
+            ]));
 
         const entry = await newEntry.save();
 
@@ -72,25 +77,45 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     console.log(req.body);
-    // console.log(req.params.id);
+    console.log(req.params.id);
 
-    const {error} = validate(req.body);
-    if (error) return res.status(400).send(error.message);
+    // const {error} = validate(req.body);
+    // if (error) return res.status(400).send(error.message);
 
     try {
         const findEntry = await AppProd.findByIdAndUpdate(req.params.id, 
             {   
                 chassisNum: req.body.chassisNum,
-                engineNum: req.body.engineNum,
-                bodyType: req.body.bodyType,
-                name: req.body.name,
-                color: req.body.color,
-                dateEdited: new Date(),
-                mvNum: req.body.mvNum
+                conDate: req.body.conDate,
+                painting: req.body.painting,
+                paint_started: req.body.paint_started,
+                paint_stat: req.body.color,
+                mechanical: req.body.mechanical,
+                mec_started: req.body.mec_started,
+                mec_stat: req.body.mec_stat,
+                electrical: req.body.electrical,
+                elect_started: req.body.elect_started,
+                elect_stat: req.body.elect_stat,
+                upholstery: req.body.upholstery,
+                up_started: req.body.up_started,
+                up_stat: req.body.up_stat,
+                trimmer: req.body.trimmer,
+                trim_started: req.body.trim_started,
+                trim_stat: req.body.trim_stat,
+                dashboard: req.body.dashboard,
+                dash_started: req.body.dash_started,
+                dash_stat: req.body.dash_stat,
+                detailing: req.body.detailing,
+                det_started: req.body.det_started,
+                det_stat: req.body.det_stat,
+                qc: req.body.qc,
+                qc_started: req.body.qc_started,
+                qc_stat: req.body.qc_stat,
+                sold_to: req.body.sold_to,
 
             },{new: true});
 
-        if (!findEntry) return res.status(404).send('Cand find entry with the given engine number.');
+        if (!findEntry) return res.status(404).send('Cand find entry with the given chassis id number.');
 
         res.send(findEntry);       
     } catch (error) {

@@ -14,6 +14,7 @@ const user = require('./routes/user');
 const login = require('./routes/login');
 const entry = require('./routes/entry');
 const registration = require('./routes/registration');
+const production = require('./routes/production');
 
 // load the environment variable first
 if(!config.get('jwtPrivateKey')) {
@@ -47,14 +48,15 @@ app.use(auth);
 app.use('/api/users', user);
 app.use('/api/entry', entry);
 app.use('/api/registration', registration);
+app.use('/api/production', production);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname +' /public/index.html'));
 });
 
 // configuration
-console.log('Application Name:' + config.get('name'));
-console.log('mail Server :' + config.get('mail.host'));
-console.log('mail Server :' + config.get('mail.password'));
+// console.log('Application Name:' + config.get('name'));
+// console.log('mail Server :' + config.get('mail.host'));
+// console.log('mail Server :' + config.get('mail.password'));
 
 if (app.get('env') === 'development') {
     app.use(morgan('tiny'));
@@ -64,6 +66,6 @@ if (app.get('env') === 'development') {
 const port = process.env.PORT || 3000;
 console.log(port);
 
-app.listen(port, '192.168.1.20', () => {
+app.listen(port, '192.168.254.105', () => {
     console.log(`Server is listening at port: ${port}`);
 });

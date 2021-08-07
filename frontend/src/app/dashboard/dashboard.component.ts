@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   entryCards = true;
   entryTbl = false;
   registerTbl = false;
+  prodTbl = false;
   prodForm = false;
 
   user: any;
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit {
         this.userForm = true;
         this.entryCards = false;
         this.newEntryForm = false;
+        this.prodTbl = false;
         this.setLocal(1);
         break;
       }
@@ -52,6 +54,7 @@ export class DashboardComponent implements OnInit {
         this.newEntryForm = true;
         this.registerTbl = false;
         this.prodForm = false;
+        this.prodTbl = false;
         this.setLocal(2);
         break;
       }
@@ -61,6 +64,7 @@ export class DashboardComponent implements OnInit {
         this.registerTbl = false;
         this.registryForm = true;
         this.prodForm = false;
+        this.prodTbl = false;
         this.setLocal(3);
         break;
       }
@@ -70,11 +74,13 @@ export class DashboardComponent implements OnInit {
         this.userForm = false;
         this.entryCards = false;
         this.registerTbl = false;
+        this.prodTbl = false;
         this.setLocal(4);
         break;
       }
       case 5: {
         this.entryTbl = true;
+        this.prodTbl = false;
         this.registerTbl = false;
         this.entryCards = false;
         this.newEntryForm = false;
@@ -86,6 +92,7 @@ export class DashboardComponent implements OnInit {
       }
       case 6: {
         this.registerTbl = true;
+        this.prodTbl = false;
         this.entryTbl = false;
         this.entryCards = false;
         this.newEntryForm = false;
@@ -95,18 +102,20 @@ export class DashboardComponent implements OnInit {
         this.setLocal(6);
         break;
       }
-      // case 7: {
-      //   this.prodForm = true;
-      //   this.registerTbl = false;
-      //   this.entryTbl = false;
-      //   this.entryCards = false;
-      //   this.newEntryForm = false;
-      //   this.userForm = false;
-      //   this.registryForm = false;
-      //   this.setLocal(7);
-      //   break;
-      // }
+      case 7: {
+        this.prodTbl = true;
+        this.prodForm = false;
+        this.registerTbl = false;
+        this.entryTbl = false;
+        this.entryCards = false;
+        this.newEntryForm = false;
+        this.userForm = false;
+        this.registryForm = false;
+        this.setLocal(7);
+        break;
+      }
       default: {
+        this.prodTbl = false;
         this.newEntryForm = false;
         this.registerTbl = false;
         this.userForm = false;
@@ -122,5 +131,12 @@ export class DashboardComponent implements OnInit {
 
   setLocal(num: any) {
     localStorage.setItem('current', num);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('current');
+    console.log(localStorage.removeItem('token'));
+    this.router.navigate(['']);
   }
 }

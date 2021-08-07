@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
 })
 export class ProductionService {
 
-  // endpoint = 'http://192.168.254.105:3000/api/registration';
-  endpoint = 'http://192.168.1.20:3000/api/registration';
+  endpoint = 'http://192.168.254.105:3000/api/production';
+  // endpoint = 'http://192.168.1.20:3000/api/production';
 
   constructor(private http: HttpClient) { }
 
@@ -24,14 +24,13 @@ export class ProductionService {
     );
   }
 
-  newRegistration(data: any, _passport: string) {
+  newProduction(data: any, _passport: string) {
     console.log(data);
     return this.http.post(this.endpoint , data, {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
         .set('x-auth-token', _passport),  observe: 'response'
-    }).pipe(
-    );
+    }).pipe();
   }
 
   entrySearch(data: any, _passport: string) {

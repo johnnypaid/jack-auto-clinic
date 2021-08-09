@@ -58,3 +58,19 @@
     margin: 8% !important;
   }
 }
+
+@media (max-width: 768px) { 
+  .dash {
+    &-main {
+      margin-top: 16% !important;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .dash {
+    &-main {
+      margin-top: 24% !important;
+    }
+  }
+}

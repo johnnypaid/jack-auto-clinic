@@ -1,4 +1,7 @@
 .entry {
+  &-section {
+    margin: auto !important;
+  }
   &-delete {
     color: red;
   }
@@ -26,9 +29,14 @@
     margin-top: 3%;
     &-input {
       height: 37px;
+      border-radius: 0px !important;
+      border-color: #343a40 !important;
+      border-width: thin !important;
     }
     &-btn {
-      margin-top: -.4%;
+      margin-top: -1.0%;
+      border-radius: 0px !important;
+      height: 37px;
     }
   }
   &-select {
@@ -36,5 +44,137 @@
     height: 37px !important;
     margin-left: .5%;
     margin-right: .5%;
+    border-radius: 0px !important;
+    border-color: #343a40 !important;
+  }
+  &-chassis {
+    min-height: 5%;
+    background-color: #343a4073;
+  }
+  &-chassis h5 {
+    margin-top: -5%;
+    margin-bottom: 5%;
+    color: #d8652b;
+  }
+   &-chassis p {
+    color: #ffffff;
+    font-size: 1em;
+  }
+  &-p {
+    font-size: 1em;
+  }
+  &-pad {
+    padding: 2% !important;
+  }
+  &-fields {
+    color: #252627;
+    margin-top: -7%;
+    font-weight: 600;
+  }
+}
+hr {
+  width: 10%;
+}
+.card {
+  min-height: 534px !important;
+  border-radius: 10px;
+}
+
+@media (max-width: 1440px) {
+  .entry-search-btn {
+    margin-top: -0.5%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .entry-search-btn {
+    margin-top: -0.8%;
+  }
+}
+
+@media (max-width: 768px) { 
+  .entry-chassis {
+    max-height: 62px !important;
+  }
+  .entry-search-btn {
+    height: 37px;
+    margin-top: -1%;
+  }
+  .entry-chassis {
+    max-height: 48px;
+  }
+  .entry-chassis h5{
+    margin-top: -4%;
+  }
+  .entry-fields {
+    margin-top: -4%;
+  }
+} 
+
+@media (max-width: 425px) { 
+  .entry {
+    &-chassis {
+      max-height: 52px;
+    }
+    &-section {
+      margin-top: 23% !important;
+    }
+    &-search-input {
+      height: 32px;
+      width: 50%;
+    }
+    &-select {
+      height: 32px !important;
+      margin-right: 1px;
+    }
+    &-search-btn {
+      height: 32px;
+      margin-top: -5px;
+    }
+  }
+}
+
+@media (max-width: 375px) { 
+  .entry {
+    &-chassis {
+      max-height: 60px;
+    }
+    &-search {
+      margin-left: -3px;
+    }
+    &-search-btn {
+      margin-top: 2%;
+      width: 254px;
+    }
+    &-search-input {
+      width: 254px;
+      margin-bottom: 1%;
+    }
+    &-select {
+      height: 32px !important;
+      width: 254px;
+    }
+  }
+}
+
+@media (max-width: 320px) { 
+  .entry {
+    &-search {
+      margin-left: -19px;
+    }
+    &-search-input {
+      width: 242px;
+    }
+    &-select {
+      margin-top: 1%;
+      width: 242px;
+      margin-left: -.5px;
+    }
+    &-search-btn {
+      width: 242px;
+    }
+  }
+  .ngx-pagination {
+    margin-left: -50px !important;
   }
 }

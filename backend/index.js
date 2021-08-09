@@ -66,6 +66,6 @@ if (app.get('env') === 'development') {
 const port = process.env.PORT || 3000;
 console.log(port);
 
-app.listen(port, '192.168.254.105', () => {
+app.listen(port, '192.168.254.103', () => {
     console.log(`Server is listening at port: ${port}`);
 });

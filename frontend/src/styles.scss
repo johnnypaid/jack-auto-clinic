@@ -3,8 +3,15 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
 label {
   position: inherit !important;
   float: left !important
+}
+.ngx-pagination {
+  margin-top: 10% !important;
+  margin-left: -36px !important;
 }
 

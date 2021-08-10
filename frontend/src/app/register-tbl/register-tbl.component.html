@@ -24,65 +24,38 @@
   </div>
 
   <ng-template [ngIf]="mainTable === true">
-    <table class="table table-striped" >
-      <thead>
-      <tr>
-        <!-- <th scope="col">#</th> -->
-        <th scope="col">Id</th>
-        <th scope="col">Chassis</th>
-        <th scope="col">Engine</th>
-        <th scope="col">BodyT</th>
-        <th scope="col">Name</th>
-        <th scope="col">Plate</th>
-        <th scope="col">MvNum</th>
-        <th scope="col">Color</th>
-        <th scope="col">Date</th>
-        <th scope="col">Actions</th>
-
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let entry of entryTable | paginate : {
-        itemsPerPage: tableSize,
-        currentPage: page,
-        totalItems: count
-      };
-      let i = index">
-        <!-- <th scope="row">{{ i + 1 }}</th> -->
-        <td>
-          {{entry._id}}
-        </td>
-        <td>
-          {{entry.chassisNum}}
-        </td>
-        <td>
-          {{entry.engineNum}}
-        </td>
-        <td>
-          {{entry.bodyType}}
-        </td>
-        <td>
-          {{entry.name}}
-        </td>
-        <td>
-          {{entry.plateNum}}
-        </td>
-        <td>
-          {{entry.mvNum}}
-        </td>
-        <td>
-          {{entry.color}}
-        </td>
-        <td>
-          {{entry.date}}
-        </td>
-        <td>
-          <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-          <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="row">
+      <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
+        <div class="card shadow">
+          <div class="entry-chassis">
+            <p class="lead"><small>Engine #</small></p>
+            <h5>{{ entry.engineNum }}</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><small class="text-muted">Chasis #</small></p>
+            <p class="entry-fields">{{entry.chassisNum}}</p>
+            <p class="card-text"><small class="text-muted">Body Type</small></p>
+            <p class="entry-fields">{{entry.bodyType}}</p>
+            <p class="card-text"><small class="text-muted">Name</small></p>
+            <p class="entry-fields">{{entry.name}}</p>
+            <p class="card-text"><small class="text-muted">Plate #</small></p>
+            <p class="entry-fields">{{entry.plateNum}}</p>
+            <p class="card-text"><small class="text-muted">MV #</small></p>
+            <p class="entry-fields">{{entry.mvNum}}</p>
+            <p class="card-text"><small class="text-muted">Color</small></p>
+            <p class="entry-fields">{{entry.color}}</p>
+            <p class="card-text"><small class="text-muted">Date</small></p>
+            <p class="entry-fields">{{entry.date | slice:0:10}}</p>
+            <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
+            <hr>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="d-flex justify-content-center">
       <pagination-controls
         previousLabel="Prev"
@@ -93,61 +66,39 @@
   </ng-template>
 
   <ng-template [ngIf]="searchTable === true">
-    <table class="table table-striped" >
-      <thead>
-        <tr>
-          <!-- <th scope="col">#</th> -->
-          <th scope="col">Id</th>
-          <th scope="col">Chassis</th>
-          <th scope="col">Engine</th>
-          <th scope="col">Bodyt</th>
-          <th scope="col">Name</th>
-          <th scope="col">Plate</th>
-          <th scope="col">MvNum</th>
-          <th scope="col">Color</th>
-          <th scope="col">Date</th>
-          <th scope="col">Actions</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
-          <!-- <th scope="row">{{ i + 1 }}</th> -->
-          <td>
-            {{entry._id}}
-          </td>
-          <td>
-            {{entry.chassisNum}}
-          </td>
-          <td>
-            {{entry.engineNum}}
-          </td>
-          <td>
-            {{entry.bodyType}}
-          </td>
-          <td>
-            {{entry.name}}
-          </td>
-          <td>
-            {{entry.plateNum}}
-          </td>
-          <td>
-            {{entry.mvNum}}
-          </td>
-          <td>
-            {{entry.color}}
-          </td>
-          <td>
-            {{entry.date}}
-          </td>
-        <td>
-          <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-          <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
+    <div class="row">
+      <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
+        <div class="card shadow">
+          <div class="entry-chassis">
+            <p class="lead"><small>Engine #</small></p>
+            <h5>{{ entry.engineNum }}</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><small class="text-muted">Chasis #</small></p>
+            <p class="entry-fields">{{entry.chassisNum}}</p>
+            <p class="card-text"><small class="text-muted">Body Type</small></p>
+            <p class="entry-fields">{{entry.bodyType}}</p>
+            <p class="card-text"><small class="text-muted">Name</small></p>
+            <p class="entry-fields">{{entry.name}}</p>
+            <p class="card-text"><small class="text-muted">Plate #</small></p>
+            <p class="entry-fields">{{entry.plateNum}}</p>
+            <p class="card-text"><small class="text-muted">MV #</small></p>
+            <p class="entry-fields">{{entry.mvNum}}</p>
+            <p class="card-text"><small class="text-muted">Color</small></p>
+            <p class="entry-fields">{{entry.color}}</p>
+            <p class="card-text"><small class="text-muted">Date</small></p>
+            <p class="entry-fields">{{entry.date | slice:0:10}}</p>
+            <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
+            <hr>
+          </div>
+          <div class="card-footer bg-transparent border-success">
+            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center" id="entry-pagination">
       <pagination-controls
         previousLabel="Prev"
         nextLabel="Next"
@@ -155,7 +106,6 @@
       </pagination-controls>
     </div>
   </ng-template>
-
 </section>
 
 <section>
@@ -183,7 +133,12 @@
               </div>
               <label for="dateOfBirth">Body Type</label>
               <div class="input-group">
-              <input class="entry-form" type="text" id="body-code" class="form-control entry-form" formControlName="bodyType" required>
+                <input class="form-control entry-form" list="bodyT" name="body" id="body" formControlName="bodyType" required>
+                <datalist id="bodyT">
+                  <option value="Round">
+                  <option value="Square">
+                  <option value="Big">
+                </datalist>
               </div>
               <label for="dateOfBirth">Name</label>
               <div class="input-group">
@@ -195,11 +150,22 @@
               </div>
               <label for="dateOfBirth">MV Num</label>
               <div class="input-group">
-              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" formControlName="mvNum"></textarea>
+                <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="mvNum" required>
               </div>
               <label for="dateOfBirth">Color</label>
               <div class="input-group">
-              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" formControlName="color"></textarea>
+                <input class="form-control entry-form" list="colors" name="color" id="color" formControlName="color" required>
+                <datalist id="colors">
+                  <option value="White">
+                  <option value="Black">
+                  <option value="Red">
+                  <option value="Blue">
+                  <option value="Grey">
+                </datalist>
+              </div>
+               <label for="dateOfBirth">MV Num</label>
+              <div class="input-group">
+                <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="date" required>
               </div>
             </div>
           </ng-template>

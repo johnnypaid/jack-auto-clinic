@@ -43,6 +43,8 @@
               <p class="entry-fields">{{entry.containerNum}}</p>
               <p class="card-text"><small class="text-muted">Description</small></p>
               <p class="entry-fields">{{entry.unitDesc}}</p>
+              <p class="card-text"><small class="text-muted">Date</small></p>
+              <p class="entry-fields">{{entry.date | slice:0:10}}</p>
               <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
               <hr>
             </div>
@@ -64,22 +66,32 @@
 
     <ng-template [ngIf]="searchTable === true">
       <div class="row">
-        <div class="col-md-4 entry-pad shadow" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
-          <div class="card">
+        <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
+          <div class="card shadow">
             <div class="entry-chassis">
-              <p class="lead"><small>engine #</small></p>
+              <p class="lead"><small>Engine #</small></p>
               <h5>{{ entry.engineNum }}</h5>
             </div>
             <div class="card-body">
-              <p>Chassis Number: <strong>{{entry.chassisNum}}</strong></p>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <p class="card-text"><small class="text-muted">Chasis #</small></p>
+              <p class="entry-fields">{{entry.chassisNum}}</p>
+              <p class="card-text"><small class="text-muted">Body Code</small></p>
+              <p class="entry-fields">{{entry.bodyCode}}</p>
+              <p class="card-text"><small class="text-muted">Supplier</small></p>
+              <p class="entry-fields">{{entry.supplier}}</p>
+              <p class="card-text"><small class="text-muted">Container</small></p>
+              <p class="entry-fields">{{entry.containerNum}}</p>
+              <p class="card-text"><small class="text-muted">Description</small></p>
+              <p class="entry-fields">{{entry.unitDesc}}</p>
+              <p class="card-text"><small class="text-muted">Date</small></p>
+              <p class="entry-fields">{{entry.date | slice:0:10}}</p>
+              <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
+              <hr>
             </div>
-            
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+            <div class="card-footer bg-transparent border-success">
+              <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+              <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
+            </div>
           </div>
         </div>
       </div>

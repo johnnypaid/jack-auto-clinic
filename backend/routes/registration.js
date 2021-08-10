@@ -86,7 +86,9 @@ router.put('/:id', async (req, res) => {
                 name: req.body.name,
                 color: req.body.color,
                 dateEdited: new Date(),
-                mvNum: req.body.mvNum
+                mvNum: req.body.mvNum,
+                plateNum: req.body.plateNum,
+                date: req.body.date
 
             },{new: true});
 

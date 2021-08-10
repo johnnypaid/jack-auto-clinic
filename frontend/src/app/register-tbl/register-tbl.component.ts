@@ -39,7 +39,8 @@ export class RegisterTblComponent implements OnInit {
     name: ['', Validators.required],
     mvNum: ['', Validators.required],
     plateNum: ['', Validators.required],
-    color: ['', Validators.required]
+    color: ['', Validators.required],
+    date: ['', Validators.required]
   });
 
   searchForm = this.formBuilder.group({
@@ -100,7 +101,7 @@ export class RegisterTblComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.entryFormUpdate.value);
+    console.log(this.entryFormUpdate.value);
     this.regTbl.newEntryUpdate(this.entryFormUpdate.getRawValue(), this.passport)
       .subscribe(resdata => {
         console.log(resdata.status);
@@ -123,6 +124,7 @@ export class RegisterTblComponent implements OnInit {
     this.entryFormUpdate.controls.color.setValue(entry.color);
     this.entryFormUpdate.controls.mvNum.setValue(entry.mvNum);
     this.entryFormUpdate.controls.name.setValue(entry.name);
+    this.entryFormUpdate.controls.date.setValue(entry.date.slice(0, 10));
   }
 
   onDelete() {

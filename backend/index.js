@@ -18,7 +18,11 @@ if(!config.get('jwtPrivateKey')) {
     process.exit(1);
 }
 // db connection
-mongoose.connect('mongodb://localhost:27017/auto-clnic', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/auto-clnic', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex:true
+        });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -29,7 +33,7 @@ db.once('open', function() {
 // middleware
 app.use(express.json());
 app.use(log);
-app.use(auth);
+// app.use(auth);
 app.use(express.static('public'));
 app.use(helmet());
 

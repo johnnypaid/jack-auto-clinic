@@ -11,13 +11,12 @@ router.get('/', auth, async (req, res) => {
     res.send(result);
 });
 
-router.get('/:name', auth, async (req, res) => {
+router.get('/:name', async (req, res) => {
     let result = await AppUser.findOne({name: req.params.name});
     if (!result) return res.status(400).send('No user found..');
 
     res.send(result);
 });
-
 router.post('/', auth, async (req, res) => {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.message);

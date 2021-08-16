@@ -17,18 +17,15 @@ router.get('/:option/:key', async (req, res) => {
     let result = {};
 
     try {
-        if (field === 'engineNum') {
-            result = await AppProd.find({'engineNum': key });
+        if (field === 'sold_to') {
+            result = await AppProd.find({'sold_to': key });
         }
-    
         if (field === 'chassisNum') {
             result = await AppProd.find({'chassisNum': key });
         }
-    
         if (field === 'bodyType') {
             result = await AppProd.find({'bodyType': key });
         }
-
         if (field === 'date') {
             console.log(key);
 
@@ -55,7 +52,7 @@ router.post('/', async (req, res) => {
     try {
         newEntry = new AppProd(_.pick(req.body, 
             [
-                'chassisNum', 'conDate', 
+                'chassisNum', 'conversion', 'conDate', 'con_stat', 
                 'painting', 'paint_started', 'paint_stat', 
                 'mechanical', 'mec_started', 'mec_stat',
                 'electrical', 'elect_started', 'elect_stat',

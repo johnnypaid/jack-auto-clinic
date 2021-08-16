@@ -8,6 +8,10 @@
             <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="chassisNum" required>
           </div>
           <div class="form-group col-md-4">
+            <label for="chassisNum">Conversion</label>
+            <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="conversion" required>
+          </div>
+          <div class="form-group col-md-4">
             <label class="entry-label" for="conDate">Conversion Date</label>
             <div class="input-group">
               <input class="form-control reg-date" placeholder="yyyy-mm-dd"
@@ -16,6 +20,15 @@
                 <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
               </div>
             </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="paint_stat">Conversion Status</label>
+            <input class="form-control" list="paint_stats" name="paint_stat" id="paint_stat" formControlName="con_stat" required>
+            <datalist id="paint_stats">
+              <option value="Ongoing">
+              <option value="Onhold">
+              <option value="Done">
+            </datalist>
           </div>
           <div class="form-group col-md-4">
             <label for="sold_to">Sold To</label>

@@ -97,7 +97,7 @@ export class EntryTblComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(this.entryFormUpdate.value);
+    console.log(this.entryFormUpdate.value);
     this.entryTbl.newEntryUpdate(this.entryFormUpdate.getRawValue(), this.passport)
       .subscribe(resdata => {
         console.log(resdata.status);

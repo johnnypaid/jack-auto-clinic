@@ -16,7 +16,9 @@ export class ProductionComponent implements OnInit {
   passport: any;
 
   productionForm = this.formBuilder.group({
+    conversion: ['', Validators.required],
     conDate: ['', Validators.required],
+    con_stat: ['', Validators.required],
     chassisNum: ['', Validators.required],
     painting: ['', Validators.required],
     paint_started: ['', Validators.required],
@@ -64,7 +66,7 @@ export class ProductionComponent implements OnInit {
       this.showErr = false;
       let con_date, paint_date, mec_date, elec_date, up_date, trim_date, dash_date, det_date, qc_date = '';
       try {
-        if (this.productionForm.value.conDate.year !== undefined) {
+        if (this.productionForm.value.conDate.year != undefined) {
           let newCondate = this.productionForm.value.conDate;
           let conDay, conMonth = '';
           if (newCondate.month < 10 ) {
@@ -78,7 +80,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.conDate = '';
         }
-        if (this.productionForm.value.paint_started.year !== undefined) {
+        if (this.productionForm.value.paint_started.year != undefined) {
           let newPaintdate = this.productionForm.value.paint_started;
           let paintMonth, paintDay = '';
           if (newPaintdate.month < 10 ) {
@@ -92,7 +94,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.paint_started = '';
         }
-        if (this.productionForm.value.mec_started.year !== undefined) {
+        if (this.productionForm.value.mec_started.year != undefined) {
           let newMecdate = this.productionForm.value.mec_started;
           let mecMonth, mecDay = '';
           if (newMecdate.month < 10 ) {
@@ -106,7 +108,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.mec_started = '';
         }
-        if (this.productionForm.value.elec_started.year !== undefined) {
+        if (this.productionForm.value.elec_started.year != undefined) {
           let newElectdate = this.productionForm.value.elec_started;
           let electMonth, electDay = '';
           if (newElectdate.month < 10 ) {
@@ -120,7 +122,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.elec_started = '';
         }
-        if (this.productionForm.value.up_started.year !== undefined) {
+        if (this.productionForm.value.up_started.year != undefined) {
           let newUpdate = this.productionForm.value.up_started;
           let upMonth, upDay = '';
           if (newUpdate.month < 10 ) {
@@ -134,7 +136,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.up_started = '';
         }
-        if (this.productionForm.value.trim_started.year !== undefined) {
+        if (this.productionForm.value.trim_started.year != undefined) {
           let newTrimdate = this.productionForm.value.trim_started;
           let trimMonth, trimDay = '';
           if (newTrimdate.month < 10 ) {
@@ -148,7 +150,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.trim_started = '';
         }
-        if (this.productionForm.value.dash_started.year !== undefined) {
+        if (this.productionForm.value.dash_started.year != undefined) {
           let newDashdate = this.productionForm.value.dash_started;
           let dashMonth, dashDay = '';
           if (newDashdate.month < 10 ) {
@@ -162,7 +164,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.dash_started = '';
         }
-        if (this.productionForm.value.det_started.year !== undefined) {
+        if (this.productionForm.value.det_started.year != undefined) {
           let newDetdate = this.productionForm.value.det_started;
           let detMonth, detDay = '';
           if (newDetdate.month < 10 ) {
@@ -176,7 +178,7 @@ export class ProductionComponent implements OnInit {
         } else {
           this.productionForm.value.det_started = '';
         }
-        if (this.productionForm.value.qc_started.year !== undefined) {
+        if (this.productionForm.value.qc_started.year != undefined) {
           let newQcdate = this.productionForm.value.qc_started;
           let qcMonth, qcDay = '';
           if (newQcdate.month < 10 ) {

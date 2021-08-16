@@ -32,6 +32,7 @@ export class ProductionTblComponent implements OnInit {
 
   mainTable = true;
   searchTable = false;
+  isCollapsed = true;
 
   entryFormUpdate = this.formBuilder.group({
     id: [{value: '', disabled: true}],
@@ -97,8 +98,10 @@ export class ProductionTblComponent implements OnInit {
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
+    console.log(this.passport);
     this.prodTbl.getAllEntry(this.passport)
       .subscribe(resdata => {
+        console.log(resdata);
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData;
       // console.log(this.entryTable);
@@ -111,7 +114,7 @@ export class ProductionTblComponent implements OnInit {
 
   open(content: any, entry: any) {
     console.log(entry.conDate);
-    this.setModalEntryValue(entry);
+    // this.setModalEntryValue(entry);
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -134,7 +137,7 @@ export class ProductionTblComponent implements OnInit {
 
   onSubmit() {
     let con_date, paint_date, mec_date, elec_date, up_date, trim_date, dash_date, det_date, qc_date = '';
-    console.log(this.prodFormUpdate.value.conDate);
+    console.log(this.prodFormUpdate.value.electrical);
     try {
       if (this.prodFormUpdate.value.conDate != null) {
         let newCondate = this.prodFormUpdate.value.conDate;
@@ -149,7 +152,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           conDay = newCondate.day;
         };
-        con_date = newCondate.year + '-' + conDay + '-' + conDay;
+        con_date = newCondate.year + '-' + conMonth + '-' + conDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.conDate = con_date;
       } else {
         this.prodFormUpdate.value.conDate = '';
@@ -168,7 +171,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           paintDay = newPaintdate.day;
         }
-        paint_date = newPaintdate.year + '-' + paintMonth + '-' + paintDay;
+        paint_date = newPaintdate.year + '-' + paintMonth + '-' + paintDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.paint_started = paint_date;
       } else {
         this.prodFormUpdate.value.paint_started = '';
@@ -187,7 +190,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           mecDay = newMecdate.day;
         }
-        mec_date = newMecdate.year + '-' + mecMonth + '-' + mecDay;
+        mec_date = newMecdate.year + '-' + mecMonth + '-' + mecDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.mec_started = mec_date;
       } else {
         this.prodFormUpdate.value.mec_started = '';
@@ -206,7 +209,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           electDay = newElectdate.day;
         }
-        elec_date = newElectdate.year + '-' + electMonth + '-' + electDay;
+        elec_date = newElectdate.year + '-' + electMonth + '-' + electDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.elec_started = elec_date;
       } else {
         this.prodFormUpdate.value.elec_started = '';
@@ -224,7 +227,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           upDay = newUpdate.day;
         }
-        up_date = newUpdate.year + '-' + upMonth + '-' + upDay;
+        up_date = newUpdate.year + '-' + upMonth + '-' + upDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.up_started = up_date;
       } else {
         this.prodFormUpdate.value.up_started = '';
@@ -242,7 +245,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           trimDay = newTrimdate.day;
         }
-        trim_date = newTrimdate.year + '-' + trimMonth + '-' + trimDay;
+        trim_date = newTrimdate.year + '-' + trimMonth + '-' + trimDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.trim_started = trim_date;
       } else {
         this.prodFormUpdate.value.trim_started = '';
@@ -260,7 +263,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           dashDay = newDashdate.day;
         }
-        dash_date = newDashdate.year + '-' + dashMonth + '-' + dashDay;
+        dash_date = newDashdate.year + '-' + dashMonth + '-' + dashDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.dash_started = dash_date;
       } else {
         this.prodFormUpdate.value.dash_started = '';
@@ -278,7 +281,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           detDay = newDetdate.day;
         }
-        det_date = newDetdate.year + '-' + detMonth + '-' + detDay;
+        det_date = newDetdate.year + '-' + detMonth + '-' + detDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.det_started = det_date;
       } else {
         this.prodFormUpdate.value.det_started = '';
@@ -296,7 +299,7 @@ export class ProductionTblComponent implements OnInit {
         } else {
           qcDay = newQcdate.day;
         }
-        qc_date = newQcdate.year + '-' + qcMonth + '-' + qcDay;
+        qc_date = newQcdate.year + '-' + qcMonth + '-' + qcDay + 'T00:00:00.000+00:00';
         this.prodFormUpdate.value.qc_started = qc_date;
       } else {
         this.prodFormUpdate.value.qc_started = '';
@@ -326,14 +329,14 @@ export class ProductionTblComponent implements OnInit {
     this.prodFormUpdate.controls.id.setValue(entry._id);
     this.prodFormUpdate.controls.chassisNum.setValue(entry.chassisNum);
     if (entry.conDate != null) {
-      this.prodFormUpdate.controls.conDate.setValue(
-        {
-          year: parseInt(entry.conDate.slice(0,4)),
-          month: parseInt(entry.conDate.slice(5,7)),
-          day: parseInt(entry.conDate.slice(8,10))
-        });
+      // this.prodFormUpdate.controls.conDate.setValue(
+      //   {
+      //     year: parseInt(entry.conDate.slice(0,4)),
+      //     month: parseInt(entry.conDate.slice(5,7)),
+      //     day: parseInt(entry.conDate.slice(8,10))
+      //   });
     } else {
-      this.prodFormUpdate.controls.conDate.setValue({year: 1000 ,month: 10,day: 10});
+      this.prodFormUpdate.controls.conDate.setValue(new Date("<YYYY-mm-dd>"));
     }
 
     this.prodFormUpdate.controls.painting.setValue(entry.painting);
@@ -345,7 +348,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.paint_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.paint_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.paint_started.setValue(new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.paint_stat.setValue(entry.paint_stat);
 
@@ -358,11 +361,15 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.mec_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.mec_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.mec_started.setValue(new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.mec_stat.setValue(entry.mec_stat);
 
-    this.prodFormUpdate.controls.electrical.setValue(entry.electrical);
+    if(entry.electrical != null) {
+      this.prodFormUpdate.controls.electrical.setValue(entry.electrical);
+    } else {
+      this.prodFormUpdate.controls.electrical.setValue('');
+    }
     if (entry.elec_started != null) {
       this.prodFormUpdate.controls.elec_started.setValue(
         {
@@ -371,9 +378,14 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.elec_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.elec_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.elec_started.setValue(new Date("<YYYY-mm-dd>"));
     }
-    this.prodFormUpdate.controls.elec_stat.setValue(entry.elec_stat);
+    if (entry.elec_stat != null) {
+      this.prodFormUpdate.controls.elec_stat.setValue(entry.elec_stat);
+    } else {
+      this.prodFormUpdate.controls.elec_stat.setValue('');
+    }
+    
 
     this.prodFormUpdate.controls.upholstery.setValue(entry.upholstery);
     if (entry.up_started != null) {
@@ -384,7 +396,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.up_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.up_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.up_started.setValue( new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.up_stat.setValue(entry.up_stat);
 
@@ -397,7 +409,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.trim_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.trim_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.trim_started.setValue(new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.trim_stat.setValue(entry.trim_stat);
 
@@ -410,7 +422,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.dash_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.dash_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.dash_started.setValue(new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.dash_stat.setValue(entry.dash_stat);
 
@@ -423,7 +435,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.det_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.det_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.det_started.setValue(new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.det_stat.setValue(entry.det_stat);
 
@@ -436,7 +448,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.qc_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.qc_started.setValue({year: 1000 ,month: 10, day: 10});
+      this.prodFormUpdate.controls.qc_started.setValue(new Date("<YYYY-mm-dd>"));
     }
     this.prodFormUpdate.controls.qc_stat.setValue(entry.qc_stat);
     this.prodFormUpdate.controls.sold_to.setValue(entry.sold_to);
@@ -480,7 +492,7 @@ export class ProductionTblComponent implements OnInit {
       switch (parseInt(this.searchForm.value.searhOption)) {
         case 1: {
           this.inputKey = true;
-          option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
+          option = {field: 'sold_to', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
@@ -490,13 +502,13 @@ export class ProductionTblComponent implements OnInit {
           this.searchEntry(option);
           break;
         }
-        case 3: {
-          this.inputKey = true;
-          this.searchForm.value.searhOption = 'bodyType';
-          option = {field: 'bodyType', keyword: this.searchForm.value.searchInput};
-          this.searchEntry(option);
-          break;
-        }
+        // case 3: {
+        //   this.inputKey = true;
+        //   this.searchForm.value.searhOption = 'bodyType';
+        //   option = {field: 'bodyType', keyword: this.searchForm.value.searchInput};
+        //   this.searchEntry(option);
+        //   break;
+        // }
         default: {
           this.inputKey = true;
           break;

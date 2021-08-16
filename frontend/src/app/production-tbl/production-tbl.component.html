@@ -13,9 +13,9 @@
         <input *ngIf="inputKey === true" class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
         <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option" (change)="search()">
           <option [selected]="isSelected">Default</option>
-          <option value="1">Engine</option>
+          <option value="1">Sold To</option>
           <option value="2">Chassis</option>
-          <option value="3">Body Type</option>
+          <!-- <option value="3">Body Type</option> -->
           <option value="4">Date</option>
         </select>
         <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
@@ -24,33 +24,93 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-4" *ngFor="let entry of entryTable | paginate : {
+    <div class="col-sm-4 entry-pad" *ngFor="let entry of entryTable | paginate : {
       itemsPerPage: tableSize,
       currentPage: page,
       totalItems: count
     };
     let i = index">
       <div class="card entry-card">
-        <div class="card-body">
+        <div class="entry-chassis">
+          <p class="lead"><small>Engine #</small></p>
           <h5 class="card-title text-center">{{ entry.chassisNum }}</h5>
-          <p class="card-text"><strong>ConversiotnDate:</strong><br>{{ entry.conDate | slice:0:10 }}</p>
-          <p class="card-text"><strong>Painting:</strong> <br> name: {{ entry.painting }} <br>started: {{ entry.paint_started | slice:0:10 }} <br>status: {{ entry.paint_stat }}</p>
-          <p class="card-text"><strong>Mechanical:</strong> <br> name: {{ entry.mechanical }} <br>started: {{ entry.mec_started | slice:0:10 }} <br>status: {{ entry.mec_stat }}</p>
-          <p class="card-text"><strong>Electrical:</strong> <br> name: {{ entry.painting }} <br>started: {{ entry.paint_started | slice:0:10 }} <br>status: {{ entry.paint_stat }}</p>
-          <p class="card-text"><strong>Upholstery:</strong> <br> name: {{ entry.upholstery }} <br>started: {{ entry.up_started | slice:0:10 }} <br>status: {{ entry.up_stat }}</p>
-          <p class="card-text"><strong>Trimmer:</strong> <br> name: {{ entry.trimmer }} <br>started: {{ entry.trim_started | slice:0:10 }} <br>status: {{ entry.trim_stat }}</p>
-          <p class="card-text"><strong>Dashboard:</strong> <br> name: {{ entry.dashboard }} <br>started: {{ entry.dash_started | slice:0:10 }} <br>status: {{ entry.dash_stat }}</p>
-          <p class="card-text"><strong>Detailing:</strong> <br> name: {{ entry.detailing }} <br>started: {{ entry.det_started | slice:0:10 }} <br>status: {{ entry.det_stat }}</p>
-          <p class="card-text"><strong>QC:</strong> <br> name: {{ entry.qc }} <br>started: {{ entry.qc_started | slice:0:10 }} <br>status: {{ entry.qc_stat }}</p>
-          <p class="card-text"><strong>Sold to:</strong> <br>{{ entry.sold_to }}</p>
-          <p><small>ID: {{ entry._id }}</small></p>
-          <div class="row">
-            <div class="col-sm-6 text-center">
-              <a type="button" (click)="open(content, entry)" class="btn btn-warning btn-block" title="Update entry" data-toggle="tooltip">Edit</a>
+        </div>
+        <div class="card-body">
+          <p>
+            <button class="btn btn-secondary shadow" type="button" data-toggle="collapse" [attr.data-target]="'#collapseExample' + i" aria-expanded="false" aria-controls="collapseExample">
+              Show More
+            </button>
+          </p>
+          <div class="collapse" [attr.id]="'collapseExample' + i">
+            <div class="card card-body">
+              <div class="card prod-card">
+                <div class="card-body shadow-lg">
+                  <p class="card-text"><small class="text-muted">Conversion</small></p>
+                  <p class="entry-fields">{{ entry.conversion}}</p>
+                  <p class="card-text"><small class="text-muted">Conversion Date</small></p>
+                  <p class="entry-fields">{{ entry.conDate | slice:0:10 }}</p>
+                  <p class="card-text"><small class="text-muted">Conversion Status</small></p>
+                  <p class="entry-fields">{{ entry.con_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Painting</small></p>
+                  <p class="entry-fields">{{ entry.painting}}</p>
+                  <p class="card-text"><small class="text-muted">Painting Date</small></p>
+                  <p class="entry-fields">{{ entry.paint_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Painting Status</small></p>
+                  <p class="entry-fields">{{ entry.paint_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Mechanical</small></p>
+                  <p class="entry-fields">{{ entry.mechanical}}</p>
+                  <p class="card-text"><small class="text-muted">Painting Date</small></p>
+                  <p class="entry-fields">{{ entry.mec_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Painting Status</small></p>
+                  <p class="entry-fields">{{ entry.mec_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Electrical</small></p>
+                  <p class="entry-fields">{{ entry.electrical}}</p>
+                  <p class="card-text"><small class="text-muted">Electrical Date</small></p>
+                  <p class="entry-fields">{{ entry.elec_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Electrical Status</small></p>
+                  <p class="entry-fields">{{ entry.elec_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Upholstery</small></p>
+                  <p class="entry-fields">{{ entry.upholstery}}</p>
+                  <p class="card-text"><small class="text-muted">Upholstery Date</small></p>
+                  <p class="entry-fields">{{ entry.up_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Upholstery Status</small></p>
+                  <p class="entry-fields">{{ entry.up_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Trimmer</small></p>
+                  <p class="entry-fields">{{ entry.trimmer}}</p>
+                  <p class="card-text"><small class="text-muted">Trimmer Date</small></p>
+                  <p class="entry-fields">{{ entry.trim_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Trimmer Status</small></p>
+                  <p class="entry-fields">{{ entry.trim_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Dashboard</small></p>
+                  <p class="entry-fields">{{ entry.dashboard}}</p>
+                  <p class="card-text"><small class="text-muted">Dashboard Date</small></p>
+                  <p class="entry-fields">{{ entry.dash_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Dashboard Status</small></p>
+                  <p class="entry-fields">{{ entry.dash_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Detailing</small></p>
+                  <p class="entry-fields">{{ entry.detailing}}</p>
+                  <p class="card-text"><small class="text-muted">Detailing Date</small></p>
+                  <p class="entry-fields">{{ entry.det_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">Detailing Status</small></p>
+                  <p class="entry-fields">{{ entry.det_stat}}</p>
+                  <p class="card-text"><small class="text-muted">QC</small></p>
+                  <p class="entry-fields">{{ entry.qc}}</p>
+                  <p class="card-text"><small class="text-muted">QC Date</small></p>
+                  <p class="entry-fields">{{ entry.qc_started | slice:0:10}}</p>
+                  <p class="card-text"><small class="text-muted">QC Status</small></p>
+                  <p class="entry-fields">{{ entry.qc_stat}}</p>
+                  <p class="card-text"><small class="text-muted">Sold to</small></p>
+                  <p class="card-text">{{ entry.sold_to }}</p>
+                  <p class="card-text"><small class="text-muted">ID</small></p>
+                  <p class="entry-fields"><small class="text-muted">{{ entry._id }}</small></p>
+                </div>
+              </div>
             </div>
-            <div class="col-sm-6 text-center">
-              <a type="button" (click)="openDel(del, entry)" class="btn btn-danger btn-block"  data-toggle="tooltip">Delete</a>
-            </div>
+          </div>
+          <hr>
+          <div class="card-footer bg-transparent border-success">
+            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
+            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
           </div>
         </div>
       </div>
@@ -63,142 +123,6 @@
       (pageChange)="onTableDataChange($event)">
     </pagination-controls>
   </div>
-
-  <!-- <ng-template [ngIf]="mainTable === true">
-    <table class="table table-striped" >
-      <thead>
-      <tr>
-
-        <th scope="col">Id</th>
-        <th scope="col">Chassis</th>
-        <th scope="col">conDate</th>
-        <th scope="col">painting</th>
-        <th scope="col">paint_started</th>
-        <th scope="col">paint_stat</th>
-        <th scope="col">mechanical</th>
-        <th scope="col">mec_started</th>
-        <th scope="col">mec_stat</th>
-        <th scope="col">Actions</th>
-
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let entry of entryTable | paginate : {
-        itemsPerPage: tableSize,
-        currentPage: page,
-        totalItems: count
-      };
-      let i = index">
-
-        <td>
-          {{entry._id}}
-        </td>
-        <td>
-          {{entry.chassisNum}}
-        </td>
-        <td>
-          {{entry.conDate}}
-        </td>
-        <td>
-          {{entry.painting}}
-        </td>
-        <td>
-          {{entry.paint_started}}
-        </td>
-        <td>
-          {{entry.paint_stat}}
-        </td>
-        <td>
-          {{entry.mechanical}}
-        </td>
-        <td>
-          {{entry.mec_started}}
-        </td>
-        <td>
-          {{entry.mec_stat}}
-        </td>
-        <td>
-          <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-          <a type="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-    </div>
-  </ng-template> -->
-
-  <ng-template [ngIf]="searchTable === true">
-    <table class="table table-striped" >
-      <thead>
-        <tr>
-          <!-- <th scope="col">#</th> -->
-          <th scope="col">Id</th>
-          <th scope="col">Chassis</th>
-          <th scope="col">Engine</th>
-          <th scope="col">Bodyt</th>
-          <th scope="col">Name</th>
-          <th scope="col">Plate</th>
-          <th scope="col">MvNum</th>
-          <th scope="col">Color</th>
-          <th scope="col">Date</th>
-          <th scope="col">Actions</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
-          <!-- <th scope="row">{{ i + 1 }}</th> -->
-          <td>
-            {{entry._id}}
-          </td>
-          <td>
-            {{entry.chassisNum}}
-          </td>
-          <td>
-            {{entry.engineNum}}
-          </td>
-          <td>
-            {{entry.bodyType}}
-          </td>
-          <td>
-            {{entry.name}}
-          </td>
-          <td>
-            {{entry.plateNum}}
-          </td>
-          <td>
-            {{entry.mvNum}}
-          </td>
-          <td>
-            {{entry.color}}
-          </td>
-          <td>
-            {{entry.date}}
-          </td>
-        <td>
-          <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-          <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-    </div>
-  </ng-template>
-
 </section>
 
 <section>
@@ -217,6 +141,10 @@
                 <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="chassisNum" required>
               </div>
               <div class="form-group col-md-4">
+                <label for="chassisNum">Conversion</label>
+                <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="conversion" required>
+              </div>
+              <div class="form-group col-md-4">
                 <label class="entry-label" for="conDate">Conversion Date</label>
                 <div class="input-group">
                   <input class="form-control reg-date" placeholder="yyyy-mm-dd"
@@ -225,6 +153,15 @@
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
                   </div>
                 </div>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="paint_stat">Conversion Status</label>
+                <input class="form-control" list="con_stats" name="con_stat" id="con_stat" formControlName="con_stat" required>
+                <datalist id="con_stats">
+                  <option value="Ongoing">
+                  <option value="Onhold">
+                  <option value="Done">
+                </datalist>
               </div>
               <div class="form-group col-md-4">
                 <label for="sold_to">Sold To</label>

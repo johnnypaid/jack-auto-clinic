@@ -115,7 +115,7 @@ export class RegisterTblComponent implements OnInit {
   }
 
   setModalEntryValue(entry: any) {
-    // console.log(entry)
+    console.log(entry)
     this.entryFormUpdate.controls.id.setValue(entry._id);
     this.entryFormUpdate.controls.chassisNum.setValue(entry.chassisNum);
     this.entryFormUpdate.controls.engineNum.setValue(entry.engineNum);

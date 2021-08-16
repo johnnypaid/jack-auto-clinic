@@ -13,8 +13,14 @@ const productionSchema = new mongoose.Schema({
         requried: true,
         unique: true
     },
+    conversion: {
+        type: String
+    },
     conDate: {
         type: Date
+    },
+    con_stat: {
+        type: String
     },
     painting: { 
         type: String
@@ -99,7 +105,9 @@ function validateEntry(entry) {
     const schema = Joi.object({
         id: Joi.string().optional(),
         updated: Joi.string().optional(),
+        conversion: Joi.string().allow(null, '').optional(),
         conDate: Joi.string().allow(null, '').optional(),
+        con_stat: Joi.string().allow(null, '').optional(),
         chassisNum: Joi.string().required(),
         painting: Joi.string().allow(null, '').optional(),
         paint_started: Joi.string().allow(null, '').optional(),

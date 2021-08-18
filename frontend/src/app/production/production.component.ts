@@ -18,7 +18,7 @@ export class ProductionComponent implements OnInit {
   productionForm = this.formBuilder.group({
     conversion: ['', Validators.required],
     conDate: ['', Validators.required],
-    con_stat: ['', Validators.required],
+    con_stat : ['', Validators.required],
     chassisNum: ['', Validators.required],
     painting: ['', Validators.required],
     paint_started: ['', Validators.required],
@@ -200,9 +200,14 @@ export class ProductionComponent implements OnInit {
             if (resdata.status === 200) {
               this.message.setMessage('User added succesfully.');
               this.productionForm.reset();
+              this.error = '';
+              this.showErr = false;
             }
           }, error => {
             console.log(error.error);
+            this.error = error.error;
+            this.showErr = true;
+
           });
       } catch (error) {
 

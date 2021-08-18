@@ -34,20 +34,22 @@ export class ProductionTblComponent implements OnInit {
   searchTable = false;
   isCollapsed = true;
 
-  entryFormUpdate = this.formBuilder.group({
-    id: [{value: '', disabled: true}],
-    chassisNum: ['', Validators.required],
-    engineNum: ['', Validators.required],
-    bodyType: ['', Validators.required],
-    name: ['', Validators.required],
-    mvNum: ['', Validators.required],
-    plateNum: ['', Validators.required],
-    color: ['', Validators.required]
-  });
+  // entryFormUpdate = this.formBuilder.group({
+  //   id: [{value: '', disabled: true}],
+  //   chassisNum: ['', Validators.required],
+  //   engineNum: ['', Validators.required],
+  //   bodyType: ['', Validators.required],
+  //   name: ['', Validators.required],
+  //   mvNum: ['', Validators.required],
+  //   plateNum: ['', Validators.required],
+  //   color: ['', Validators.required]
+  // });
 
   prodFormUpdate = this.formBuilder.group({
     id: [''],
+    conversion: ['', Validators.required],
     conDate: ['', Validators.required],
+    con_stat: ['', Validators.required],
     chassisNum: ['', Validators.required],
     painting: ['', Validators.required],
     paint_started: ['', Validators.required],
@@ -104,7 +106,7 @@ export class ProductionTblComponent implements OnInit {
         console.log(resdata);
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData;
-      // console.log(this.entryTable);
+      console.log(this.entryTable);
     });
 
     this.mainTable = true;
@@ -114,7 +116,7 @@ export class ProductionTblComponent implements OnInit {
 
   open(content: any, entry: any) {
     console.log(entry.conDate);
-    // this.setModalEntryValue(entry);
+    this.setModalEntryValue(entry);
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
@@ -137,7 +139,7 @@ export class ProductionTblComponent implements OnInit {
 
   onSubmit() {
     let con_date, paint_date, mec_date, elec_date, up_date, trim_date, dash_date, det_date, qc_date = '';
-    console.log(this.prodFormUpdate.value.electrical);
+    console.log(this.prodFormUpdate.value);
     try {
       if (this.prodFormUpdate.value.conDate != null) {
         let newCondate = this.prodFormUpdate.value.conDate;
@@ -317,30 +319,34 @@ export class ProductionTblComponent implements OnInit {
         });
 
     } catch (error) {
-
+      console.log(error.text);
     }
     console.log(this.prodFormUpdate.value);
-
   }
 
   setModalEntryValue(entry: any) {
+    // console.log(entry);
+    console.log(typeof(entry.elec_started));
     console.log(entry.elec_started);
+
+    const fullYear = new Date().getFullYear();
 
     this.prodFormUpdate.controls.id.setValue(entry._id);
     this.prodFormUpdate.controls.chassisNum.setValue(entry.chassisNum);
     if (entry.conDate != null) {
-      // this.prodFormUpdate.controls.conDate.setValue(
-      //   {
-      //     year: parseInt(entry.conDate.slice(0,4)),
-      //     month: parseInt(entry.conDate.slice(5,7)),
-      //     day: parseInt(entry.conDate.slice(8,10))
-      //   });
+      this.prodFormUpdate.controls.conDate.setValue(
+        {
+          year: parseInt(entry.conDate.slice(0,4)),
+          month: parseInt(entry.conDate.slice(5,7)),
+          day: parseInt(entry.conDate.slice(8,10))
+        });
     } else {
-      this.prodFormUpdate.controls.conDate.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.conDate.setValue({year: fullYear, month: 1, day: 1});
     }
 
     this.prodFormUpdate.controls.painting.setValue(entry.painting);
     if (entry.paint_started != null) {
+      // console.log('terty')
       this.prodFormUpdate.controls.paint_started.setValue(
         {
           year: parseInt(entry.paint_started.slice(0,4)),
@@ -348,7 +354,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.paint_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.paint_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.paint_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.paint_stat.setValue(entry.paint_stat);
 
@@ -361,11 +367,11 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.mec_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.mec_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.mec_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.mec_stat.setValue(entry.mec_stat);
 
-    if(entry.electrical != null) {
+    if(entry.electrical != '') {
       this.prodFormUpdate.controls.electrical.setValue(entry.electrical);
     } else {
       this.prodFormUpdate.controls.electrical.setValue('');
@@ -378,7 +384,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.elec_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.elec_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.elec_started.setValue({year: fullYear, month: 1, day: 1});
     }
     if (entry.elec_stat != null) {
       this.prodFormUpdate.controls.elec_stat.setValue(entry.elec_stat);
@@ -396,7 +402,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.up_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.up_started.setValue( new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.up_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.up_stat.setValue(entry.up_stat);
 
@@ -409,7 +415,7 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.trim_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.trim_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.trim_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.trim_stat.setValue(entry.trim_stat);
 
@@ -422,33 +428,33 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.dash_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.dash_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.dash_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.dash_stat.setValue(entry.dash_stat);
 
     this.prodFormUpdate.controls.detailing.setValue(entry.detailing);
     if (entry.det_started != null) {
-      this.prodFormUpdate.controls.dash_started.setValue(
+      this.prodFormUpdate.controls.det_started.setValue(
         {
           year: parseInt(entry.det_started.slice(0,4)),
           month: parseInt(entry.det_started.slice(5,7)),
           day: parseInt(entry.det_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.det_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.det_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.det_stat.setValue(entry.det_stat);
 
     this.prodFormUpdate.controls.qc.setValue(entry.qc);
     if (entry.qc_started != null) {
-      this.prodFormUpdate.controls.dash_started.setValue(
+      this.prodFormUpdate.controls.qc_started.setValue(
         {
           year: parseInt(entry.qc_started.slice(0,4)),
           month: parseInt(entry.qc_started.slice(5,7)),
           day: parseInt(entry.qc_started.slice(8,10))
         });
     } else {
-      this.prodFormUpdate.controls.qc_started.setValue(new Date("<YYYY-mm-dd>"));
+      this.prodFormUpdate.controls.qc_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.qc_stat.setValue(entry.qc_stat);
     this.prodFormUpdate.controls.sold_to.setValue(entry.sold_to);
@@ -456,19 +462,25 @@ export class ProductionTblComponent implements OnInit {
 
   onDelete() {
     console.log(this.delId);
-    if (this.delId === '' || this.delId == null) {
-      this.delMessage = 'No data to delete.'
-    } else {
-      this.prodTbl.delEntry(this.delId, this.passport)
-      .subscribe(resdata => {
-        console.log(resdata);
-        if (resdata.status === 200) {
-          this.delSuccess = true;
-          this.delMessage = 'Successfully deleted.'
-          this.delId = '';
-          this.ngOnInit();
-        }
-      });
+    try {
+      if (this.delId === '' || this.delId == null) {
+        this.delMessage = 'No data to delete.'
+      } else {
+        this.prodTbl.delEntry(this.delId, this.passport)
+        .subscribe(resdata => {
+          console.log(resdata);
+          if (resdata.status === 200) {
+            this.delSuccess = true;
+            this.delMessage = 'Successfully deleted.'
+            this.delId = '';
+            this.ngOnInit();
+          }
+        }, error => {
+          console.log(error.message)
+        });
+      }
+    } catch (error) {
+      console.log(error.text);
     }
   }
 

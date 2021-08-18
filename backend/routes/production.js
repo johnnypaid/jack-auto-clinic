@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
                 'chassisNum', 'conversion', 'conDate', 'con_stat', 
                 'painting', 'paint_started', 'paint_stat', 
                 'mechanical', 'mec_started', 'mec_stat',
-                'electrical', 'elect_started', 'elect_stat',
+                'electrical', 'elec_started', 'elec_stat',
                 'upholstery', 'up_started', 'up_stat',
                 'trimmer', 'trim_started', 'trim_stat',
                 'dashboard', 'dash_started', 'dash_stat',
@@ -83,7 +83,9 @@ router.put('/:id', async (req, res) => {
         const findEntry = await AppProd.findByIdAndUpdate(req.params.id, 
             {   
                 chassisNum: req.body.chassisNum,
+                conversion: req.body.conversion,
                 conDate: req.body.conDate,
+                con_stat: req.body.con_stat,
                 painting: req.body.painting,
                 paint_started: req.body.paint_started,
                 paint_stat: req.body.color,

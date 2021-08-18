@@ -32,7 +32,7 @@
     let i = index">
       <div class="card entry-card">
         <div class="entry-chassis">
-          <p class="lead"><small>Engine #</small></p>
+          <p class="lead"><small>Chassis #</small></p>
           <h5 class="card-title text-center">{{ entry.chassisNum }}</h5>
         </div>
         <div class="card-body">
@@ -54,14 +54,14 @@
                   <p class="card-text"><small class="text-muted">Painting</small></p>
                   <p class="entry-fields">{{ entry.painting}}</p>
                   <p class="card-text"><small class="text-muted">Painting Date</small></p>
-                  <p class="entry-fields">{{ entry.paint_started | slice:0:10}}</p>
+                  <p class="entry-fields" [class.entry-updated]="entry.paint_started === '2021-01-01'">{{ entry.paint_started | slice:0:10}}</p>
                   <p class="card-text"><small class="text-muted">Painting Status</small></p>
                   <p class="entry-fields">{{ entry.paint_stat}}</p>
                   <p class="card-text"><small class="text-muted">Mechanical</small></p>
                   <p class="entry-fields">{{ entry.mechanical}}</p>
-                  <p class="card-text"><small class="text-muted">Painting Date</small></p>
+                  <p class="card-text"><small class="text-muted">Mechanical Date</small></p>
                   <p class="entry-fields">{{ entry.mec_started | slice:0:10}}</p>
-                  <p class="card-text"><small class="text-muted">Painting Status</small></p>
+                  <p class="card-text"><small class="text-muted">Mechanical Status</small></p>
                   <p class="entry-fields">{{ entry.mec_stat}}</p>
                   <p class="card-text"><small class="text-muted">Electrical</small></p>
                   <p class="entry-fields">{{ entry.electrical}}</p>
@@ -107,7 +107,6 @@
               </div>
             </div>
           </div>
-          <hr>
           <div class="card-footer bg-transparent border-success">
             <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
             <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
@@ -363,9 +362,6 @@
     <div class="modal-footer" *ngIf="editSuccess === true">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
     </div>
-    <div class="modal-footer">
-
-    </div>
   </ng-template>
   <hr>
 </section>
@@ -375,7 +371,7 @@
       <h4 class="modal-title" id="modal-basic-title">Delete Registration</h4>
     </div>
     <div class="modal-body">
-      <form [formGroup]="entryFormUpdate">
+      <form>
         <div class="modal-body">
           <div *ngIf="delSuccess === true ; then thenBlock else elseBlock"></div>
           <ng-template #thenBlock><span class="text-success">{{ delMessage }}</span></ng-template>

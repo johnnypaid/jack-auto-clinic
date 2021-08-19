@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductionService } from '../service/production.service';
 import { PromptMessageService } from '../service/prompt-message.service';
 import { RegistrationService } from '../service/registration.service';
@@ -50,7 +51,8 @@ export class ProductionComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private prodService: ProductionService,
-    private message: PromptMessageService) { }
+    private message: PromptMessageService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');

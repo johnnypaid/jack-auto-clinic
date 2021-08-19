@@ -312,6 +312,8 @@ export class ProductionTblComponent implements OnInit {
         .subscribe(resdata => {
           console.log(resdata);
           if (resdata.status === 200) {
+            this.editSuccess = true;
+            this.editMessage = 'Updated sucessfully';
             this.ngOnInit();
           }
         }, error => {

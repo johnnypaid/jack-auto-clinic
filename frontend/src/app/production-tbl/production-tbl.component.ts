@@ -34,17 +34,6 @@ export class ProductionTblComponent implements OnInit {
   searchTable = false;
   isCollapsed = true;
 
-  // entryFormUpdate = this.formBuilder.group({
-  //   id: [{value: '', disabled: true}],
-  //   chassisNum: ['', Validators.required],
-  //   engineNum: ['', Validators.required],
-  //   bodyType: ['', Validators.required],
-  //   name: ['', Validators.required],
-  //   mvNum: ['', Validators.required],
-  //   plateNum: ['', Validators.required],
-  //   color: ['', Validators.required]
-  // });
-
   prodFormUpdate = this.formBuilder.group({
     id: [''],
     conversion: ['', Validators.required],
@@ -115,7 +104,7 @@ export class ProductionTblComponent implements OnInit {
   }
 
   open(content: any, entry: any) {
-    console.log(entry.conDate);
+    console.log(entry);
     this.setModalEntryValue(entry);
 
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -328,13 +317,14 @@ export class ProductionTblComponent implements OnInit {
 
   setModalEntryValue(entry: any) {
     // console.log(entry);
-    console.log(typeof(entry.elec_started));
+    // console.log(typeof(entry.elec_started));
     console.log(entry.elec_started);
 
     const fullYear = new Date().getFullYear();
 
     this.prodFormUpdate.controls.id.setValue(entry._id);
     this.prodFormUpdate.controls.chassisNum.setValue(entry.chassisNum);
+    this.prodFormUpdate.controls.conversion.setValue(entry.conversion);
     if (entry.conDate != null) {
       this.prodFormUpdate.controls.conDate.setValue(
         {
@@ -345,6 +335,7 @@ export class ProductionTblComponent implements OnInit {
     } else {
       this.prodFormUpdate.controls.conDate.setValue({year: fullYear, month: 1, day: 1});
     }
+    this.prodFormUpdate.controls.con_stat.setValue(entry.con_stat);
 
     this.prodFormUpdate.controls.painting.setValue(entry.painting);
     if (entry.paint_started != null) {

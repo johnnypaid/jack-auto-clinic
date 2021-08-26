@@ -1,5 +1,5 @@
 import { NewEntryService } from './../service/new-entry.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PromptMessageService } from '../service/prompt-message.service';
 
@@ -8,7 +8,7 @@ import { PromptMessageService } from '../service/prompt-message.service';
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss']
 })
-export class EntryComponent implements OnInit {
+export class EntryComponent implements OnInit, OnDestroy {
 
   error = ''
   showErr = false;
@@ -64,5 +64,9 @@ export class EntryComponent implements OnInit {
       this.error = 'Please complete details.';
       this.showErr = true;
     }
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('current');
   }
 }

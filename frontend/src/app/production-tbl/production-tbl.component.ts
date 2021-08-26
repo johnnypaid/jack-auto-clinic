@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewEntryService } from '../service/new-entry.service';
@@ -10,7 +10,7 @@ import { RegistrationService } from '../service/registration.service';
   templateUrl: './production-tbl.component.html',
   styleUrls: ['./production-tbl.component.scss']
 })
-export class ProductionTblComponent implements OnInit {
+export class ProductionTblComponent implements OnInit, OnDestroy {
 
   passport: any;
   entryTblData: any
@@ -33,6 +33,8 @@ export class ProductionTblComponent implements OnInit {
   mainTable = true;
   searchTable = false;
   isCollapsed = true;
+  con_date = false;
+  paint_date = false;
 
   prodFormUpdate = this.formBuilder.group({
     id: [''],
@@ -332,14 +334,16 @@ export class ProductionTblComponent implements OnInit {
           month: parseInt(entry.conDate.slice(5,7)),
           day: parseInt(entry.conDate.slice(8,10))
         });
+        this.con_date = false;
     } else {
       this.prodFormUpdate.controls.conDate.setValue({year: fullYear, month: 1, day: 1});
+      this.con_date = true;
     }
     this.prodFormUpdate.controls.con_stat.setValue(entry.con_stat);
 
     this.prodFormUpdate.controls.painting.setValue(entry.painting);
     if (entry.paint_started != null) {
-      // console.log('terty')
+      this.paint_date = false;
       this.prodFormUpdate.controls.paint_started.setValue(
         {
           year: parseInt(entry.paint_started.slice(0,4)),
@@ -347,9 +351,12 @@ export class ProductionTblComponent implements OnInit {
           day: parseInt(entry.paint_started.slice(8,10))
         });
     } else {
+      this.paint_date = true;
       this.prodFormUpdate.controls.paint_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.paint_stat.setValue(entry.paint_stat);
+    this.prodFormUpdate.controls.paint_started.value;
+    console.log(this.paint_date);
 
     this.prodFormUpdate.controls.mechanical.setValue(entry.mechanical);
     if (entry.mec_started != null) {
@@ -570,5 +577,9 @@ export class ProductionTblComponent implements OnInit {
     this.tableSize = event.target.value;
     this.page = 1;
     this.prodTbl  = this.prodTbl;
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('current');
   }
 }

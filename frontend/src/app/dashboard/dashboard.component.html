@@ -10,9 +10,9 @@
         <li class="nav-item active">
           <a class="nav-link" type="button" (click)="getNotification(0)">Dashboard</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown active drop-menu">
           <a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown04">
+          <div class="dropdown-menu reports" aria-labelledby="dropdown04">
             <a class="dropdown-item" (click)="getNotification(5)">Entry</a>
             <a class="dropdown-item" (click)="getNotification(6)">Registration</a>
             <a class="dropdown-item" (click)="getNotification(7)">Production</a>
@@ -20,7 +20,7 @@
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-md-0">
+      <form class="form-inline my-2 my-md-0 drop-menu">
         <a class="nav-link" (click)="logout()">Lougout</a>
       </form>
     </div>

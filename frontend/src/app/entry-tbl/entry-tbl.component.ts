@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbActiveModal, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewEntryService } from '../service/new-entry.service';
@@ -8,7 +8,7 @@ import { NewEntryService } from '../service/new-entry.service';
   templateUrl: './entry-tbl.component.html',
   styleUrls: ['./entry-tbl.component.scss']
 })
-export class EntryTblComponent implements OnInit {
+export class EntryTblComponent implements OnInit, OnDestroy {
 
   passport: any;
   entryTblData: any
@@ -234,4 +234,7 @@ export class EntryTblComponent implements OnInit {
     this.entryTable  = this.entryTable;
   }
 
+  ngOnDestroy() {
+    localStorage.removeItem('current');
+  }
 }

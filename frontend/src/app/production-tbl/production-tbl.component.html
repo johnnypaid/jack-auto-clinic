@@ -146,7 +146,7 @@
               <div class="form-group col-md-4">
                 <label class="entry-label" for="conDate">Conversion Date</label>
                 <div class="input-group">
-                  <input class="form-control reg-date" placeholder="yyyy-mm-dd"
+                  <input class="form-control reg-date" [class.entry-delete]="con_date" placeholder="yyyy-mm-dd"
                          name="conDate" ngbDatepicker #d="ngbDatepicker" formControlName="conDate">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>

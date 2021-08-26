@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PromptMessageService } from '../service/prompt-message.service';
 import { RegistrationService } from '../service/registration.service';
@@ -8,7 +8,7 @@ import { RegistrationService } from '../service/registration.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
 
   showErr = false;
   error = '';
@@ -76,4 +76,7 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    localStorage.removeItem('current');
+  }
 }

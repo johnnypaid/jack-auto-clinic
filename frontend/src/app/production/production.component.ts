@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductionService } from '../service/production.service';
@@ -10,7 +10,7 @@ import { RegistrationService } from '../service/registration.service';
   templateUrl: './production.component.html',
   styleUrls: ['./production.component.scss']
 })
-export class ProductionComponent implements OnInit {
+export class ProductionComponent implements OnInit, OnDestroy {
 
   showErr = false;
   error = '';
@@ -216,6 +216,10 @@ export class ProductionComponent implements OnInit {
       }
 
     }
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('current');
   }
 
 }

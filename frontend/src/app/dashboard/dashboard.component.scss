@@ -46,6 +46,17 @@
   text-transform: uppercase;
 }
 
+.drop-menu a{
+  color: #ffffff;
+}
+.reports a{
+  color: #0f0f0f !important;
+}
+
+.drop-menu a:hover{
+  cursor: pointer !important;
+}
+
 /*
  * Utilities
  */

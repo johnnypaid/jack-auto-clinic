@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewEntryService } from '../service/new-entry.service';
@@ -9,7 +9,7 @@ import { RegistrationService } from '../service/registration.service';
   templateUrl: './register-tbl.component.html',
   styleUrls: ['./register-tbl.component.scss']
 })
-export class RegisterTblComponent implements OnInit {
+export class RegisterTblComponent implements OnInit, OnDestroy {
 
   passport: any;
   entryTblData: any
@@ -241,4 +241,7 @@ export class RegisterTblComponent implements OnInit {
     this.regTbl  = this.regTbl;
   }
 
+  ngOnDestroy() {
+    localStorage.removeItem('current');
+  }
 }

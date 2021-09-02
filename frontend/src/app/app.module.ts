@@ -1,3 +1,4 @@
+import { SearchService } from './service/search.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +26,7 @@ import { TableComponent } from './table/table.component';
 import { RegisterTblComponent } from './register-tbl/register-tbl.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductionTblComponent } from './production-tbl/production-tbl.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const icons = {
   Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon, PlusSquare
@@ -32,6 +34,7 @@ const icons = {
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'search/:key', component: SearchResultComponent},
   {path: '', component: LoginComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 
@@ -52,7 +55,8 @@ const routes: Routes = [
     SideNavComponent,
     TableComponent,
     RegisterTblComponent,
-    ProductionTblComponent
+    ProductionTblComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

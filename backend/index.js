@@ -15,6 +15,7 @@ const login = require('./routes/login');
 const entry = require('./routes/entry');
 const registration = require('./routes/registration');
 const production = require('./routes/production');
+const search = require('./routes/search');
 
 // load the environment variable first
 if(!config.get('jwtPrivateKey')) {
@@ -49,6 +50,7 @@ app.use('/api/users', user);
 app.use('/api/entry', entry);
 app.use('/api/registration', registration);
 app.use('/api/production', production);
+app.use('/api/search', search);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname +' /public/index.html'));
 });

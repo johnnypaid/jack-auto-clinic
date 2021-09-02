@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { SearchService } from './../service/search.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../service/common.service';
 
@@ -18,10 +19,12 @@ export class DashboardComponent implements OnInit {
   registerTbl = false;
   prodTbl = false;
   prodForm = false;
-
+  searchChasisResult = false;
+  searchChasisData: any;
   user: any;
+  searchChasis = '';
 
-  constructor(private common: CommonService, private router: Router) { }
+  constructor(private common: CommonService, private router: Router, private searchData: SearchService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('token') === undefined || localStorage.getItem('token') === null) {
@@ -42,6 +45,7 @@ export class DashboardComponent implements OnInit {
     switch (parseInt(evt)) {
       case 1: {
         this.userForm = true;
+        this.searchChasisResult = false;
         this.entryCards = false;
         this.newEntryForm = false;
         this.prodTbl = false;
@@ -50,6 +54,7 @@ export class DashboardComponent implements OnInit {
       }
       case 2: {
         this.userForm = false;
+        this.searchChasisResult = false;
         this.entryCards = false;
         this.newEntryForm = true;
         this.registerTbl = false;
@@ -60,6 +65,7 @@ export class DashboardComponent implements OnInit {
       }
       case 3: {
         this.userForm = false;
+        this.searchChasisResult = false;
         this.entryCards = false;
         this.registerTbl = false;
         this.registryForm = true;
@@ -71,6 +77,7 @@ export class DashboardComponent implements OnInit {
       case 4: {
         console.log(evt);
         this.prodForm = true;
+        this.searchChasisResult = false;
         this.userForm = false;
         this.entryCards = false;
         this.registerTbl = false;
@@ -80,6 +87,7 @@ export class DashboardComponent implements OnInit {
       }
       case 5: {
         this.entryTbl = true;
+        this.searchChasisResult = false;
         this.prodTbl = false;
         this.registerTbl = false;
         this.entryCards = false;
@@ -92,6 +100,7 @@ export class DashboardComponent implements OnInit {
       }
       case 6: {
         this.registerTbl = true;
+        this.searchChasisResult = false;
         this.prodTbl = false;
         this.entryTbl = false;
         this.entryCards = false;
@@ -104,6 +113,7 @@ export class DashboardComponent implements OnInit {
       }
       case 7: {
         this.prodTbl = true;
+        this.searchChasisResult = false;
         this.prodForm = false;
         this.registerTbl = false;
         this.entryTbl = false;
@@ -116,6 +126,7 @@ export class DashboardComponent implements OnInit {
       }
       default: {
         this.prodTbl = false;
+        this.searchChasisResult = false;
         this.newEntryForm = false;
         this.registerTbl = false;
         this.userForm = false;
@@ -138,5 +149,28 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem('current');
     console.log(localStorage.removeItem('token'));
     this.router.navigate(['']);
+  }
+
+  search(keyword: any) {
+    this.searchChasisResult = false;
+    if (keyword) {
+      this.searchData.searchChasis({chasis: keyword, token: localStorage.getItem('token')})
+      .subscribe(resdata => {
+        console.log(resdata);
+          this.searchChasisData = resdata.body;
+          this.searchData.setSearchData(this.searchChasisData);
+          this.searchChasisResult = true;
+          this.registerTbl = false;
+          this.prodTbl = false;
+          this.entryTbl = false;
+          this.entryCards = false;
+          this.newEntryForm = false;
+          this.userForm = false;
+          this.registryForm = false;
+          this.prodForm = false;
+      }, error => {
+        console.log(error.error);
+      });
+    } 
   }
 }

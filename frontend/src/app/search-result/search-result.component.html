@@ -1,0 +1,45 @@
+<div *ngIf="showLoader; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <h5 class="text-center">Search results.</h5>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header search-header">
+                  Entry
+                </div>
+                <div class="card-body">
+                  <div *ngIf="chassisEntry; then thenBlock else elseBlock"></div>
+                  <ng-template #thenBlock><h5 class="card-title">{{ chassisEntry }}</h5></ng-template>
+                  <ng-template #elseBlock>No data from entry database. </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header search-header">
+                  Registration
+                </div>
+                <div class="card-body">
+                  <div *ngIf="chassisRegister; then thenReg else regBlock"></div>
+                  <ng-template #thenReg><h5 class="card-title">{{ chassisRegister }}</h5></ng-template>
+                  <ng-template #regBlock>No data from register database.</ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header search-header">
+                  Production
+                </div>
+                <div class="card-body">
+                  <div *ngIf="chassisProduction; then thenProd else prodBlock"></div>
+                  <ng-template #thenProd><h5 class="card-title">{{ chassisProduction }}</h5></ng-template>
+                  <ng-template #prodBlock>No data from production database.</ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #elseBlock>
+    Content to render when condition is false.
+</ng-template>

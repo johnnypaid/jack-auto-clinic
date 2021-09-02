@@ -20,54 +20,14 @@
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-md-0 drop-menu">
-        <a class="nav-link" (click)="logout()">Lougout</a>
+      <form class="form-inline my-2 my-md-0 drop-menu" id="dash-form">
+        <input class="form-control mr-sm-2" type="search" id="searchChasis" name="searchChasis" #searchChasis placeholder="Search Chasis" aria-label="Search" >
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="search(searchChasis.value)">Search</button>
       </form>
+      <a class="dash-logout" (click)="logout()">Lougout</a>
     </div>
   </nav>
 
-  <!-- <app-dash-nav></app-dash-nav> -->
-
-    <!-- <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link" type="button" (click)="getNotification(0)">
-                <i-feather name="home"></i-feather>
-                Dashboard
-              </a>
-            </li>
-          </ul>
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
-            <a class="d-flex align-items-center text-muted" href="#">
-              <span data-feather="plus-circle"></span>
-            </a>
-          </h6>
-          <ul class="nav flex-column mb-2">
-            <li class="nav-item">
-              <a type="button" class="nav-link" (click)="getNotification(5)">
-                <i-feather name="file-text"></i-feather>
-                Entry
-              </a>
-            </li>
-            <li class="nav-item">
-              <a type="button" class="nav-link" (click)="getNotification(6)">
-                <i-feather name="file-text"></i-feather>
-                Registration
-              </a>
-            </li>
-            <li class="nav-item">
-              <a  type="button" class="nav-link" (click)="getNotification(7)" >
-                <i-feather name="file-text"></i-feather>
-                Production
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div> -->
   <main role="main" class="text-center">
     <div class="container dash-main">
       <ng-template [ngIf]="entryCards === true">
@@ -93,6 +53,9 @@
       </ng-template>
       <ng-template [ngIf]="prodTbl === true">
         <app-production-tbl></app-production-tbl>
+      </ng-template>
+      <ng-template [ngIf]="searchChasisResult === true">
+        <app-search-result></app-search-result>
       </ng-template>
     </div>
   </main>

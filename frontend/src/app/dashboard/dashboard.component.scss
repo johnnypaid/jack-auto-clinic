@@ -68,6 +68,13 @@
   &-main {
     margin: 8% !important;
   }
+  &-logout {
+    float: left !important;
+    color: #ffffff;
+  }
+}
+#dash-form {
+  margin-right: 2%;
 }
 
 @media (max-width: 768px) { 

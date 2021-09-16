@@ -1,5 +1,6 @@
 import { SearchService } from './../service/search.service';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search-result',
@@ -14,7 +15,9 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   chassisRegister = '';
   chassisProduction = '';
 
-  constructor(private searchResult: SearchService) { }
+  closeEntry = '';
+
+  constructor(private searchResult: SearchService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.showLoader = true;
@@ -23,6 +26,25 @@ export class SearchResultComponent implements OnInit, OnDestroy {
     this.chassisEntry = this.searchData.entry.chassisNum;
     this.chassisRegister = this.searchData.registry.chassisNum;
     this.chassisProduction = this.searchData.production.chassisNum;
+    console.log(this.searchResult.getSearchData());
+  }
+
+  entry(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeEntry = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeEntry = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   ngOnDestroy() {

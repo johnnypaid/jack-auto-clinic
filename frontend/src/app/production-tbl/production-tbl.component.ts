@@ -79,7 +79,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
 
   page = 1;
   count = 0;
-  tableSize = 10;
+  tableSize = 4;
   tableSizes = [10, 1];
 
 
@@ -96,8 +96,9 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
       .subscribe(resdata => {
         console.log(resdata);
       this.entryTblData = resdata.body;
-      this.entryTable = this.entryTblData;
-      console.log(this.entryTable);
+      this.entryTable = this.entryTblData.data;
+      this.count = parseInt(this.entryTblData.prodInfo);
+      // console.log(this.entryTblData.prodInfo);
     });
 
     this.mainTable = true;
@@ -311,8 +312,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           console.log(error.error)
         });
 
-    } catch (error) {
-      console.log(error.text);
+    } catch {
+      console.log('Oops somthing went wrong!');
     }
     console.log(this.prodFormUpdate.value);
   }
@@ -479,8 +480,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           console.log(error.message)
         });
       }
-    } catch (error) {
-      console.log(error.text);
+    } catch {
+      console.log('Oops something went wrong!');
     }
   }
 
@@ -569,13 +570,23 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   onTableDataChange(event: any){
-    this.page = event;
+    console.log(event);
+
+    const pagProd = {passport: this.passport, page: event};
+
+    this.prodTbl.paginateProd(pagProd)
+      .subscribe(resdata => {
+        // console.log(resdata.body);
+        this.page = event;
+        this.entryTblData = resdata.body;
+        this.entryTable = this.entryTblData.data;
+      });
     this.prodTbl = this.prodTbl;
   }
 
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
-    this.page = 1;
+    this.page = event;
     this.prodTbl  = this.prodTbl;
   }
 

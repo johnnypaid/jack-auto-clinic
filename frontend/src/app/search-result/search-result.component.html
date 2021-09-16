@@ -1,45 +1,103 @@
-<div *ngIf="showLoader; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock>
-    <h5 class="text-center">Search results.</h5>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header search-header">
-                  Entry
-                </div>
-                <div class="card-body">
-                  <div *ngIf="chassisEntry; then thenBlock else elseBlock"></div>
-                  <ng-template #thenBlock><h5 class="card-title">{{ chassisEntry }}</h5></ng-template>
-                  <ng-template #elseBlock>No data from entry database. </ng-template>
-                </div>
+
+<h5 class="text-center">Search results.</h5>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header search-header">
+              Entry
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header search-header">
-                  Registration
-                </div>
-                <div class="card-body">
-                  <div *ngIf="chassisRegister; then thenReg else regBlock"></div>
-                  <ng-template #thenReg><h5 class="card-title">{{ chassisRegister }}</h5></ng-template>
-                  <ng-template #regBlock>No data from register database.</ng-template>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header search-header">
-                  Production
-                </div>
-                <div class="card-body">
-                  <div *ngIf="chassisProduction; then thenProd else prodBlock"></div>
-                  <ng-template #thenProd><h5 class="card-title">{{ chassisProduction }}</h5></ng-template>
-                  <ng-template #prodBlock>No data from production database.</ng-template>
-                </div>
+            <div class="card-body">
+              <div *ngIf="chassisEntry; then thenEntry else elseBlock"></div>
+              <ng-template #thenEntry>
+                <h5 class="card-title search-title">
+                  {{ chassisEntry }}
+                </h5>
+              </ng-template>
+              <ng-template #elseBlock>No data from entry database. </ng-template>
+              <div>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="entry(content)" data-toggle="tooltip" [disabled]="!chassisEntry" data-target="#exampleModal">View More</button >
+              </div>
             </div>
         </div>
     </div>
-</ng-template>
-<ng-template #elseBlock>
-    Content to render when condition is false.
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header search-header">
+              Registration
+            </div>
+            <div class="card-body">
+              <div *ngIf="chassisRegister; then thenReg else regBlock"></div>
+              <ng-template #thenReg>
+                <h5 class="card-title search-title">
+                  {{ chassisRegister }}
+                </h5>
+              </ng-template>
+              <ng-template #regBlock>No data from register database.</ng-template>
+              <div>
+                <button type="button" class="btn btn-secondary btn-sm"  data-toggle="tooltip" [disabled]="!chassisRegister">View More</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header search-header">
+              Production
+            </div>
+            <div class="card-body">
+              <div *ngIf="chassisProduction; then thenProd else prodBlock"></div>
+              <ng-template #thenProd>
+                <h5 class="card-title search-title">{{ chassisProduction }}</h5>
+              </ng-template>
+              <ng-template #prodBlock>No data from production database.</ng-template>
+              <div>
+                <button type="button" class="btn btn-secondary btn-sm"  data-toggle="tooltip" [disabled]="!chassisProduction">View More</button>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of birth</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+  </div>
 </ng-template>

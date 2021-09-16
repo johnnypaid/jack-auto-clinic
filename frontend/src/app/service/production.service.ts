@@ -66,4 +66,18 @@ export class ProductionService {
     }).pipe(
     );
   }
+
+  paginateProd(data: any) {
+    console.log(data);
+
+    return this.http.get(this.endpoint + '/' + data.page, {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        .set('x-auth-token', data.passport),  observe: 'response'
+    }).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
 }

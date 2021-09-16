@@ -7,9 +7,49 @@ const { AppProd, validate } = require('../model/production');
 
 
 router.get('/', async (req, res) => {
-    const result = await AppProd.find();
-    res.send(result);
+
+    try {
+        var pageNumber = 1;
+        var nPerPage = 4;
+        prodData = {};
+
+        const prodInfo =  await AppProd.find().countDocuments();
+    
+        const result = await AppProd.find()
+                        .skip(pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0)
+                        .limit(nPerPage);
+
+        prodData['prodInfo'] = prodInfo;           
+        prodData['data'] = result;           
+        res.send(prodData);
+    } catch (error) {
+        console.log(error);
+    }
 });
+
+router.get('/:page', async (req, res) => {
+
+    console.log(req.params.page);
+
+    try {
+        var pageNumber = req.params.page;
+        var nPerPage = 4;
+        prodData = {};
+
+        const prodInfo =  await AppProd.find().countDocuments();
+    
+        const result = await AppProd.find()
+                        .skip(pageNumber > 0 ? ( ( pageNumber - 1 ) * nPerPage ) : 0)
+                        .limit(nPerPage);
+
+        prodData['prodInfo'] = prodInfo;           
+        prodData['data'] = result;           
+        res.send(prodData);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 router.get('/:option/:key', async (req, res) => {
 
     const field = req.params.option;

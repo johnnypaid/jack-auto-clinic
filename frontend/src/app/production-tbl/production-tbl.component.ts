@@ -36,6 +36,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   con_date = false;
   paint_date = false;
 
+  pagicont = false;
+
   prodFormUpdate = this.formBuilder.group({
     id: [''],
     conversion: ['', Validators.required],
@@ -515,6 +517,12 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           this.searchEntry(option);
           break;
         }
+        case 5: {
+          this.inputKey = true;
+          option = {field: 'default', keyword: this.searchForm.value.searchInput};
+          this.searchEntry(option);
+          break;
+        }
         // case 3: {
         //   this.inputKey = true;
         //   this.searchForm.value.searhOption = 'bodyType';
@@ -556,16 +564,23 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   searchEntry (option: any) {
+    console.log(option);
+
+    if (option.field === 'chassisNum') {
+      this.pagicont = true;
+    } else {
+      this.pagicont = false;
+    }
+
     this.prodTbl.entrySearch(option, this.passport)
       .subscribe(resdata => {
-        console.log(resdata)
         this.entryTable = [];
         this.entryTblData = resdata.body;
-        this.entryTable = this.entryTblData;
-        this.entryTbl.setTable(resdata.body);
+        this.entryTable = this.entryTblData.result;
+        this.entryTbl.setTable(this.entryTable);
+        this.count = this.entryTblData.prodCount;
         this.mainTable = false;
         this.searchTable = true;
-        this.onTableDataChange(event);
       });
   }
 

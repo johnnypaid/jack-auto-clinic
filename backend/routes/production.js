@@ -54,27 +54,32 @@ router.get('/:option/:key', async (req, res) => {
 
     const field = req.params.option;
     const key = req.params.key;
-    let result = {};
+    
+    result = {};
+    prodCount = {};
+    resCount = 0;
+    prodData = {};
 
     try {
         if (field === 'sold_to') {
+            resCount = await AppProd.find({'sold_to': key }).countDocuments();
             result = await AppProd.find({'sold_to': key });
         }
         if (field === 'chassisNum') {
             result = await AppProd.find({'chassisNum': key });
         }
-        if (field === 'bodyType') {
-            result = await AppProd.find({'bodyType': key });
-        }
         if (field === 'date') {
-            console.log(key);
-
-            var sDate = new Date('2021-08-01');
-            result = await AppProd.find({'date': { "$gte": new Date(key)}});
+            // console.log(key);
+            var sDate = key + 'T00:00:00.000+00:00';
+            
+            resCount = await AppProd.find({'conDate': { "$gte": sDate}}).countDocuments();
+            result = await AppProd.find({'conDate': { "$gte": sDate}}).sort({conDate: 1});
         }
 
-        console.log(result);
-        res.send(result);
+        prodData = {};
+        prodData['prodCount'] = resCount;
+        prodData['result'] = result;
+        res.send(prodData);
     } catch (error) {
         res.send(error);
     }

@@ -60,7 +60,7 @@
                   <p class="card-text"><small class="text-muted">Mechanical</small></p>
                   <p class="entry-fields">{{ entry.mechanical}}</p>
                   <p class="card-text"><small class="text-muted">Mechanical Date</small></p>
-                  <p class="entry-fields">{{ entry.mec_started | slice:0:10}}</p>
+                  <p class="entry-fields" [class.entry-updated]="entry.mec_started === '2021-01-01'">{{ entry.mec_started | slice:0:10}}</p>
                   <p class="card-text"><small class="text-muted">Mechanical Status</small></p>
                   <p class="entry-fields">{{ entry.mec_stat}}</p>
                   <p class="card-text"><small class="text-muted">Electrical</small></p>
@@ -146,7 +146,7 @@
               <div class="form-group col-md-4">
                 <label class="entry-label" for="conDate">Conversion Date</label>
                 <div class="input-group">
-                  <input class="form-control reg-date" [class.entry-delete]="con_date" placeholder="yyyy-mm-dd"
+                  <input class="form-control reg-date" placeholder="yyyy-mm-dd"
                          name="conDate" ngbDatepicker #d="ngbDatepicker" formControlName="conDate">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>

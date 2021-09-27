@@ -1,5 +1,5 @@
 import { SearchService } from './../service/search.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../service/common.service';
 
@@ -8,7 +8,7 @@ import { CommonService } from '../service/common.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   headStat: any;
   userForm = false;
@@ -172,5 +172,9 @@ export class DashboardComponent implements OnInit {
         console.log(error.error);
       });
     } 
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('current');
   }
 }

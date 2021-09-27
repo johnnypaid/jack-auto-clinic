@@ -33,8 +33,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   mainTable = true;
   searchTable = false;
   isCollapsed = true;
-  con_date = false;
-  paint_date = false;
 
   pagicont = false;
 
@@ -96,10 +94,11 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
     console.log(this.passport);
     this.prodTbl.getAllEntry(this.passport)
       .subscribe(resdata => {
-        console.log(resdata);
+      console.log(resdata);
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData.data;
       this.count = parseInt(this.entryTblData.prodInfo);
+      this.onTableDataChange(1);
       // console.log(this.entryTblData.prodInfo);
     });
 
@@ -321,10 +320,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   setModalEntryValue(entry: any) {
-    // console.log(entry);
-    // console.log(typeof(entry.elec_started));
-    console.log(entry.elec_started);
-
     const fullYear = new Date().getFullYear();
 
     this.prodFormUpdate.controls.id.setValue(entry._id);
@@ -336,17 +331,14 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           year: parseInt(entry.conDate.slice(0,4)),
           month: parseInt(entry.conDate.slice(5,7)),
           day: parseInt(entry.conDate.slice(8,10))
-        });
-        this.con_date = false;
+        });;
     } else {
       this.prodFormUpdate.controls.conDate.setValue({year: fullYear, month: 1, day: 1});
-      this.con_date = true;
     }
     this.prodFormUpdate.controls.con_stat.setValue(entry.con_stat);
 
     this.prodFormUpdate.controls.painting.setValue(entry.painting);
     if (entry.paint_started != null) {
-      this.paint_date = false;
       this.prodFormUpdate.controls.paint_started.setValue(
         {
           year: parseInt(entry.paint_started.slice(0,4)),
@@ -354,12 +346,10 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           day: parseInt(entry.paint_started.slice(8,10))
         });
     } else {
-      this.paint_date = true;
       this.prodFormUpdate.controls.paint_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.paint_stat.setValue(entry.paint_stat);
     this.prodFormUpdate.controls.paint_started.value;
-    console.log(this.paint_date);
 
     this.prodFormUpdate.controls.mechanical.setValue(entry.mechanical);
     if (entry.mec_started != null) {
@@ -519,7 +509,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
         }
         case 5: {
           this.inputKey = true;
-          option = {field: 'default', keyword: this.searchForm.value.searchInput};
+          this.searchForm.controls.searchInput.setValue('');
+          option = {field: 'default', keyword: ''};
           this.searchEntry(option);
           break;
         }
@@ -535,11 +526,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           break;
         }
       }
-    } else {
-      this.ngOnInit();
-    }
-
-    if (parseInt(this.searchForm.value.searhOption) === 4) {
+    } else if (parseInt(this.searchForm.value.searhOption) === 4) {
 
       this.inputKey = false;
 
@@ -560,11 +547,14 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           this.searchEntry(option);
         }
       }
+    } else {
+      this.ngOnInit();
     }
   }
 
   searchEntry (option: any) {
     console.log(option);
+    const pagiSearch = {};
 
     if (option.field === 'chassisNum') {
       this.pagicont = true;
@@ -577,6 +567,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
         this.entryTable = [];
         this.entryTblData = resdata.body;
         this.entryTable = this.entryTblData.result;
+        console.log(this.entryTblData);
         this.entryTbl.setTable(this.entryTable);
         this.count = this.entryTblData.prodCount;
         this.mainTable = false;

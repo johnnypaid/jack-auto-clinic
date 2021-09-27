@@ -52,8 +52,10 @@ router.get('/:page', async (req, res) => {
 
 router.get('/:option/:key', async (req, res) => {
 
-    const field = req.params.option;
-    const key = req.params.key;
+    var field = req.params.option;
+    var key = req.params.key;
+
+    console.log(field);
     
     result = {};
     prodCount = {};
@@ -69,20 +71,33 @@ router.get('/:option/:key', async (req, res) => {
             result = await AppProd.find({'chassisNum': key });
         }
         if (field === 'date') {
-            // console.log(key);
             var sDate = key + 'T00:00:00.000+00:00';
-            
+            var newDate = key.slice(5, 7);
+            var pattern = /^0[0-9].*$/
+            console.log(newDate);
+            prodCount = {};
+            result = {};
+
             resCount = await AppProd.find({'conDate': { "$gte": sDate}}).countDocuments();
             result = await AppProd.find({'conDate': { "$gte": sDate}}).sort({conDate: 1});
+        }
+        if (field === 'default') {
+            resCount = await AppProd.find().countDocuments();
+            result = await AppProd.find();
         }
 
         prodData = {};
         prodData['prodCount'] = resCount;
         prodData['result'] = result;
+        console.log(prodData);
         res.send(prodData);
     } catch (error) {
         res.send(error);
     }
+});
+
+router.get('/:option/:key/:page', (rea, res) => {
+    console.log(req.params);
 });
 
 router.post('/', async (req, res) => {

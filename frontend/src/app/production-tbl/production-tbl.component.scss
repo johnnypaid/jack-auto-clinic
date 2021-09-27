@@ -2,7 +2,10 @@
   &-section {
     margin: auto !important;
   }
-  &-delete {
+  &-delete{
+    color: red;
+  }
+  &-paint{
     color: red;
   }
   &-date {

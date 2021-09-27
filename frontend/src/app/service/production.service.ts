@@ -80,4 +80,8 @@ export class ProductionService {
       })
     );
   }
+
+  pageProd(params: any) {
+    console.log(params);
+  }
 }

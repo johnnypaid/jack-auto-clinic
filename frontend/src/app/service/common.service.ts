@@ -6,15 +6,16 @@ import { Injectable } from '@angular/core';
 })
 export class CommonService {
 
-  pageData = '';
+  private pageData: any;
+  private userInfo: any;
 
   constructor() { }
 
   setUserData(data: any) {
-    this.pageData = data;
+    localStorage.setItem('user', JSON.stringify(data));
   }
 
   getUserData() {
-    return this.pageData;
+    return localStorage.getItem('user');
   }
 }

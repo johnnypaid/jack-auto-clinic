@@ -147,6 +147,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('current');
+    localStorage.removeItem('user');
     console.log(localStorage.removeItem('token'));
     this.router.navigate(['']);
   }

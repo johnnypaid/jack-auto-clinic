@@ -1,5 +1,6 @@
 <section>
   <h3>Production Data</h3>
+
   <div class="container entry-search text-right">
     <form [formGroup]="searchForm">
       <div class=" ">
@@ -19,11 +20,16 @@
           <option value="4">Date</option>
         </select>
         <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
+        <button  
+	        printTitle="MyTitle"  
+          [useExistingCss]="true"
+	        printSectionId="print-area"  
+	        ngxPrint>print</button>
       </div>
     </form>
   </div>
 
-  <div class="row">
+  <div class="row" id="print-area">
     <div class="col-sm-4 entry-pad" *ngFor="let entry of entryTable | paginate : {
       itemsPerPage: tableSize,
       currentPage: page,
@@ -100,7 +106,7 @@
                   <p class="card-text"><small class="text-muted">QC Status</small></p>
                   <p class="entry-fields">{{ entry.qc_stat}}</p>
                   <p class="card-text"><small class="text-muted">Sold to</small></p>
-                  <p class="card-text">{{ entry.sold_to }}</p>
+                  <p class="entry-fields">{{ entry.sold_to }}</p>
                   <p class="card-text"><small class="text-muted">ID</small></p>
                   <p class="entry-fields"><small class="text-muted">{{ entry._id }}</small></p>
                 </div>
@@ -123,6 +129,7 @@
     </pagination-controls>
   </div>
 </section>
+
 
 <section>
   <ng-template #content let-modal>

@@ -2,6 +2,7 @@
     <form class="form-signin text-center login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <img class="mb-4 shadow-lg rounded" id="logo" src="assets/img/logo.png" alt="" width="140" height="72">
         <p class=""><br>Please sign in</p>
+        <small *ngIf="loginError !== ''" class="text-danger"> {{ loginError }} </small>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>

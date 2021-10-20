@@ -12,6 +12,7 @@ import { LoginService } from '../service/login.service';
 export class LoginComponent implements OnInit {
 
   userData: any;
+  loginError = '';
 
   loginForm = this.formBuilder.group({
     email: '',
@@ -24,11 +25,10 @@ export class LoginComponent implements OnInit {
     private common: CommonService,
     private router: Router) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
+    this.loginError = '';
     this.loginService.getUser(this.loginForm)
       .subscribe(resdata => {
         this.userData = resdata;
@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
         if (this.userData.status === 200) {
           this.common.setUserData(this.userData.body);
           this.router.navigate(['/dashboard']);
-        }
+        } 
+      }, error => {
+        this.loginError = error.error;
       });
   }
 }

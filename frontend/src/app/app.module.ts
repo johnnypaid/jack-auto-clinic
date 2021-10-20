@@ -27,6 +27,7 @@ import { RegisterTblComponent } from './register-tbl/register-tbl.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductionTblComponent } from './production-tbl/production-tbl.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { NgxPrintModule } from 'ngx-print';
 
 const icons = {
   Home, File, BarChart2, Meh, Layers, FileText, Edit, XOctagon, PlusSquare
@@ -66,7 +67,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     FeatherModule.pick(icons),
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxPrintModule
   ],
   providers: [
     LoginService,

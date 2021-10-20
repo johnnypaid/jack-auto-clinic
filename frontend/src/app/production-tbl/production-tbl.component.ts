@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewEntryService } from '../service/new-entry.service';
 import { ProductionService } from '../service/production.service';
-import { RegistrationService } from '../service/registration.service';
 
 @Component({
   selector: 'app-production-tbl',
@@ -554,7 +553,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
 
   searchEntry (option: any) {
     console.log(option);
-    const pagiSearch = {};
 
     if (option.field === 'chassisNum') {
       this.pagicont = true;
@@ -576,6 +574,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   onTableDataChange(event: any){
+    const pagiSearch = {};
+    
     console.log(event);
 
     const pagProd = {passport: this.passport, page: event};
@@ -596,7 +596,9 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
     this.prodTbl  = this.prodTbl;
   }
 
+  
   ngOnDestroy() {
     localStorage.removeItem('current');
   }
+
 }

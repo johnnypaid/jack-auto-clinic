@@ -1,3 +1,4 @@
+import { CommonService } from './../service/common.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,8 +11,7 @@ export class DashNavComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   logout() {
     localStorage.removeItem('token');

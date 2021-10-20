@@ -1,9 +1,25 @@
+$header-color: #343a4073;
+$font-white: #ffffff;
+$font-orange: #d8652b;
+
 .search {
     &-header {
-        color: #ffffff;
-        background-color: #343a4073;
+        color: $font-white;
+        background-color: $header-color;
+        &-modal {
+            color: $font-white;
+            background-color: $header-color;
+
+        }
+        &-modal h4{
+            margin: auto !important;
+        }
     }
     &-title {
-        color: #d8652b !important;
+        color: $font-orange !important;
     }
+}
+
+.entry-fields {
+    color: $font-orange !important;
 }

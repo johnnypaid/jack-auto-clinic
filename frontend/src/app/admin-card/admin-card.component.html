@@ -1,6 +1,6 @@
 <div class="container card-products">
   <div class="row">
-      <div class="col-md-4 col-xl-3">
+      <div *ngIf="isAdmin" class="col-md-4 col-xl-3">
         <div class="card-link">
             <div class="card bg-c-blue order-card" (click)="sendNotification(1)">
               <div class="card-block">

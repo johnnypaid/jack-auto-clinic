@@ -28,6 +28,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   supplier = '';
   unitDesc = '';
   startColor = false;
+  btnText = 'Show More';
 
   mainTable = true;
   searchTable = false;
@@ -131,172 +132,44 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     let con_date, paint_date, mec_date, elec_date, up_date, trim_date, dash_date, det_date, qc_date = '';
-    console.log(this.prodFormUpdate.value);
+
+    this.btnText = 'Show More';
+
     try {
-      if (this.prodFormUpdate.value.conDate != null) {
-        let newCondate = this.prodFormUpdate.value.conDate;
-        let conDay, conMonth = '';
-        if (newCondate.month < 10 ) {
-          conMonth = '0' + newCondate.month;
-        } else {
-          conMonth = newCondate.month;
-        }
-        if (newCondate.day < 10 ) {
-          conDay = '0' + newCondate.day;
-        } else {
-          conDay = newCondate.day;
-        };
-        con_date = newCondate.year + '-' + conMonth + '-' + conDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.conDate = con_date;
-      } else {
-        this.prodFormUpdate.value.conDate = '';
+      if (typeof this.prodFormUpdate.value.conDate === 'object' && this.prodFormUpdate.value.conDate !== null) {
+        this.prodFormUpdate.value.conDate = this.processDate(this.prodFormUpdate.value.conDate);
       }
 
-      if (this.prodFormUpdate.value.paint_started != null) {
-        let newPaintdate = this.prodFormUpdate.value.paint_started;
-        let paintMonth, paintDay = '';
-        if (newPaintdate.month < 10 ) {
-          paintMonth = '0' + newPaintdate.month;
-        } else {
-          paintMonth = newPaintdate.month;
-        }
-        if (newPaintdate.day < 10 ) {
-          paintDay = '0' + newPaintdate.day;
-        } else {
-          paintDay = newPaintdate.day;
-        }
-        paint_date = newPaintdate.year + '-' + paintMonth + '-' + paintDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.paint_started = paint_date;
-      } else {
-        this.prodFormUpdate.value.paint_started = '';
+      if (typeof this.prodFormUpdate.value.paint_started === 'object' && this.prodFormUpdate.value.paint_started !== null) {
+        this.prodFormUpdate.value.paint_started = this.processDate(this.prodFormUpdate.value.paint_started);
       }
 
-      if (this.prodFormUpdate.value.mec_started != null) {
-        let newMecdate = this.prodFormUpdate.value.mec_started;
-        let mecMonth, mecDay = '';
-        if (newMecdate.month < 10 ) {
-          mecMonth = '0' + newMecdate.month;
-        } else {
-          mecMonth = newMecdate.month;
-        }
-        if (newMecdate.day < 10 ) {
-          mecDay = '0' + newMecdate.day;
-        } else {
-          mecDay = newMecdate.day;
-        }
-        mec_date = newMecdate.year + '-' + mecMonth + '-' + mecDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.mec_started = mec_date;
-      } else {
-        this.prodFormUpdate.value.mec_started = '';
+      if (typeof this.prodFormUpdate.value.mec_started === 'object' && this.prodFormUpdate.value.mec_started !== null) {
+        this.prodFormUpdate.value.mec_started = this.processDate(this.prodFormUpdate.value.mec_started);
       }
 
-      if (this.prodFormUpdate.value.elec_started != null) {
-        let newElectdate = this.prodFormUpdate.value.elec_started;
-        let electMonth, electDay = '';
-        if (newElectdate.month < 10 ) {
-          electMonth = '0' + newElectdate.month;
-        } else {
-          electMonth = newElectdate.month;
-        }
-        if (newElectdate.day < 10 ) {
-          electDay = '0' + newElectdate.day;
-        } else {
-          electDay = newElectdate.day;
-        }
-        elec_date = newElectdate.year + '-' + electMonth + '-' + electDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.elec_started = elec_date;
-      } else {
-        this.prodFormUpdate.value.elec_started = '';
+      if (typeof this.prodFormUpdate.value.elec_started === 'object' && this.prodFormUpdate.value.elec_started !== null) {
+        this.prodFormUpdate.value.elec_started = this.processDate(this.prodFormUpdate.value.elec_started);
       }
-      if (this.prodFormUpdate.value.up_started != null) {
-        let newUpdate = this.prodFormUpdate.value.up_started;
-        let upMonth, upDay = '';
-        if (newUpdate.month < 10 ) {
-          upMonth = '0' + newUpdate.month;
-        } else {
-          upMonth = newUpdate.month;
-        }
-        if (newUpdate.day < 10 ) {
-          upDay = '0' + newUpdate.day;
-        } else {
-          upDay = newUpdate.day;
-        }
-        up_date = newUpdate.year + '-' + upMonth + '-' + upDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.up_started = up_date;
-      } else {
-        this.prodFormUpdate.value.up_started = '';
+
+      if (typeof this.prodFormUpdate.value.up_started === 'object' && this.prodFormUpdate.value.up_started !== null) {
+        this.prodFormUpdate.value.up_started = this.processDate(this.prodFormUpdate.value.up_started);
       }
-      if (this.prodFormUpdate.value.trim_started != null) {
-        let newTrimdate = this.prodFormUpdate.value.trim_started;
-        let trimMonth, trimDay = '';
-        if (newTrimdate.month < 10 ) {
-          trimMonth = '0' + newTrimdate.month;
-        } else {
-          trimMonth = newTrimdate.month;
-        }
-        if (newTrimdate.day < 10 ) {
-          trimDay = '0' + newTrimdate.day;
-        } else {
-          trimDay = newTrimdate.day;
-        }
-        trim_date = newTrimdate.year + '-' + trimMonth + '-' + trimDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.trim_started = trim_date;
-      } else {
-        this.prodFormUpdate.value.trim_started = '';
+
+      if (typeof this.prodFormUpdate.value.trim_started === 'object' && this.prodFormUpdate.value.trim_started !== null) {
+        this.prodFormUpdate.value.trim_started = this.processDate(this.prodFormUpdate.value.trim_started);
       }
-      if (this.prodFormUpdate.value.dash_started != null) {
-        let newDashdate = this.prodFormUpdate.value.dash_started;
-        let dashMonth, dashDay = '';
-        if (newDashdate.month < 10 ) {
-          dashMonth = '0' + newDashdate.month;
-        } else {
-          dashMonth = newDashdate.month;
-        }
-        if (newDashdate.day < 10 ) {
-          dashDay = '0' + newDashdate.day;
-        } else {
-          dashDay = newDashdate.day;
-        }
-        dash_date = newDashdate.year + '-' + dashMonth + '-' + dashDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.dash_started = dash_date;
-      } else {
-        this.prodFormUpdate.value.dash_started = '';
+
+      if (typeof this.prodFormUpdate.value.dash_started === 'object' && this.prodFormUpdate.value.dash_started !== null) {
+        this.prodFormUpdate.value.dash_started = this.processDate(this.prodFormUpdate.value.dash_started);
       }
-      if (this.prodFormUpdate.value.det_started != null) {
-        let newDetdate = this.prodFormUpdate.value.det_started;
-        let detMonth, detDay = '';
-        if (newDetdate.month < 10 ) {
-          detMonth = '0' + newDetdate.month;
-        } else {
-          detMonth = newDetdate.month;
-        }
-        if (newDetdate.day < 10 ) {
-          detDay = '0' + newDetdate.day;
-        } else {
-          detDay = newDetdate.day;
-        }
-        det_date = newDetdate.year + '-' + detMonth + '-' + detDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.det_started = det_date;
-      } else {
-        this.prodFormUpdate.value.det_started = '';
+
+      if (typeof this.prodFormUpdate.value.det_started === 'object' && this.prodFormUpdate.value.det_started !== null) {
+        this.prodFormUpdate.value.det_started = this.processDate(this.prodFormUpdate.value.det_started);
       }
-      if (this.prodFormUpdate.value.qc_started !== null) {
-        let newQcdate = this.prodFormUpdate.value.qc_started;
-        let qcMonth, qcDay = '';
-        if (newQcdate.month < 10 ) {
-          qcMonth = '0' + newQcdate.month;
-        } else {
-          qcMonth = newQcdate.month;
-        }
-        if (newQcdate.day < 10 ) {
-          qcDay = '0' + newQcdate.day;
-        } else {
-          qcDay = newQcdate.day;
-        }
-        qc_date = newQcdate.year + '-' + qcMonth + '-' + qcDay + 'T00:00:00.000+00:00';
-        this.prodFormUpdate.value.qc_started = qc_date;
-      } else {
-        this.prodFormUpdate.value.qc_started = '';
+
+      if (typeof this.prodFormUpdate.value.qc_started === 'object' && this.prodFormUpdate.value.qc_started !== null) {
+        this.prodFormUpdate.value.qc_started = this.processDate(this.prodFormUpdate.value.qc_started);
       }
 
 
@@ -318,11 +191,38 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
     console.log(this.prodFormUpdate.value);
   }
 
+  processDate(date: any) {
+    let newDate = '';
+
+    if (typeof date === 'object') {
+      let newDay, newMonth = '';
+        if (date.month < 10 ) {
+          newMonth = '0' + date.month;
+        } else {
+          newMonth = date.month;
+        }
+        if (date.day < 10 ) {
+          newDay = '0' + date.day;
+        } else {
+          newDay = date.day;
+        };
+
+        newDate = date.year + '-' + newMonth + '-' + newDay;
+    }
+    return newDate;
+  }
+
+  showButton() {
+    this.btnText === 'Show More' ? this.btnText = 'Show Less' : this.btnText = 'Show More';
+  }
+
   setModalEntryValue(entry: any) {
     const fullYear = new Date().getFullYear();
 
     this.prodFormUpdate.controls.id.setValue(entry._id);
     this.prodFormUpdate.controls.chassisNum.setValue(entry.chassisNum);
+    this.prodFormUpdate.controls.sold_to.setValue(entry.sold_to);
+
     this.prodFormUpdate.controls.conversion.setValue(entry.conversion);
     if (entry.conDate != null) {
       this.prodFormUpdate.controls.conDate.setValue(
@@ -331,10 +231,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.conDate.slice(5,7)),
           day: parseInt(entry.conDate.slice(8,10))
         });;
-    } else {
-      this.prodFormUpdate.controls.conDate.setValue({year: fullYear, month: 1, day: 1});
     }
-    this.prodFormUpdate.controls.con_stat.setValue(entry.con_stat);
+    this.prodFormUpdate.controls.con_stat.setValue(entry.con_stat)
 
     this.prodFormUpdate.controls.painting.setValue(entry.painting);
     if (entry.paint_started != null) {
@@ -344,11 +242,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.paint_started.slice(5,7)),
           day: parseInt(entry.paint_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.paint_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.paint_stat.setValue(entry.paint_stat);
-    this.prodFormUpdate.controls.paint_started.value;
 
     this.prodFormUpdate.controls.mechanical.setValue(entry.mechanical);
     if (entry.mec_started != null) {
@@ -358,16 +253,11 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.mec_started.slice(5,7)),
           day: parseInt(entry.mec_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.mec_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.mec_stat.setValue(entry.mec_stat);
 
-    if(entry.electrical != '') {
-      this.prodFormUpdate.controls.electrical.setValue(entry.electrical);
-    } else {
-      this.prodFormUpdate.controls.electrical.setValue('');
-    }
+
+    this.prodFormUpdate.controls.electrical.setValue(entry.electrical);
     if (entry.elec_started != null) {
       this.prodFormUpdate.controls.elec_started.setValue(
         {
@@ -375,15 +265,9 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.elec_started.slice(5,7)),
           day: parseInt(entry.elec_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.elec_started.setValue({year: fullYear, month: 1, day: 1});
     }
-    if (entry.elec_stat != null) {
-      this.prodFormUpdate.controls.elec_stat.setValue(entry.elec_stat);
-    } else {
-      this.prodFormUpdate.controls.elec_stat.setValue('');
-    }
-    
+    this.prodFormUpdate.controls.elec_stat.setValue(entry.elec_stat);
+
 
     this.prodFormUpdate.controls.upholstery.setValue(entry.upholstery);
     if (entry.up_started != null) {
@@ -393,8 +277,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.up_started.slice(5,7)),
           day: parseInt(entry.up_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.up_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.up_stat.setValue(entry.up_stat);
 
@@ -406,8 +288,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.trim_started.slice(5,7)),
           day: parseInt(entry.trim_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.trim_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.trim_stat.setValue(entry.trim_stat);
 
@@ -419,8 +299,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.dash_started.slice(5,7)),
           day: parseInt(entry.dash_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.dash_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.dash_stat.setValue(entry.dash_stat);
 
@@ -432,8 +310,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.det_started.slice(5,7)),
           day: parseInt(entry.det_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.det_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.det_stat.setValue(entry.det_stat);
 
@@ -445,11 +321,9 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.qc_started.slice(5,7)),
           day: parseInt(entry.qc_started.slice(8,10))
         });
-    } else {
-      this.prodFormUpdate.controls.qc_started.setValue({year: fullYear, month: 1, day: 1});
     }
     this.prodFormUpdate.controls.qc_stat.setValue(entry.qc_stat);
-    this.prodFormUpdate.controls.sold_to.setValue(entry.sold_to);
+
   }
 
   onDelete() {
@@ -575,7 +449,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
 
   onTableDataChange(event: any){
     const pagiSearch = {};
-    
+
     console.log(event);
 
     const pagProd = {passport: this.passport, page: event};
@@ -596,7 +470,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
     this.prodTbl  = this.prodTbl;
   }
 
-  
+
   ngOnDestroy() {
     localStorage.removeItem('current');
   }

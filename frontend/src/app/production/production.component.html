@@ -4,12 +4,29 @@
     <form class="form-entry" [formGroup]="productionForm" (ngSubmit)="onSubmit()">
         <div class="form-row">
           <div class="form-group col-md-4">
+            <label for="paint_stat">Chasis Number</label>
+            <!-- <input class="form-control" list="chassisNum" name="chassisNum" formControlName="chassisNum" (change)="chassisOnChange()" required>
+            <datalist id="chassisNum">
+              <option *ngFor="let data of chasNum" value="{{data}}">{{data}}</option>
+            </datalist> -->
+
+            <div class="input-group mb-3">
+              <select class="custom-select" name="chassisNum" formControlName="chassisNum" (change)="chassisOnChange()">
+                <option selected>Choose...</option>
+                <option *ngFor="let data of chasNum" value="{{data}}">{{data}}</option>
+              </select>
+              <div class="input-group-append">
+                <label class="input-group-text" for="inputGroupSelect02"></label>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-group col-md-4">
             <label for="chassisNum">Chasis Number</label>
             <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="chassisNum" required>
-          </div>
+          </div> -->
           <div class="form-group col-md-4">
             <label for="chassisNum">Conversion</label>
-            <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="conversion" required>
+            <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="conversion">
           </div>
           <div class="form-group col-md-4">
             <label class="entry-label" for="conDate">Conversion Date</label>

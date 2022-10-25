@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
 })
 export class ProductionService {
 
-  endpoint = 'http://192.168.254.103:3000/api/production';
+  endpoint = 'http://localhost:3000/api/production';
+  // endpoint = 'http://192.168.254.103:3000/api/production';
   // endpoint = 'http://192.168.1.20:3000/api/production';
 
   constructor(private http: HttpClient) { }

@@ -20,10 +20,10 @@
           <option value="4">Date</option>
         </select>
         <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
-        <button  
-	        printTitle="MyTitle"  
+        <button
+	        printTitle="MyTitle"
           [useExistingCss]="true"
-	        printSectionId="print-area"  
+	        printSectionId="print-area"
 	        ngxPrint>print</button>
       </div>
     </form>
@@ -43,8 +43,8 @@
         </div>
         <div class="card-body">
           <p>
-            <button class="btn btn-secondary shadow" type="button" data-toggle="collapse" [attr.data-target]="'#collapseExample' + i" aria-expanded="false" aria-controls="collapseExample">
-              Show More
+            <button class="btn btn-secondary shadow" type="button" data-toggle="collapse" [attr.data-target]="'#collapseExample' + i" aria-expanded="false" aria-controls="collapseExample" (click)="showButton()">
+              {{btnText}}
             </button>
           </p>
           <div class="collapse" [attr.id]="'collapseExample' + i">
@@ -52,61 +52,61 @@
               <div class="card prod-card">
                 <div class="card-body shadow-lg">
                   <p class="card-text"><small class="text-muted">Conversion</small></p>
-                  <p class="entry-fields">{{ entry.conversion}}</p>
+                  <p class="entry-fields">{{ entry.conversion || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Conversion Date</small></p>
-                  <p class="entry-fields">{{ entry.conDate | slice:0:10 }}</p>
+                  <p class="entry-fields">{{ (entry.conDate | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Conversion Status</small></p>
-                  <p class="entry-fields">{{ entry.con_stat}}</p>
+                  <p class="entry-fields">{{ entry.con_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Painting</small></p>
-                  <p class="entry-fields">{{ entry.painting}}</p>
+                  <p class="entry-fields">{{ entry.painting || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Painting Date</small></p>
-                  <p class="entry-fields" [class.entry-updated]="entry.paint_started === '2021-01-01'">{{ entry.paint_started | slice:0:10}}</p>
+                  <p class="entry-fields" >{{ (entry.paint_started | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Painting Status</small></p>
-                  <p class="entry-fields">{{ entry.paint_stat}}</p>
+                  <p class="entry-fields">{{ entry.paint_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Mechanical</small></p>
-                  <p class="entry-fields">{{ entry.mechanical}}</p>
+                  <p class="entry-fields">{{ entry.mechanical || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Mechanical Date</small></p>
-                  <p class="entry-fields" [class.entry-updated]="entry.mec_started === '2021-01-01'">{{ entry.mec_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.mec_started | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Mechanical Status</small></p>
-                  <p class="entry-fields">{{ entry.mec_stat}}</p>
+                  <p class="entry-fields">{{ entry.mec_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Electrical</small></p>
-                  <p class="entry-fields">{{ entry.electrical}}</p>
+                  <p class="entry-fields">{{ entry.electrical || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Electrical Date</small></p>
-                  <p class="entry-fields">{{ entry.elec_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.elec_started | slice:0:10) || 'none' }}</p>
                   <p class="card-text"><small class="text-muted">Electrical Status</small></p>
-                  <p class="entry-fields">{{ entry.elec_stat}}</p>
+                  <p class="entry-fields">{{ entry.elec_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Upholstery</small></p>
-                  <p class="entry-fields">{{ entry.upholstery}}</p>
+                  <p class="entry-fields">{{ entry.upholstery || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Upholstery Date</small></p>
-                  <p class="entry-fields">{{ entry.up_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.up_started | slice:0:10) || 'none' }}</p>
                   <p class="card-text"><small class="text-muted">Upholstery Status</small></p>
-                  <p class="entry-fields">{{ entry.up_stat}}</p>
+                  <p class="entry-fields">{{ entry.up_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Trimmer</small></p>
-                  <p class="entry-fields">{{ entry.trimmer}}</p>
+                  <p class="entry-fields">{{ entry.trimmer || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Trimmer Date</small></p>
-                  <p class="entry-fields">{{ entry.trim_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.trim_started | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Trimmer Status</small></p>
-                  <p class="entry-fields">{{ entry.trim_stat}}</p>
+                  <p class="entry-fields">{{ entry.trim_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Dashboard</small></p>
-                  <p class="entry-fields">{{ entry.dashboard}}</p>
+                  <p class="entry-fields">{{ entry.dashboard || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Dashboard Date</small></p>
-                  <p class="entry-fields">{{ entry.dash_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.dash_started | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Dashboard Status</small></p>
-                  <p class="entry-fields">{{ entry.dash_stat}}</p>
+                  <p class="entry-fields">{{ entry.dash_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Detailing</small></p>
-                  <p class="entry-fields">{{ entry.detailing}}</p>
+                  <p class="entry-fields">{{ entry.detailing || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Detailing Date</small></p>
-                  <p class="entry-fields">{{ entry.det_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.det_started | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Detailing Status</small></p>
-                  <p class="entry-fields">{{ entry.det_stat}}</p>
+                  <p class="entry-fields">{{ entry.det_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">QC</small></p>
-                  <p class="entry-fields">{{ entry.qc}}</p>
+                  <p class="entry-fields">{{ entry.qc || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">QC Date</small></p>
-                  <p class="entry-fields">{{ entry.qc_started | slice:0:10}}</p>
+                  <p class="entry-fields">{{ (entry.qc_started | slice:0:10) || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">QC Status</small></p>
-                  <p class="entry-fields">{{ entry.qc_stat}}</p>
+                  <p class="entry-fields">{{ entry.qc_stat || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">Sold to</small></p>
-                  <p class="entry-fields">{{ entry.sold_to }}</p>
+                  <p class="entry-fields">{{ entry.sold_to || 'none'}}</p>
                   <p class="card-text"><small class="text-muted">ID</small></p>
                   <p class="entry-fields"><small class="text-muted">{{ entry._id }}</small></p>
                 </div>
@@ -144,7 +144,7 @@
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="chassisNum">Chasis Number</label>
-                <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="chassisNum" required>
+                <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="chassisNum" readonly>
               </div>
               <div class="form-group col-md-4">
                 <label for="chassisNum">Conversion</label>
@@ -164,9 +164,9 @@
                 <label for="paint_stat">Conversion Status</label>
                 <input class="form-control" list="con_stats" name="con_stat" id="con_stat" formControlName="con_stat" required>
                 <datalist id="con_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -191,9 +191,9 @@
                 <label for="paint_stat">Painting Status</label>
                 <input class="form-control" list="paint_stats" name="paint_stat" id="paint_stat" formControlName="paint_stat" required>
                 <datalist id="paint_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -214,9 +214,9 @@
                 <label for="mec_stat">Mechanical Status</label>
                 <input class="form-control" list="mec_stats" name="mec_stat" id="mec_stat" formControlName="mec_stat" required>
                 <datalist id="mec_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -237,9 +237,9 @@
                 <label for="mec_stat">Electrical Status</label>
                 <input class="form-control" list="elec_stats" name="mec_stat" id="elec_stat" formControlName="elec_stat" required>
                 <datalist id="elec_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -260,9 +260,9 @@
                 <label for="up_stat">Upholstery Status</label>
                 <input class="form-control" list="up_stats" name="up_stat" id="up_stat" formControlName="up_stat" required>
                 <datalist id="up_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -283,9 +283,9 @@
                 <label for="trim_stat">Trimmer Status</label>
                 <input class="form-control" list="trim_stats" name="trim_stat" id="trim_stat" formControlName="trim_stat" required>
                 <datalist id="trim_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -306,9 +306,9 @@
                 <label for="dash_stat">Dashboard Status</label>
                 <input class="form-control" list="dash_stats" name="dash_stat" id="dash_stat" formControlName="dash_stat" required>
                 <datalist id="dash_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -329,9 +329,9 @@
                 <label for="dash_stat">Detailing Status</label>
                 <input class="form-control" list="det_stats" name="det_stat" id="det_stat" formControlName="det_stat" required>
                 <datalist id="det_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
               <div class="form-group col-md-4">
@@ -352,9 +352,9 @@
                 <label for="dash_stat">QC Status</label>
                 <input class="form-control" list="qc_stats" name="qc_stat" id="qc_stat" formControlName="qc_stat" required>
                 <datalist id="qc_stats">
-                  <option value="Ongoing">
-                  <option value="Onhold">
-                  <option value="Done">
+                  <option value="ongoing">
+                  <option value="onhold">
+                  <option value="done">
                 </datalist>
               </div>
             </div>

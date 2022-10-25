@@ -7,7 +7,8 @@ import { map } from 'rxjs/operators';
 })
 export class SearchService {
 
-  endpoint = 'http://192.168.254.103:3000/api/search';
+  endpoint = 'http://localhost:3000/api/search';
+  // endpoint = 'http://192.168.254.103:3000/api/search';
   searchData: any;
 
   constructor(private http: HttpClient) { }
@@ -23,7 +24,7 @@ export class SearchService {
       })
     );
   }
-  
+
   searchChasis(data: any) {
     return this.http.get(this.endpoint + '/' + data.chasis.trim(), {
       headers: new HttpHeaders()

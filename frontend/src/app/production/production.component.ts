@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewEntryService } from '../service/new-entry.service';
 import { ProductionService } from '../service/production.service';
 import { PromptMessageService } from '../service/prompt-message.service';
 import { RegistrationService } from '../service/registration.service';
@@ -15,6 +16,8 @@ export class ProductionComponent implements OnInit, OnDestroy {
   showErr = false;
   error = '';
   passport: any;
+  chasNum: string[] = [];
+  chasData: any;
 
   productionForm = this.formBuilder.group({
     conversion: ['', Validators.required],
@@ -52,10 +55,11 @@ export class ProductionComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private prodService: ProductionService,
     private message: PromptMessageService,
-    private modalService: NgbModal) { }
+    private chasisService: NewEntryService) { }
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
+    this.getAllChasis();
   }
 
   onSubmit() {
@@ -216,6 +220,21 @@ export class ProductionComponent implements OnInit, OnDestroy {
       }
 
     }
+  }
+
+  getAllChasis() {
+    this.chasisService.getAllEntry(this.passport)
+    .subscribe(res => {
+      this.chasData = res;
+      for (let i = 0; i < this.chasData.body.length; i++) {
+        this.chasNum.push(this.chasData.body[i].chassisNum)
+      }
+    })
+  }
+
+  chassisOnChange() {
+    console.log(this.productionForm.value.chassisNum)
+    console.log(this.chasData.body)
   }
 
   ngOnDestroy() {

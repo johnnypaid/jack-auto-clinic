@@ -43,7 +43,6 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   searchForm = this.formBuilder.group({
     searchInput: '',
     searhOption: '',
-    date: ''
   });
   isSelected = true;
   inputKey = false;
@@ -52,6 +51,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   count = 0;
   tableSize = 10;
   tableSizes = [10, 1];
+  showPagination = true;
 
 
   constructor(
@@ -65,7 +65,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
       .subscribe(resdata => {
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData;
-      console.log(this.entryTable[0]);
+      console.log(this.entryTable);
     });
 
     this.mainTable = true;
@@ -153,26 +153,34 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    console.log('test')
     let option: any;
 
     if (this.searchForm.value.searchInput !== '' && this.searchForm.value.searhOption !== '') {
       switch (parseInt(this.searchForm.value.searhOption)) {
         case 1: {
-          this.inputKey = true;
+          // this.inputKey = true;
           option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
         case 2: {
-          this.inputKey = true;
+          // this.inputKey = true;
           option = {field: 'chassisNum', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
         case 3: {
-          this.inputKey = true;
-          this.searchForm.value.searhOption = 'bodyCode';
-          option = {field: 'bodyCode', keyword: this.searchForm.value.searchInput};
+          // this.inputKey = true;
+          this.searchForm.value.searhOption = 'supplier';
+          option = {field: 'supplier', keyword: this.searchForm.value.searchInput};
+          this.searchEntry(option);
+          break;
+        }
+        case 4: {
+          // this.inputKey = true;
+          this.searchForm.value.searhOption = 'date';
+          option = {field: 'date', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
@@ -183,29 +191,6 @@ export class EntryTblComponent implements OnInit, OnDestroy {
       }
     } else {
       this.ngOnInit();
-    }
-
-    if (parseInt(this.searchForm.value.searhOption) === 4) {
-
-      this.inputKey = false;
-
-      if (this.searchForm.value.searchInput.date !== "") {
-        const year = this.searchForm.value.date.year;
-        let month = this.searchForm.value.date.month;
-        let day = this.searchForm.value.date.day;
-
-        if (year !== undefined || month !== undefined || day !== undefined) {
-          if (month < 10) {
-            month = '0' + month;
-          }
-          if (day < 10) {
-            day = '0' + day;
-          }
-          let newDate = year + '-' + month + '-' + day;
-          option = {field: 'date', keyword: newDate};
-          this.searchEntry(option);
-        }
-      }
     }
   }
 
@@ -220,6 +205,8 @@ export class EntryTblComponent implements OnInit, OnDestroy {
         this.mainTable = false;
         this.searchTable = true;
         this.onTableDataChange(event);
+
+        this.entryTable.length > 0 ? this.showPagination = true : this.showPagination = false;
       });
   }
 

@@ -71,8 +71,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
 
   searchForm = this.formBuilder.group({
     searchInput: '',
-    searhOption: '',
-    date: ''
+    searhOption: ''
   });
   isSelected = true;
   inputKey = false;
@@ -81,6 +80,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   count = 0;
   tableSize = 4;
   tableSizes = [10, 1];
+  showPagination = true;
 
 
   constructor(
@@ -98,7 +98,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData.data;
       this.count = parseInt(this.entryTblData.prodInfo);
-      this.onTableDataChange(1);
+      this.onTableDataChange(event);
       // console.log(this.entryTblData.prodInfo);
     });
 
@@ -364,86 +364,57 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    console.log('test')
     let option: any;
 
     if (this.searchForm.value.searchInput !== '' && this.searchForm.value.searhOption !== '') {
       switch (parseInt(this.searchForm.value.searhOption)) {
         case 1: {
-          this.inputKey = true;
-          option = {field: 'sold_to', keyword: this.searchForm.value.searchInput};
+          // this.inputKey = true;
+          option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
         case 2: {
-          this.inputKey = true;
+          // this.inputKey = true;
           option = {field: 'chassisNum', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
-        case 5: {
-          this.inputKey = true;
-          this.searchForm.controls.searchInput.setValue('');
-          option = {field: 'default', keyword: ''};
+        case 3: {
+          // this.inputKey = true;
+          this.searchForm.value.searhOption = 'sold_to';
+          option = {field: 'sold_to', keyword: this.searchForm.value.searchInput};
           this.searchEntry(option);
           break;
         }
-        // case 3: {
-        //   this.inputKey = true;
-        //   this.searchForm.value.searhOption = 'bodyType';
-        //   option = {field: 'bodyType', keyword: this.searchForm.value.searchInput};
-        //   this.searchEntry(option);
-        //   break;
-        // }
+        case 4: {
+          // this.inputKey = true;
+          this.searchForm.value.searhOption = 'date';
+          option = {field: 'date', keyword: this.searchForm.value.searchInput};
+          this.searchEntry(option);
+          break;
+        }
         default: {
           this.inputKey = true;
           break;
         }
       }
-    } else if (parseInt(this.searchForm.value.searhOption) === 4) {
-
-      this.inputKey = false;
-
-      if (this.searchForm.value.searchInput.date !== "") {
-        const year = this.searchForm.value.date.year;
-        let month = this.searchForm.value.date.month;
-        let day = this.searchForm.value.date.day;
-
-        if (year !== undefined || month !== undefined || day !== undefined) {
-          if (month < 10) {
-            month = '0' + month;
-          }
-          if (day < 10) {
-            day = '0' + day;
-          }
-          let newDate = year + '-' + month + '-' + day;
-          option = {field: 'date', keyword: newDate};
-          this.searchEntry(option);
-        }
-      }
-    } else {
-      this.ngOnInit();
     }
   }
 
   searchEntry (option: any) {
-    console.log(option);
-
-    if (option.field === 'chassisNum') {
-      this.pagicont = true;
-    } else {
-      this.pagicont = false;
-    }
-
     this.prodTbl.entrySearch(option, this.passport)
       .subscribe(resdata => {
+        console.log(resdata)
         this.entryTable = [];
         this.entryTblData = resdata.body;
-        this.entryTable = this.entryTblData.result;
-        console.log(this.entryTblData);
-        this.entryTbl.setTable(this.entryTable);
-        this.count = this.entryTblData.prodCount;
-        this.mainTable = false;
-        this.searchTable = true;
+        this.entryTable = this.entryTblData;
+        this.onTableDataChange(event);
+
+        console.log(this.entryTable)
+
+        this.entryTable.length > 0 ? this.showPagination = true : this.showPagination = false;
       });
   }
 

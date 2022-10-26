@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 const { AppProd, validate } = require('../model/production');
+const { result } = require('lodash');
 
 
 router.get('/', async (req, res) => {
@@ -54,43 +55,23 @@ router.get('/:option/:key', async (req, res) => {
 
     var field = req.params.option;
     var key = req.params.key;
-
-    console.log(field);
-    
-    result = {};
-    prodCount = {};
-    resCount = 0;
-    prodData = {};
+    let result = {};
 
     try {
         if (field === 'sold_to') {
-            resCount = await AppProd.find({'sold_to': key }).countDocuments();
+            // resCount = await AppProd.find({'sold_to': key }).countDocuments();
             result = await AppProd.find({'sold_to': key });
+        }
+        if (field === 'engineNum') {
+            result = await AppProd.find({'engineNum': key });
         }
         if (field === 'chassisNum') {
             result = await AppProd.find({'chassisNum': key });
         }
         if (field === 'date') {
-            var sDate = key + 'T00:00:00.000+00:00';
-            var newDate = key.slice(5, 7);
-            var pattern = /^0[0-9].*$/
-            console.log(newDate);
-            prodCount = {};
-            result = {};
-
-            resCount = await AppProd.find({'conDate': { "$gte": sDate}}).countDocuments();
-            result = await AppProd.find({'conDate': { "$gte": sDate}}).sort({conDate: 1});
+            result = await AppProd.find({'date': { "$eq": ISODate(key)}});
         }
-        if (field === 'default') {
-            resCount = await AppProd.find().countDocuments();
-            result = await AppProd.find();
-        }
-
-        prodData = {};
-        prodData['prodCount'] = resCount;
-        prodData['result'] = result;
-        console.log(prodData);
-        res.send(prodData);
+        res.send(result);
     } catch (error) {
         res.send(error);
     }

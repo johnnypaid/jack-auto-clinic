@@ -13,28 +13,9 @@
                   {{ chassisEntry }}
                 </h5>
               </ng-template>
-              <ng-template #elseBlock>No data from entry database. </ng-template>
+              <ng-template #elseBlock>No data from entry database.</ng-template>
               <div>
                 <button type="button" class="btn btn-secondary btn-sm" (click)="viewData(content, 1)" data-toggle="tooltip" [disabled]="!chassisEntry" data-target="#exampleModal">View More</button >
-              </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header search-header">
-              Registration
-            </div>
-            <div class="card-body">
-              <div *ngIf="chassisRegister; then thenReg else regBlock"></div>
-              <ng-template #thenReg>
-                <h5 class="card-title search-title">
-                  {{ chassisRegister }}
-                </h5>
-              </ng-template>
-              <ng-template #regBlock>No data from register database.</ng-template>
-              <div>
-                <button type="button" class="btn btn-secondary btn-sm" (click)="viewData(content, 2)" data-toggle="tooltip" [disabled]="!chassisRegister">View More</button>
               </div>
             </div>
         </div>
@@ -56,6 +37,25 @@
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+      <div class="card">
+          <div class="card-header search-header">
+            Registration
+          </div>
+          <div class="card-body">
+            <div *ngIf="chassisRegister; then thenReg else regBlock"></div>
+            <ng-template #thenReg>
+              <h5 class="card-title search-title">
+                {{ chassisRegister }}
+              </h5>
+            </ng-template>
+            <ng-template #regBlock>No data from register database.</ng-template>
+            <div>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="viewData(content, 2)" data-toggle="tooltip" [disabled]="!chassisRegister">View More</button>
+            </div>
+          </div>
+      </div>
+  </div>
 </div>
 
 <ng-template #content let-modal>
@@ -84,33 +84,33 @@
         <p class="card-text"><small class="text-muted">{{ registryData._id }}</small></p>
       </ng-template>
       <ng-template [ngIf]="headerTitle === 'Production Data'">
-        <p class="card-text"><small class="text-muted">Conversion: <strong><span class="entry-fields">{{ productionData.conversion}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Conversion Date: <strong><span class="entry-fields">{{ productionData.conDate | slice:0:10 }}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Conversion Status: <strong><span class="entry-fields">{{ productionData.con_stat}}</span></strong></small></p>        
+        <p class="card-text"><small class="text-muted">Conversion: <strong><span class="entry-fields">{{ productionData.conversion}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Conversion Date: <strong><span class="entry-fields">{{ productionData.conDate | slice:0:10 }}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Conversion Status: <strong><span class="entry-fields">{{ productionData.con_stat}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Painting: <strong><span class="entry-fields">{{ productionData.painting}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Painting Date: <strong><span class="entry-fields">{{ productionData.paint_started | slice:0:10}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Painting Status: <strong><span class="entry-fields">{{ productionData.paint_stat}}</span></strong></small></p>
-        <p class="card-text"><small class="text-muted">Mechanical: <strong><span class="entry-fields">{{ productionData.mechanical}}</span></strong></small></p>        
+        <p class="card-text"><small class="text-muted">Mechanical: <strong><span class="entry-fields">{{ productionData.mechanical}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Mechanical Date: <strong><span class="entry-fields">{{ productionData.mec_started | slice:0:10}}</span></strong></small></p>
-        <p class="card-text"><small class="text-muted">Mechanical Status: <strong><span class="entry-fields">{{ productionData.mec_stat}}</span></strong></small></p>        
+        <p class="card-text"><small class="text-muted">Mechanical Status: <strong><span class="entry-fields">{{ productionData.mec_stat}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Electrical: <strong><span class="entry-fields">{{ productionData.electrical}}</span></strong></small></p>
-        <p class="card-text"><small class="text-muted">Electrical Date: <strong><span class="entry-fields">{{ productionData.elec_started | slice:0:10}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Electrical Status: <strong><span class="entry-fields">{{ productionData.elec_stat}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Upholstery: <strong><span class="entry-fields">{{ productionData.upholstery}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Upholstery Date: <strong><span class="entry-fields">{{ productionData.up_started | slice:0:10}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Upholstery Status: <strong><span class="entry-fields">{{ productionData.up_stat}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Trimmer: <strong><span class="entry-fields">{{ productionData.trimmer}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Trimmer Date: <strong><span class="entry-fields">{{ productionData.trim_started | slice:0:10}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Trimmer Status: <strong><span class="entry-fields">{{ productionData.trim_stat}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Dashboard: <strong><span class="entry-fields">{{ productionData.dashboard}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Dashboard Date: <strong><span class="entry-fields">{{ productionData.dash_started | slice:0:10}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Dashboard Status: <strong><span class="entry-fields">{{ productionData.dash_stat}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Detailing: <strong><span class="entry-fields">{{ productionData.detailing}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Detailing Date: <strong><span class="entry-fields">{{ productionData.det_started | slice:0:10}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">Detailing Status: <strong><span class="entry-fields"></span>{{ productionData.det_stat}}</strong></small></p>        
-        <p class="card-text"><small class="text-muted">QC: <strong><span class="entry-fields">{{ productionData.qc}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">QC Date: <strong><span class="entry-fields">{{ productionData.qc_started | slice:0:10}}</span></strong></small></p>        
-        <p class="card-text"><small class="text-muted">QC Status: <strong><span class="entry-fields">{{ productionData.qc_stat}}</span></strong></small></p>        
+        <p class="card-text"><small class="text-muted">Electrical Date: <strong><span class="entry-fields">{{ productionData.elec_started | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Electrical Status: <strong><span class="entry-fields">{{ productionData.elec_stat}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Upholstery: <strong><span class="entry-fields">{{ productionData.upholstery}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Upholstery Date: <strong><span class="entry-fields">{{ productionData.up_started | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Upholstery Status: <strong><span class="entry-fields">{{ productionData.up_stat}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Trimmer: <strong><span class="entry-fields">{{ productionData.trimmer}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Trimmer Date: <strong><span class="entry-fields">{{ productionData.trim_started | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Trimmer Status: <strong><span class="entry-fields">{{ productionData.trim_stat}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Dashboard: <strong><span class="entry-fields">{{ productionData.dashboard}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Dashboard Date: <strong><span class="entry-fields">{{ productionData.dash_started | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Dashboard Status: <strong><span class="entry-fields">{{ productionData.dash_stat}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Detailing: <strong><span class="entry-fields">{{ productionData.detailing}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Detailing Date: <strong><span class="entry-fields">{{ productionData.det_started | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Detailing Status: <strong><span class="entry-fields"></span>{{ productionData.det_stat}}</strong></small></p>
+        <p class="card-text"><small class="text-muted">QC: <strong><span class="entry-fields">{{ productionData.qc}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">QC Date: <strong><span class="entry-fields">{{ productionData.qc_started | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">QC Status: <strong><span class="entry-fields">{{ productionData.qc_stat}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Sold to: <strong><span class="entry-fields">{{ productionData.sold_to }}</span></strong></small></p>
         <p class="entry-fields"><small class="text-muted">{{ productionData._id }}</small></p>
       </ng-template>

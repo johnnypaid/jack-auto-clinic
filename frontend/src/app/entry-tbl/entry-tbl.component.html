@@ -4,26 +4,19 @@
     <div class="container entry-search text-right">
       <form [formGroup]="searchForm">
         <div class=" ">
-          <div class="input-group entry-date" *ngIf="inputKey === false">
-            <input class="form-control" placeholder="yyyy-mm-dd"
-                   name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="date">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-            </div>
-          </div>
-          <input *ngIf="inputKey === true" class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
-          <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option" (change)="search()">
-            <option [selected]="isSelected">Default</option>
+          <input class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
+          <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option">
+            <option></option>
             <option value="1">Engine</option>
             <option value="2">Chassis</option>
-            <option value="3">Body</option>
+            <option value="3">Supplier</option>
             <option value="4">Date</option>
           </select>
           <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
         </div>
       </form>
     </div>
-    
+
     <ng-template [ngIf]="mainTable === true">
       <div class="row">
         <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
@@ -65,7 +58,7 @@
     </ng-template>
 
     <ng-template [ngIf]="searchTable === true">
-      <div class="row">
+      <div class="row" *ngIf="entryTable.length > 0">
         <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
           <div class="card shadow">
             <div class="entry-chassis">
@@ -95,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-center" id="entry-pagination">
+      <div class="d-flex justify-content-center" id="entry-pagination" *ngIf="showPagination">
         <pagination-controls
           previousLabel="Prev"
           nextLabel="Next"
@@ -104,7 +97,7 @@
       </div>
     </ng-template>
   </section>
-  
+
   <section>
     <ng-template #content let-modal>
       <div class="modal-header">
@@ -148,7 +141,7 @@
             </ng-template>
         </form>
       </div>
-  
+
       <div class="modal-footer" *ngIf="editSuccess === false">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
         <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Save</button>
@@ -157,7 +150,7 @@
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
       </div>
       <div class="modal-footer">
-  
+
       </div>
     </ng-template>
     <hr>
@@ -187,7 +180,7 @@
         <button type="button" class="btn btn-outline-dark" (click)="onDelete()">Delete</button>
       </div>
       <div class="modal-footer">
-  
+
       </div>
     </ng-template>
   </section>

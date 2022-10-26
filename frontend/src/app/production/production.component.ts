@@ -70,141 +70,103 @@ export class ProductionComponent implements OnInit, OnDestroy {
       this.showErr = true;
     } else {
       this.showErr = false;
-      let con_date, paint_date, mec_date, elec_date, up_date, trim_date, dash_date, det_date, qc_date = '';
+
       try {
-        if (this.productionForm.value.conDate.year != undefined) {
+        if (this.productionForm.value.conDate !== "") {
           let newCondate = this.productionForm.value.conDate;
           let conDay, conMonth = '';
-          if (newCondate.month < 10 ) {
-            conMonth = '0' + newCondate.month;
-          };
-          if (newCondate.day < 10 ) {
-            conDay = '0' + newCondate.day;
-          };
-          con_date = newCondate.year + '-' + conDay + '-' + conDay;
-          this.productionForm.value.conDate = con_date;
-        } else {
-          this.productionForm.value.conDate = '';
+
+          newCondate.month < 10 ? conMonth = '0' + newCondate.month : conMonth = newCondate.month;
+          newCondate.day < 10 ? conDay = '0' + newCondate.day : conDay = newCondate.day;
+
+          this.productionForm.value.conDate = `${newCondate.year}-${conMonth}-${conDay}`;
         }
-        if (this.productionForm.value.paint_started.year != undefined) {
+
+        if (this.productionForm.value.paint_started !== "") {
           let newPaintdate = this.productionForm.value.paint_started;
           let paintMonth, paintDay = '';
-          if (newPaintdate.month < 10 ) {
-            paintMonth = '0' + newPaintdate.month;
-          };
-          if (newPaintdate.day < 10 ) {
-            paintDay = '0' + newPaintdate.day;
-          };
-          paint_date = newPaintdate.year + '-' + paintMonth + '-' + paintDay;
-          this.productionForm.value.paint_started = paint_date;
-        } else {
-          this.productionForm.value.paint_started = '';
+
+          newPaintdate.month < 10 ? paintMonth = '0' + newPaintdate.month : paintMonth = newPaintdate.month;
+          newPaintdate.day < 10 ? paintDay = '0' + newPaintdate.day : paintDay = newPaintdate.day;
+
+          this.productionForm.value.paint_started = `${newPaintdate.year}-${paintMonth}-${paintDay}`;
         }
-        if (this.productionForm.value.mec_started.year != undefined) {
+
+        if (this.productionForm.value.mec_started.year !== "") {
           let newMecdate = this.productionForm.value.mec_started;
           let mecMonth, mecDay = '';
-          if (newMecdate.month < 10 ) {
-            mecMonth = '0' + newMecdate.month;
-          };
-          if (newMecdate.day < 10 ) {
-            mecDay = '0' + newMecdate.day;
-          };
-          mec_date = newMecdate.year + '-' + mecMonth + '-' + mecDay;
-          this.productionForm.value.mec_started = mec_date;
-        } else {
-          this.productionForm.value.mec_started = '';
+
+          newMecdate.month < 10 ? mecMonth = '0' + newMecdate.month : mecMonth = newMecdate.month;
+          newMecdate.day < 10 ? mecDay = '0' + newMecdate.day : mecDay = newMecdate.day;
+
+          this.productionForm.value.mec_started = `${newMecdate.year}-${mecMonth}-${mecDay}`;
         }
-        if (this.productionForm.value.elec_started.year != undefined) {
+
+        if (this.productionForm.value.elec_started.year !== "") {
           let newElectdate = this.productionForm.value.elec_started;
           let electMonth, electDay = '';
-          if (newElectdate.month < 10 ) {
-            electMonth = '0' + newElectdate.month;
-          };
-          if (newElectdate.day < 10 ) {
-            electDay = '0' + newElectdate.day;
-          };
-          elec_date = newElectdate.year + '-' + electMonth + '-' + electDay;
-          this.productionForm.value.elec_started = elec_date;
-        } else {
-          this.productionForm.value.elec_started = '';
+
+          newElectdate.month < 10 ? electMonth = '0' + newElectdate.month : electMonth = newElectdate.month;
+          newElectdate.day < 10 ? electDay = '0' + newElectdate.day : electDay = newElectdate.day;
+
+          this.productionForm.value.elec_started = `${newElectdate.year}-${electMonth}-${electDay}`;
         }
-        if (this.productionForm.value.up_started.year != undefined) {
+
+        if (this.productionForm.value.up_started !== "") {
           let newUpdate = this.productionForm.value.up_started;
           let upMonth, upDay = '';
-          if (newUpdate.month < 10 ) {
-            upMonth = '0' + newUpdate.month;
-          };
-          if (newUpdate.day < 10 ) {
-            upDay = '0' + newUpdate.day;
-          };
-          up_date = newUpdate.year + '-' + upMonth + '-' + upDay;
-          this.productionForm.value.up_started = up_date;
-        } else {
-          this.productionForm.value.up_started = '';
+
+          newUpdate.month < 10 ? upMonth = '0' + newUpdate.month : upMonth = newUpdate.month;
+          newUpdate.day < 10 ? upDay = '0' + newUpdate.day : upDay = newUpdate.day;
+
+          this.productionForm.value.up_started = `${newUpdate.year}-${upMonth}-${upDay}`;
         }
-        if (this.productionForm.value.trim_started.year != undefined) {
+
+        if (this.productionForm.value.trim_started !== "") {
           let newTrimdate = this.productionForm.value.trim_started;
           let trimMonth, trimDay = '';
-          if (newTrimdate.month < 10 ) {
-            trimMonth = '0' + newTrimdate.month;
-          };
-          if (newTrimdate.day < 10 ) {
-            trimDay = '0' + newTrimdate.day;
-          };
-          trim_date = newTrimdate.year + '-' + trimMonth + '-' + trimDay;
-          this.productionForm.value.trim_started = trim_date;
-        } else {
-          this.productionForm.value.trim_started = '';
+
+          newTrimdate.month < 10 ? trimMonth = '0' + newTrimdate.month : trimMonth = newTrimdate.month;
+          newTrimdate.day < 10 ? trimDay = '0' + newTrimdate.day: trimDay =  newTrimdate.day;
+
+          this.productionForm.value.trim_started = `${newTrimdate.year}-${trimMonth}-${trimDay}`;
         }
+
         if (this.productionForm.value.dash_started.year != undefined) {
           let newDashdate = this.productionForm.value.dash_started;
           let dashMonth, dashDay = '';
-          if (newDashdate.month < 10 ) {
-            dashMonth = '0' + newDashdate.month;
-          };
-          if (newDashdate.day < 10 ) {
-            dashDay = '0' + newDashdate.day;
-          };
-          dash_date = newDashdate.year + '-' + dashMonth + '-' + dashDay;
-          this.productionForm.value.dash_started = dash_date;
-        } else {
-          this.productionForm.value.dash_started = '';
-        }
-        if (this.productionForm.value.det_started.year != undefined) {
-          let newDetdate = this.productionForm.value.det_started;
-          let detMonth, detDay = '';
-          if (newDetdate.month < 10 ) {
-            detMonth = '0' + newDetdate.month;
-          };
-          if (newDetdate.day < 10 ) {
-            detDay = '0' + newDetdate.day;
-          };
-          det_date = newDetdate.year + '-' + detMonth + '-' + detDay;
-          this.productionForm.value.det_started = det_date;
-        } else {
-          this.productionForm.value.det_started = '';
-        }
-        if (this.productionForm.value.qc_started.year != undefined) {
-          let newQcdate = this.productionForm.value.qc_started;
-          let qcMonth, qcDay = '';
-          if (newQcdate.month < 10 ) {
-            qcMonth = '0' + newQcdate.month;
-          };
-          if (newQcdate.day < 10 ) {
-            qcDay = '0' + newQcdate.day;
-          };
-          qc_date = newQcdate.year + '-' + qcMonth + '-' + qcDay;
-          this.productionForm.value.qc_started = qc_date;
-        } else {
-          this.productionForm.value.qc_started = '';
+
+          newDashdate.month < 10 ? dashMonth = '0' + newDashdate.month : dashMonth = newDashdate.month;
+          newDashdate.day < 10 ? dashDay = '0' + newDashdate.day : dashDay = newDashdate.day;
+
+          this.productionForm.value.dash_started = `${newDashdate.year}-${dashMonth}-${dashDay}`;
         }
 
-        console.log(this.productionForm.value);
+        if (this.productionForm.value.det_started !== "") {
+          let newDetdate = this.productionForm.value.det_started;
+          let detMonth, detDay = '';
+
+          newDetdate.month < 10 ? detMonth = '0' + newDetdate.month : detMonth = newDetdate.month;
+          newDetdate.day < 10 ? detDay = '0' + newDetdate.day : detDay = newDetdate.day;
+
+          this.productionForm.value.det_started = `${newDetdate.year}-${detMonth}-${detDay}`;
+        }
+
+        if (this.productionForm.value.qc_started !== "") {
+          let newQcdate = this.productionForm.value.qc_started;
+          let qcMonth, qcDay = '';
+
+          newQcdate.month < 10 ? qcMonth = '0' + newQcdate.month : qcMonth = newQcdate.month;
+          newQcdate.day < 10 ? qcDay = '0' + newQcdate.day : qcDay = newQcdate.day;
+
+          this.productionForm.value.qc_started = `${newQcdate.year}-${qcMonth}-${qcDay}`;
+        }
+
         this.prodService.newProduction(this.productionForm.value, this.passport)
           .subscribe(resdata => {
             console.log(resdata);
             if (resdata.status === 200) {
-              this.message.setMessage('User added succesfully.');
+              this.message.setMessage('Succesfully added');
               this.productionForm.reset();
               this.error = '';
               this.showErr = false;

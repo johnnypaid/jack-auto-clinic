@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
     res.send(result);
 });
 router.get('/:option/:key', async (req, res) => {
+    console.log(req.params.key)
 
     const field = req.params.option;
     const key = req.params.key;
@@ -25,15 +26,13 @@ router.get('/:option/:key', async (req, res) => {
             result = await AppEntry.find({'chassisNum': key });
         }
     
-        if (field === 'bodyCode') {
-            result = await AppEntry.find({'bodyCode': key });
+        if (field === 'supplier') {
+            result = await AppEntry.find({'supplier': key });
         }
 
         if (field === 'date') {
             console.log(key);
-
-            var sDate = new Date('2021-08-01');
-            result = await AppEntry.find({'date': { "$gte": new Date(key)}});
+            result = await AppEntry.find({'date': { "$eq": ISODate(key)}});
         }
 
         console.log(result);

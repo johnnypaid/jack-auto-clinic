@@ -22,7 +22,7 @@ export class EntryComponent implements OnInit, OnDestroy {
     bodyCode: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
-    unitDesc: ['Edit here for unit description.'],
+    unitDesc: [''],
   });
 
 
@@ -49,7 +49,7 @@ export class EntryComponent implements OnInit, OnDestroy {
         .subscribe(resdata => {
           console.log(resdata);
           this.showErr = false;
-          this.message.setMessage('User added succesfully.');
+          this.message.setMessage('Entry added succesfully.');
           this.entryForm.reset();
         }, error => {
           this.error = error.error;

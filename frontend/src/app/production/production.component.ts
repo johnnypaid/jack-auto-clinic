@@ -92,7 +92,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
           this.productionForm.value.paint_started = `${newPaintdate.year}-${paintMonth}-${paintDay}`;
         }
 
-        if (this.productionForm.value.mec_started.year !== "") {
+        if (this.productionForm.value.mec_started !== "") {
           let newMecdate = this.productionForm.value.mec_started;
           let mecMonth, mecDay = '';
 
@@ -102,7 +102,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
           this.productionForm.value.mec_started = `${newMecdate.year}-${mecMonth}-${mecDay}`;
         }
 
-        if (this.productionForm.value.elec_started.year !== "") {
+        if (this.productionForm.value.elec_started !== "") {
           let newElectdate = this.productionForm.value.elec_started;
           let electMonth, electDay = '';
 

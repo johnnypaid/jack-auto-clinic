@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NewEntryService } from '../service/new-entry.service';
 import { ProductionService } from '../service/production.service';
 
 @Component({
@@ -78,13 +77,12 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
 
   page = 1;
   count = 0;
-  tableSize = 4;
+  tableSize = 10;
   tableSizes = [10, 1];
   showPagination = true;
 
 
   constructor(
-    private entryTbl: NewEntryService,
     private prodTbl: ProductionService,
     private modalService: NgbModal,
     private formBuilder: FormBuilder) { }
@@ -131,8 +129,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    let con_date, paint_date, mec_date, elec_date, up_date, trim_date, dash_date, det_date, qc_date = '';
-
     this.btnText = 'Show More';
 
     try {
@@ -217,6 +213,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   setModalEntryValue(entry: any) {
+    console.log(entry)
+
     const fullYear = new Date().getFullYear();
 
     this.prodFormUpdate.controls.id.setValue(entry._id);
@@ -231,6 +229,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.conDate.slice(5,7)),
           day: parseInt(entry.conDate.slice(8,10))
         });;
+    } else {
+      this.prodFormUpdate.controls.conDate.setValue("");
     }
     this.prodFormUpdate.controls.con_stat.setValue(entry.con_stat)
 
@@ -242,6 +242,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.paint_started.slice(5,7)),
           day: parseInt(entry.paint_started.slice(8,10))
         });
+    }else {
+      this.prodFormUpdate.controls.paint_started.setValue("");
     }
     this.prodFormUpdate.controls.paint_stat.setValue(entry.paint_stat);
 
@@ -253,6 +255,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.mec_started.slice(5,7)),
           day: parseInt(entry.mec_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.mec_started.setValue("")
     }
     this.prodFormUpdate.controls.mec_stat.setValue(entry.mec_stat);
 
@@ -265,6 +269,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.elec_started.slice(5,7)),
           day: parseInt(entry.elec_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.elec_started.setValue("");
     }
     this.prodFormUpdate.controls.elec_stat.setValue(entry.elec_stat);
 
@@ -277,6 +283,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.up_started.slice(5,7)),
           day: parseInt(entry.up_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.up_started.setValue("");
     }
     this.prodFormUpdate.controls.up_stat.setValue(entry.up_stat);
 
@@ -288,6 +296,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.trim_started.slice(5,7)),
           day: parseInt(entry.trim_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.trim_started.setValue("");
     }
     this.prodFormUpdate.controls.trim_stat.setValue(entry.trim_stat);
 
@@ -299,6 +309,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.dash_started.slice(5,7)),
           day: parseInt(entry.dash_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.dash_started.setValue("");
     }
     this.prodFormUpdate.controls.dash_stat.setValue(entry.dash_stat);
 
@@ -310,6 +322,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.det_started.slice(5,7)),
           day: parseInt(entry.det_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.det_started.setValue("");
     }
     this.prodFormUpdate.controls.det_stat.setValue(entry.det_stat);
 
@@ -321,6 +335,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           month: parseInt(entry.qc_started.slice(5,7)),
           day: parseInt(entry.qc_started.slice(8,10))
         });
+    } else {
+      this.prodFormUpdate.controls.qc_started.setValue("");
     }
     this.prodFormUpdate.controls.qc_stat.setValue(entry.qc_stat);
 
@@ -388,13 +404,6 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           this.searchEntry(option);
           break;
         }
-        case 4: {
-          // this.inputKey = true;
-          this.searchForm.value.searhOption = 'date';
-          option = {field: 'date', keyword: this.searchForm.value.searchInput};
-          this.searchEntry(option);
-          break;
-        }
         default: {
           this.inputKey = true;
           break;
@@ -419,20 +428,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
   }
 
   onTableDataChange(event: any){
-    const pagiSearch = {};
-
-    console.log(event);
-
-    const pagProd = {passport: this.passport, page: event};
-
-    this.prodTbl.paginateProd(pagProd)
-      .subscribe(resdata => {
-        // console.log(resdata.body);
-        this.page = event;
-        this.entryTblData = resdata.body;
-        this.entryTable = this.entryTblData.data;
-      });
-    this.prodTbl = this.prodTbl;
+    this.page = event;
+    this.entryTable = this.entryTable;
   }
 
   onTableSizeChange(event: any): void {

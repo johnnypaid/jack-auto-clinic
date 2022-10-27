@@ -10,7 +10,6 @@
           <option value="1">Engine</option>
           <option value="2">Chassis</option>
           <option value="3">Sold To</option>
-          <option value="4">Date</option>
         </select>
         <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
       </div>
@@ -352,7 +351,7 @@
 
     <div class="modal-footer" *ngIf="editSuccess === false">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Save</button>
+      <button type="button" class="btn btn-outline-success" (click)="onSubmit()">Save</button>
     </div>
     <div class="modal-footer" *ngIf="editSuccess === true">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
@@ -382,7 +381,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-dark" (click)="onDelete()">Delete</button>
+      <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Delete</button>
     </div>
     <div class="modal-footer">
 

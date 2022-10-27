@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
 
     try {
         var pageNumber = 1;
-        var nPerPage = 4;
+        var nPerPage = 50;
         prodData = {};
 
         const prodInfo =  await AppProd.find().countDocuments();
@@ -60,6 +60,8 @@ router.get('/:option/:key', async (req, res) => {
     try {
         if (field === 'sold_to') {
             // resCount = await AppProd.find({'sold_to': key }).countDocuments();
+            console.log(key)
+
             result = await AppProd.find({'sold_to': key });
         }
         if (field === 'engineNum') {
@@ -68,9 +70,7 @@ router.get('/:option/:key', async (req, res) => {
         if (field === 'chassisNum') {
             result = await AppProd.find({'chassisNum': key });
         }
-        if (field === 'date') {
-            result = await AppProd.find({'date': { "$eq": ISODate(key)}});
-        }
+        
         res.send(result);
     } catch (error) {
         res.send(error);

@@ -16,6 +16,7 @@ router.get('/:option/:key', async (req, res) => {
     const field = req.params.option;
     const key = req.params.key;
     let result = {};
+    let count = 0;
 
     try {
         if (field === 'engineNum') {
@@ -32,11 +33,12 @@ router.get('/:option/:key', async (req, res) => {
 
         if (field === 'date') {
             console.log(key);
-            result = await AppEntry.find({'date': { "$eq": ISODate(key)}});
+            countResult = await AppEntry.find({'dateArrived': { "$eq":new Date(key)}}).count();
+            result = await AppEntry.find({'dateArrived': { "$eq":new Date(key)}});
         }
 
-        console.log(result);
-        res.send(result);
+        console.log(countResult);
+        res.send({data: result, count: countResult});
     } catch (error) {
         res.send(error);
     }
@@ -53,11 +55,8 @@ router.post('/', async (req, res) => {
     let chasis = await AppEntry.findOne({chassisNum: req.body.chassisNum});
     if (chasis) return res.status(400).send('Chassis number already exist..');
 
-    let bodycode = await AppEntry.findOne({bodyCode: req.body.bodyCode});
-    if (bodycode) return res.status(400).send('Body code already exist..');
-
     try {
-        newEntry = new AppEntry(_.pick(req.body, ['_id','chassisNum', 'engineNum', 'bodyCode', 'supplier', 'containerNum', 'unitDesc']));
+        newEntry = new AppEntry(_.pick(req.body, ['_id','chassisNum', 'engineNum', 'bodyCode', 'supplier', 'containerNum', 'dateArrived', 'unitDesc']));
 
         const entry = await newEntry.save();
 
@@ -83,6 +82,7 @@ router.put('/:id', async (req, res) => {
                 bodyCode: req.body.bodyCode,
                 supplier: req.body.supplier,
                 containerNum: req.body.containerNum,
+                dateArrived: req.body.dateArrived,
                 unitDesc: req.body.unitDesc
             },{new: true});
 

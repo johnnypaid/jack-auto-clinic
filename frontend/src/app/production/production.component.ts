@@ -63,14 +63,12 @@ export class ProductionComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.productionForm.value);
-
     if (this.productionForm.value.chassisNum === '') {
       this.error = 'Please enter chassis number.';
       this.showErr = true;
     } else {
       this.showErr = false;
-
+      console.log(this.productionForm.value);
       try {
         if (this.productionForm.value.conDate !== "") {
           let newCondate = this.productionForm.value.conDate;
@@ -194,10 +192,10 @@ export class ProductionComponent implements OnInit, OnDestroy {
     })
   }
 
-  chassisOnChange() {
-    console.log(this.productionForm.value.chassisNum)
-    console.log(this.chasData.body)
-  }
+  // chassisOnChange() {
+  //   console.log(this.productionForm.value.chassisNum)
+  //   console.log(this.chasData.body)
+  // }
 
   ngOnDestroy() {
     localStorage.removeItem('current');

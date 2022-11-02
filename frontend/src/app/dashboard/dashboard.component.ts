@@ -8,7 +8,7 @@ import { CommonService } from '../service/common.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
 
   headStat: any;
   userForm = false;
@@ -141,6 +141,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   setLocal(num: any) {
+    console.log(num)
     localStorage.setItem('current', num);
   }
 
@@ -172,10 +173,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }, error => {
         console.log(error.error);
       });
-    } 
+    }
   }
 
-  ngOnDestroy() {
-    localStorage.removeItem('current');
-  }
+  // ngOnDestroy() {
+  //   localStorage.removeItem('current');
+  // }
 }

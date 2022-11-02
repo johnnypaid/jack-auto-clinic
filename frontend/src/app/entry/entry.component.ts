@@ -22,6 +22,7 @@ export class EntryComponent implements OnInit, OnDestroy {
     bodyCode: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
+    dateArrived: ['', Validators.required],
     unitDesc: [''],
   });
 
@@ -37,13 +38,25 @@ export class EntryComponent implements OnInit, OnDestroy {
     this.newEntry.getAllEntry(this.passport)
     .subscribe(resdata => {
       console.log(resdata);
-    })
+    });
+
+    console.log(localStorage.getItem('current'))
   }
 
   onSubmit() {
     console.log(this.entryForm.value);
     if (this.entryForm.valid === true) {
-      console.log(this.entryForm.valid);
+
+      let newCondate = this.entryForm.value.dateArrived;
+      let conDay, conMonth = '';
+
+      newCondate.month < 10 ? conMonth = '0' + newCondate.month : conMonth = newCondate.month;
+      newCondate.day < 10 ? conDay = '0' + newCondate.day : conDay = newCondate.day;
+
+      this.entryForm.value.dateArrived = `${newCondate.year}-${conMonth}-${conDay}`;
+
+      this.entryForm.value.unitDesc === null ? this.entryForm.value.unitDesc = "" : '';
+
        try {
         this.newEntry.newEntry(this.entryForm.value, this.passport)
         .subscribe(resdata => {

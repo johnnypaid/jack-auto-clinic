@@ -31,12 +31,13 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   searchTable = false;
 
   entryFormUpdate = this.formBuilder.group({
-    id: [{value: '', disabled: true}],
+    id: [{value: '', isReadonly: true}],
     chassisNum: ['', Validators.required],
     engineNum: ['', Validators.required],
     bodyCode: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
+    dateArrived: ['', Validators.required],
     unitDesc: [''],
   });
 
@@ -71,6 +72,8 @@ export class EntryTblComponent implements OnInit, OnDestroy {
     this.mainTable = true;
     this.searchTable = false;
     this.inputKey = true;
+
+    console.log(localStorage.getItem('current'));
   }
 
   open(content: any, entry: any) {
@@ -98,16 +101,30 @@ export class EntryTblComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log(this.entryFormUpdate.value);
-    this.entryTbl.newEntryUpdate(this.entryFormUpdate.getRawValue(), this.passport)
-      .subscribe(resdata => {
-        console.log(resdata.status);
-        if (resdata.status === 200) {
-          this.editSuccess = true;
-          this.editMessage = 'Succesfully edited the data.';
-          this.inputKey = false;
-          this.ngOnInit();
-        }
-      });
+    console.log(this.entryFormUpdate.valid);
+
+    if (this.entryFormUpdate.valid) {
+      let newCondate = this.entryFormUpdate.value.dateArrived;
+      let conDay, conMonth = ''
+      newCondate.month < 10 ? conMonth = '0' + newCondate.month : conMonth = newCondate.month;
+      newCondate.day < 10 ? conDay = '0' + newCondate.day : conDay = newCondate.day
+      this.entryFormUpdate.value.dateArrived = `${newCondate.year}-${conMonth}-${conDay}`;
+
+      try {
+        this.entryTbl.newEntryUpdate(this.entryFormUpdate.value, this.passport)
+        .subscribe(resdata => {
+          console.log(resdata.status);
+          if (resdata.status === 200) {
+            this.editSuccess = true;
+            this.editMessage = 'Succesfully edited the data.';
+            this.inputKey = false;
+            this.ngOnInit();
+          }
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }
 
   setModalEntryValue(entry: any) {
@@ -117,6 +134,11 @@ export class EntryTblComponent implements OnInit, OnDestroy {
     this.entryFormUpdate.controls.bodyCode.setValue(entry.bodyCode);
     this.entryFormUpdate.controls.supplier.setValue(entry.supplier);
     this.entryFormUpdate.controls.containerNum.setValue(entry.containerNum);
+    this.entryFormUpdate.controls.dateArrived.setValue({
+      year: parseInt(entry.dateArrived.slice(0,4)),
+      month: parseInt(entry.dateArrived.slice(5,7)),
+      day: parseInt(entry.dateArrived.slice(8,10))
+    });
     this.entryFormUpdate.controls.unitDesc.setValue(entry.unitDesc);
   }
 
@@ -146,6 +168,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
 
     this.modalService.open(del, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      this.delSuccess = false;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       this.delSuccess = false;
@@ -153,17 +176,16 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    console.log('test')
     let option: any;
 
     if (this.searchForm.value.searchInput !== '' && this.searchForm.value.searhOption !== '') {
       switch (parseInt(this.searchForm.value.searhOption)) {
-        case 1: {
-          // this.inputKey = true;
-          option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
-          this.searchEntry(option);
-          break;
-        }
+        // case 1: {
+        //   // this.inputKey = true;
+        //   option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
+        //   this.searchEntry(option);
+        //   break;
+        // }
         case 2: {
           // this.inputKey = true;
           option = {field: 'chassisNum', keyword: this.searchForm.value.searchInput};
@@ -200,7 +222,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
         console.log(resdata)
         this.entryTable = [];
         this.entryTblData = resdata.body;
-        this.entryTable = this.entryTblData;
+        this.entryTable = this.entryTblData.data;
         this.entryTbl.setTable(resdata.body);
         this.mainTable = false;
         this.searchTable = true;

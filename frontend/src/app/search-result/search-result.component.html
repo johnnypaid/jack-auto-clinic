@@ -70,7 +70,7 @@
         <p class="card-text"><small class="text-muted">Supplier: <strong><span class="entry-fields">{{entryData.supplier}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Container: <strong><span class="entry-fields">{{entryData.containerNum}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">Description: <strong><span class="entry-fields">{{entryData.unitDesc}}</span></strong></small></p>
-        <p class="card-text"><small class="text-muted">Date: <strong><span class="entry-fields">{{entryData.date | slice:0:10}}</span></strong></small></p>
+        <p class="card-text"><small class="text-muted">Date Arrived: <strong><span class="entry-fields">{{entryData.dateArrived | slice:0:10}}</span></strong></small></p>
         <p class="card-text"><small class="text-muted">{{ entryData._id }}</small></p>
       </ng-template>
       <ng-template [ngIf]="headerTitle === 'Registration Data'">

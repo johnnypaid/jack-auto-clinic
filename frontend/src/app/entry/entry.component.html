@@ -12,6 +12,14 @@
           <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
           <label class="entry-label" for="chassis">Container Number</label>
           <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+          <label class="entry-label" for="chassis">Date Arrived</label>
+          <div class="input-group">
+            <input class="form-control reg-date" placeholder="yyyy-mm-dd"
+                   name="conDate" ngbDatepicker #d="ngbDatepicker" formControlName="dateArrived">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
           <label class="entry-label" for="chassis">Unit Descripton</label>
           <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
           <div class="entry-error" *ngIf="showErr">

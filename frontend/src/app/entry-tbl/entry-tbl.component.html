@@ -7,7 +7,6 @@
           <input class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
           <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option">
             <option></option>
-            <option value="1">Engine</option>
             <option value="2">Chassis</option>
             <option value="3">Supplier</option>
             <option value="4">Date</option>
@@ -22,22 +21,22 @@
         <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
           <div class="card shadow">
             <div class="entry-chassis">
-              <p class="lead"><small>Engine #</small></p>
-              <h5>{{ entry.engineNum }}</h5>
+              <p class="lead"><small>Chasis #</small></p>
+              <h5>{{ entry.chassisNum }}</h5>
             </div>
             <div class="card-body">
-              <p class="card-text"><small class="text-muted">Chasis #</small></p>
-              <p class="entry-fields">{{entry.chassisNum}}</p>
+              <p class="card-text"><small class="text-muted">Engine #</small></p>
+              <p class="entry-fields">{{entry.engineNum}}</p>
               <p class="card-text"><small class="text-muted">Body Code</small></p>
               <p class="entry-fields">{{entry.bodyCode}}</p>
               <p class="card-text"><small class="text-muted">Supplier</small></p>
               <p class="entry-fields">{{entry.supplier}}</p>
               <p class="card-text"><small class="text-muted">Container</small></p>
               <p class="entry-fields">{{entry.containerNum}}</p>
+              <p class="card-text"><small class="text-muted">Date Arrived</small></p>
+              <p class="entry-fields">{{entry.dateArrived | slice:0:10}}</p>
               <p class="card-text"><small class="text-muted">Description</small></p>
               <p class="entry-fields">{{entry.unitDesc}}</p>
-              <p class="card-text"><small class="text-muted">Date</small></p>
-              <p class="entry-fields">{{entry.date | slice:0:10}}</p>
               <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
               <hr>
             </div>
@@ -74,10 +73,10 @@
               <p class="entry-fields">{{entry.supplier}}</p>
               <p class="card-text"><small class="text-muted">Container</small></p>
               <p class="entry-fields">{{entry.containerNum}}</p>
+              <p class="card-text"><small class="text-muted">Date Arrived</small></p>
+              <p class="entry-fields">{{entry.dateArrived | slice:0:10}}</p>
               <p class="card-text"><small class="text-muted">Description</small></p>
               <p class="entry-fields">{{entry.unitDesc}}</p>
-              <p class="card-text"><small class="text-muted">Date</small></p>
-              <p class="entry-fields">{{entry.date | slice:0:10}}</p>
               <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
               <hr>
             </div>
@@ -111,7 +110,7 @@
               <div class="form-group">
                 <label for="dateOfBirth">Id</label>
                 <div class="input-group">
-                  <input class="entry-form" type="text" id="id" class="form-control entry-form " placeholder="Id" formControlName="id">
+                  <input class="entry-form" type="text" id="id" class="form-control entry-form " placeholder="Id" formControlName="id" readonly="true">
                 </div>
                 <label for="dateOfBirth">Engine Numbers</label>
                 <div class="input-group">
@@ -132,6 +131,14 @@
                 <label for="dateOfBirth">Container Number</label>
                 <div class="input-group">
                   <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+                </div>
+                <label for="dateOfBirth">Date Added</label>
+                <div class="input-group">
+                  <input class="form-control reg-date" placeholder="yyyy-mm-dd"
+                         name="dateArrived" ngbDatepicker #d="ngbDatepicker" formControlName="dateArrived">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                  </div>
                 </div>
                 <label for="dateOfBirth">Unit Descripton</label>
                 <div class="input-group">

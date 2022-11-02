@@ -25,10 +25,14 @@ const entrySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    dateArrived: {
+        type: Date,
+        required: true,
+    },
     unitDesc: {
         type: String
     },
-    date: { type: Date, default: Date.now },
+    latestUpdated: { type: Date, default: Date.now },
 });
 
 const AppEntry = mongoose.model('AppEntry', entrySchema);
@@ -41,6 +45,7 @@ function validateEntry(entry) {
         bodyCode: Joi.string().required(),
         supplier: Joi.string().required(),
         containerNum: Joi.string().required(),
+        dateArrived: Joi.string().required(),
         unitDesc: Joi.string().allow('')
     });
 

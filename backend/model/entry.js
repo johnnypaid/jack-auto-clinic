@@ -29,6 +29,46 @@ const entrySchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    model: {
+        type: String,
+        required: true
+    },
+    valve: {
+        type: String,
+        required: true
+    },
+    body: {
+        type: String,
+        required: true
+    },
+    driveType: {
+        type: String,
+        required: true
+    },
+    speed: {
+        type: String,
+        required: true
+    },
+    bodyEye: {
+        type: String,
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    },
+    yard: {
+        type: String,
+        required: true
+    },
+    reconCrd: {
+        type: String,
+        required: true
+    },
+    company: {
+        type: String,
+        required: true
+    },
     unitDesc: {
         type: String
     },
@@ -46,6 +86,16 @@ function validateEntry(entry) {
         supplier: Joi.string().required(),
         containerNum: Joi.string().required(),
         dateArrived: Joi.string().required(),
+        model: Joi.string().required(),
+        valve: Joi.string().required(),
+        body: Joi.string().required(),
+        driveType: Joi.string().required(),
+        speed: Joi.string().required(),
+        bodyEye: Joi.string().required(),
+        color: Joi.string().required(),
+        yard: Joi.string().required(),
+        reconCrd: Joi.string().required(),
+        company: Joi.string().required(),
         unitDesc: Joi.string().allow('')
     });
 

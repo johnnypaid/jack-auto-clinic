@@ -2,32 +2,99 @@
     <div class="container entry-user">
       <h3>New Entry</h3>
       <form class="form-entry" [formGroup]="entryForm" (ngSubmit)="onSubmit()">
-          <label class="entry-label" for="chassis">Chasis Number</label>
-          <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
-          <label class="entry-label" for="chassis">Engine Numbers</label>
-          <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
-          <label class="entry-label" for="chassis">Body Code</label>
-          <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
-          <label class="entry-label" for="chassis">Supplier</label>
-          <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
-          <label class="entry-label" for="chassis">Container Number</label>
-          <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
-          <label class="entry-label" for="chassis">Date Arrived</label>
-          <div class="input-group">
-            <input class="form-control reg-date" placeholder="yyyy-mm-dd"
-                   name="conDate" ngbDatepicker #d="ngbDatepicker" formControlName="dateArrived">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-            </div>
+        <label class="entry-label" for="chassis">Date Arrived</label>
+        <div class="input-group">
+          <input class="form-control reg-date" placeholder="yyyy-mm-dd"
+                 name="conDate" ngbDatepicker #d="ngbDatepicker" formControlName="dateArrived">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
           </div>
-          <label class="entry-label" for="chassis">Unit Descripton</label>
-          <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
-          <div class="entry-error" *ngIf="showErr">
-            {{ error }}
-          </div>
-          <div>
-            <button class="btn btn-secondary entry-btn" type="submit">Submit</button>
-          </div>
-        </form>
+        </div>
+        <label class="entry-label" for="chassis">Chasis Number</label>
+        <input class="entry-form" type="text" id="chassis" class="form-control entry-form" placeholder="Chassis #" formControlName="chassisNum" required>
+        <label class="entry-label" for="chassis">Engine Numbers</label>
+        <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
+        <label class="entry-label" for="chassis">Body Code</label>
+        <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+        <label class="entry-label" for="model">Model</label>
+        <select class="custom-select" name="model" formControlName="model">
+          <option selected></option>
+          <option value="Latest">Latest</option>
+          <option value="Scrum">Scrum</option>
+        </select>
+        <label class="entry-label" for="valve">Valve</label>
+        <select class="custom-select" name="valve" formControlName="valve">
+          <option selected></option>
+          <option value="12v">12v</option>
+          <option value="16v">16v</option>
+        </select>
+        <label class="entry-label" for="body">Body</label>
+        <select class="custom-select" name="body" formControlName="body">
+          <option selected></option>
+          <option value="p-up">Pickup</option>
+          <option value="van">Van</option>
+        </select>
+        <label class="entry-label" for="driveType">Drive Type</label>
+        <select class="custom-select" name="driveType" formControlName="driveType">
+          <option selected></option>
+          <option value="4wd">4x4</option>
+          <option value="2wd">2x2</option>
+        </select>
+        <label class="entry-label" for="speed">Speed</label>
+        <select class="custom-select" name="speed" formControlName="speed">
+          <option selected></option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="5/man">5/Man</option>
+          <option value="3/at">3/At</option>
+        </select>
+        <label class="entry-label" for="bodyEye">Body Eye</label>
+        <select class="custom-select" name="bodyEye" formControlName="bodyEye">
+          <option selected></option>
+          <option value="b-eye">B-Eye</option>
+          <option value="c-eye">C-Eye</option>
+          <option value="r-eye">R-Eye</option>
+        </select>
+        <label class="entry-label" for="color">Color</label>
+        <select class="custom-select" name="color" formControlName="color">
+          <option selected></option>
+          <option value="blue">Blue</option>
+          <option value="gray">Gray</option>
+          <option value="green">Green</option>
+          <option value="maroon">maroon</option>
+          <option value="red">Red</option>
+          <option value="y-gree">Y-Green</option>
+          <option value="y-red">Y-Red</option>
+        </select>
+        <label class="entry-label" for="yard">Yard</label>
+        <select class="custom-select" name="yard" formControlName="yard">
+          <option selected></option>
+          <option value="yard 1">Yard 1</option>
+          <option value="yard 2">Yard 2</option>
+          <option value="Yard 3">Yard 3</option>
+          <option value="Yard 4">Yard 4</option>
+          <option value="Yard 5">Yard 5</option>
+        </select>
+        <label class="entry-label" for="reconCrd">Recon/Crd</label>
+        <select class="custom-select" name="reconCrd" formControlName="reconCrd">
+          <option selected></option>
+          <option value="recon">Recon</option>
+          <option value="crd">Crd</option>
+        </select>
+        <label class="entry-label" for="company">Company</label>
+        <input class="entry-form" type="text" id="company" class="form-control entry-form" placeholder="company" formControlName="company">
+        <label class="entry-label" for="chassis">Supplier</label>
+        <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+        <label class="entry-label" for="chassis">Container Number</label>
+        <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+        <label class="entry-label" for="chassis">Remarks</label>
+        <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
+        <div class="entry-error" *ngIf="showErr">
+          {{ error }}
+        </div>
+        <div>
+          <button class="btn btn-secondary entry-btn" type="submit">Submit</button>
+        </div>
+      </form>
     </div>
   </section>

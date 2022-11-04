@@ -20,35 +20,35 @@ export class ProductionComponent implements OnInit, OnDestroy {
   chasData: any;
 
   productionForm = this.formBuilder.group({
-    conversion: ['', Validators.required],
-    conDate: ['', Validators.required],
-    con_stat : ['', Validators.required],
-    chassisNum: ['', Validators.required],
-    painting: ['', Validators.required],
-    paint_started: ['', Validators.required],
-    paint_stat: ['', Validators.required],
-    mechanical: ['', Validators.required],
-    mec_started: ['', Validators.required],
-    mec_stat: ['', Validators.required],
-    electrical: ['', Validators.required],
-    elec_started: ['', Validators.required],
-    elec_stat: ['', Validators.required],
-    upholstery: ['', Validators.required],
-    up_started: ['', Validators.required],
-    up_stat: ['', Validators.required],
-    trimmer: ['', Validators.required],
-    trim_started: ['', Validators.required],
-    trim_stat: ['', Validators.required],
-    dashboard: ['', Validators.required],
-    dash_started: ['', Validators.required],
-    dash_stat: ['', Validators.required],
-    detailing: ['', Validators.required],
-    det_started: ['', Validators.required],
-    det_stat: ['', Validators.required],
-    qc: ['', Validators.required],
-    qc_started: ['', Validators.required],
-    qc_stat: ['', Validators.required],
-    sold_to: ['', Validators.required],
+    conversion: ['', ],
+    conDate: [''],
+    con_stat : [''],
+    chassisNum: [''],
+    painting: [''],
+    paint_started: [''],
+    paint_stat: [''],
+    mechanical: [''],
+    mec_started: [''],
+    mec_stat: [''],
+    electrical: [''],
+    elec_started: [''],
+    elec_stat: [''],
+    upholstery: [''],
+    up_started: [''],
+    up_stat: [''],
+    trimmer: [''],
+    trim_started: [''],
+    trim_stat: [''],
+    dashboard: [''],
+    dash_started: [''],
+    dash_stat: [''],
+    detailing: [''],
+    det_started: [''],
+    det_stat: [''],
+    qc: [''],
+    qc_started: [''],
+    qc_stat: [''],
+    sold_to: [''],
   });
 
   constructor(
@@ -63,12 +63,13 @@ export class ProductionComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    console.log(this.productionForm.value);
+    console.log(this.productionForm.valid);
     if (this.productionForm.value.chassisNum === '') {
       this.error = 'Please enter chassis number.';
       this.showErr = true;
     } else {
       this.showErr = false;
-      console.log(this.productionForm.value);
       try {
         if (this.productionForm.value.conDate !== "") {
           let newCondate = this.productionForm.value.conDate;

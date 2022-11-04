@@ -23,6 +23,16 @@ export class EntryComponent implements OnInit, OnDestroy {
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
     dateArrived: ['', Validators.required],
+    model: ['', Validators.required],
+    valve: ['', Validators.required],
+    body: ['', Validators.required],
+    driveType: ['', Validators.required],
+    speed: ['', Validators.required],
+    bodyEye: ['', Validators.required],
+    color: ['', Validators.required],
+    yard: ['', Validators.required],
+    reconCrd: ['', Validators.required],
+    company: ['', Validators.required],
     unitDesc: [''],
   });
 

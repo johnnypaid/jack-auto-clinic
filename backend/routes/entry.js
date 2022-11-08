@@ -56,12 +56,15 @@ router.post("/", async (req, res) => {
   if (chasis) return res.status(400).send("Chassis number already exist..");
 
   try {
+    console.log(req.body);
+    
     newEntry = new AppEntry(
       _.pick(req.body, [
         "_id",
         "chassisNum",
         "engineNum",
         "bodyCode",
+        "make",
         "supplier",
         "containerNum",
         "dateArrived",
@@ -100,6 +103,8 @@ router.put("/:id", async (req, res) => {
         chassisNum: req.body.chassisNum,
         engineNum: req.body.engineNum,
         bodyCode: req.body.bodyCode,
+        bodyCode: req.body.bodyCode,
+        make: req.body.make,
         supplier: req.body.supplier,
         containerNum: req.body.containerNum,
         model: req.body.model,

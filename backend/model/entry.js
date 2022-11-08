@@ -17,6 +17,10 @@ const entrySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    make: {
+        type: String,
+        required: true,
+    },
     supplier: {
         type: String,
         required: true,
@@ -83,6 +87,7 @@ function validateEntry(entry) {
         chassisNum: Joi.string().required(),
         engineNum: Joi.string().required(),
         bodyCode: Joi.string().required(),
+        make: Joi.string().required(),
         supplier: Joi.string().required(),
         containerNum: Joi.string().required(),
         dateArrived: Joi.string().required(),

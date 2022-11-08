@@ -16,25 +16,42 @@
         <input class="entry-form" type="text" id="engine" class="form-control entry-form " placeholder="Engine #" formControlName="engineNum" required>
         <label class="entry-label" for="chassis">Body Code</label>
         <input class="entry-form" type="text" id="body-code" class="form-control entry-form" placeholder="Body Code" formControlName="bodyCode" required>
+        <label class="entry-label" for="model">Make</label>
+        <select class="custom-select" name="make" formControlName="make">
+          <option selected></option>
+          <option value="suzuki">Suzuki</option>
+          <option value="mazda">Mazda</option>
+          <option value="isuzu">Isuzu</option>
+          <option value="mazda">Mitsubishi</option>
+        </select>
         <label class="entry-label" for="model">Model</label>
         <select class="custom-select" name="model" formControlName="model">
           <option selected></option>
+          <option value="ordinary">Ordinary</option>
           <option value="Latest">Latest</option>
           <option value="Scrum">Scrum</option>
         </select>
         <label class="entry-label" for="valve">Valve</label>
         <select class="custom-select" name="valve" formControlName="valve">
           <option selected></option>
+          <option value="6v">6v</option>
+          <option value="8v">8v</option>
           <option value="12v">12v</option>
           <option value="16v">16v</option>
         </select>
         <label class="entry-label" for="body">Body</label>
         <select class="custom-select" name="body" formControlName="body">
           <option selected></option>
-          <option value="p-up">Pickup</option>
+          <option value="pup dropside">Pickup Dropside</option>
+          <option value="pup w/ canopy">Pickup w/ Canopy</option>
+          <option value="pup w/ double canopy">Pickup w/ Double Canopy</option>
+          <option value="mini dump">Mini Dump</option>
           <option value="van">Van</option>
+          <option value="landy">Landy</option>
+          <option value="passenger">Passenger</option>
+          <option value="t8 van 6 or 8 seaters">T8 Van 6 or 8 Seaters</option>
         </select>
-        <label class="entry-label" for="driveType">Drive Type</label>
+        <label class="entry-label" for="driveType">Transmission</label>
         <select class="custom-select" name="driveType" formControlName="driveType">
           <option selected></option>
           <option value="4wd">4x4</option>
@@ -43,6 +60,7 @@
         <label class="entry-label" for="speed">Speed</label>
         <select class="custom-select" name="speed" formControlName="speed">
           <option selected></option>
+          <option value="4">3</option>
           <option value="4">4</option>
           <option value="5">5</option>
           <option value="5/man">5/Man</option>
@@ -51,11 +69,12 @@
         <label class="entry-label" for="bodyEye">Body Eye</label>
         <select class="custom-select" name="bodyEye" formControlName="bodyEye">
           <option selected></option>
-          <option value="b-eye">B-Eye</option>
-          <option value="c-eye">C-Eye</option>
-          <option value="r-eye">R-Eye</option>
+          <option value="big">Big</option>
+          <option value="cat">Cat</option>
+          <option value="round">Round</option>
+          <option value="square">Square</option>
         </select>
-        <label class="entry-label" for="color">Color</label>
+        <!-- <label class="entry-label" for="color">Color</label>
         <select class="custom-select" name="color" formControlName="color">
           <option selected></option>
           <option value="blue">Blue</option>
@@ -65,7 +84,9 @@
           <option value="red">Red</option>
           <option value="y-gree">Y-Green</option>
           <option value="y-red">Y-Red</option>
-        </select>
+        </select> -->
+        <label class="entry-label" for="color">Color</label>
+        <input class="entry-form" type="text" id="color" class="form-control entry-form" placeholder="Color" formControlName="color" required>
         <label class="entry-label" for="yard">Yard</label>
         <select class="custom-select" name="yard" formControlName="yard">
           <option selected></option>

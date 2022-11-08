@@ -20,6 +20,7 @@ export class EntryComponent implements OnInit, OnDestroy {
     chassisNum: ['', Validators.required],
     engineNum: ['', Validators.required],
     bodyCode: ['', Validators.required],
+    make: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
     dateArrived: ['', Validators.required],
@@ -54,7 +55,7 @@ export class EntryComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.entryForm.valid);
+    console.log(this.entryForm.value);
     if (this.entryForm.valid === true) {
 
       let newCondate = this.entryForm.value.dateArrived;

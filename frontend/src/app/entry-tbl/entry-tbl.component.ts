@@ -50,7 +50,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
 
   page = 1;
   count = 0;
-  tableSize = 10;
+  tableSize = 30;
   tableSizes = [10, 1];
   showPagination = true;
 

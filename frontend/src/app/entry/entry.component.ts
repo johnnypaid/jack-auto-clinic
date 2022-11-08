@@ -54,7 +54,7 @@ export class EntryComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.entryForm.value);
+    console.log(this.entryForm.valid);
     if (this.entryForm.valid === true) {
 
       let newCondate = this.entryForm.value.dateArrived;

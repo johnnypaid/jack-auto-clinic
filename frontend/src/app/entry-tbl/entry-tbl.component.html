@@ -1,9 +1,9 @@
 <div class="container entry-section">
   <section>
     <h3>Entry Data</h3>
-    <div class="container entry-search text-right">
+    <div class="container entry-search">
       <form [formGroup]="searchForm">
-        <div class="">
+        <div class="d-flex justify-content-end">
           <input
             class=""
             type="text"
@@ -18,14 +18,14 @@
             placeholder="Option"
           >
             <option></option>
-            <option value="2">Chassis</option>
-            <option value="3">Supplier</option>
-            <option value="4">Date</option>
+            <option value=2>Chassis</option>
+            <option value=3>Container #</option>
           </select>
           <button
             type="button"
             class="btn btn-outline-dark entry-search-btn"
             (click)="search()"
+            style="margin-top: 0px;"
           >
             Search
           </button>
@@ -48,6 +48,7 @@
             <th scope="col">Valve</th>
             <th scope="col">Body</th>
             <th scope="col">Speed</th>
+            <th scope="col">Transmission</th>
             <th scope="col">BodyEye</th>
             <th scope="col">Color</th>
             <th scope="col">Yard</th>
@@ -76,6 +77,7 @@
             <td>{{ entry.valve }}</td>
             <td>{{ entry.body }}</td>
             <td>{{ entry.speed }}</td>
+            <td>{{ entry.driveType }}</td>
             <td>{{ entry.bodyEye }}</td>
             <td>{{ entry.color }}</td>
             <td>{{ entry.yard }}</td>
@@ -113,84 +115,6 @@
         </pagination-controls>
       </div>
     </div>
-
-    <ng-template [ngIf]="searchTable === true">
-      <div class="row" *ngIf="entryTable.length > 0">
-        <div
-          class="col-md-4 entry-pad"
-          *ngFor="
-            let entry of entryTable
-              | paginate: { itemsPerPage: tableSize, currentPage: page }
-          "
-        >
-          <div class="card shadow">
-            <div class="entry-chassis">
-              <p class="lead"><small>Chasis #</small></p>
-              <h5>{{ entry.chasisNum }}</h5>
-            </div>
-            <div class="card-body">
-              <p class="card-text">
-                <small class="text-muted">Engine #</small>
-              </p>
-              <p class="entry-fields">{{ entry.Engine }}</p>
-              <p class="card-text">
-                <small class="text-muted">Body Code</small>
-              </p>
-              <p class="entry-fields">{{ entry.bodyCode }}</p>
-              <p class="card-text">
-                <small class="text-muted">Supplier</small>
-              </p>
-              <p class="entry-fields">{{ entry.supplier }}</p>
-              <p class="card-text">
-                <small class="text-muted">Container</small>
-              </p>
-              <p class="entry-fields">{{ entry.containerNum }}</p>
-              <p class="card-text">
-                <small class="text-muted">Date Arrived</small>
-              </p>
-              <p class="entry-fields">{{ entry.dateArrived | slice: 0:10 }}</p>
-              <p class="card-text">
-                <small class="text-muted">Description</small>
-              </p>
-              <p class="entry-fields">{{ entry.unitDesc }}</p>
-              <p class="card-text">
-                <small class="text-muted">{{ entry._id }}</small>
-              </p>
-              <hr />
-            </div>
-            <div class="card-footer bg-transparent border-success">
-              <a
-                type="button"
-                (click)="open(content, entry)"
-                class="entry-edit"
-                title="Update entry"
-                data-toggle="tooltip"
-                ><i-feather name="edit"></i-feather
-              ></a>
-              <a
-                tyope="button"
-                (click)="openDel(del, entry)"
-                class="entry-delete"
-                data-toggle="tooltip"
-                ><i-feather name="x-octagon"></i-feather
-              ></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="d-flex justify-content-center"
-        id="entry-pagination"
-        *ngIf="showPagination"
-      >
-        <pagination-controls
-          previousLabel="Prev"
-          nextLabel="Next"
-          (pageChange)="onTableDataChange($event)"
-        >
-        </pagination-controls>
-      </div>
-    </ng-template>
   </section>
 
   <section>
@@ -256,6 +180,77 @@
                   required
                 />
               </div>
+              <label class="entry-label" for="model">Make</label>
+              <select class="custom-select" name="make" formControlName="make">
+                <option selected></option>
+                <option value="suzuki">Suzuki</option>
+                <option value="mazda">Mazda</option>
+                <option value="isuzu">Isuzu</option>
+                <option value="mazda">Mitsubishi</option>
+              </select>
+              <label class="entry-label" for="chassis">Supplier</label>
+              <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+              <label class="entry-label" for="model">Model</label>
+              <select class="custom-select" name="model" formControlName="model">
+                <option selected></option>
+                <option value="ordinary">Ordinary</option>
+                <option value="Latest">Latest</option>
+                <option value="Scrum">Scrum</option>
+              </select>
+              <label class="entry-label" for="valve">Valve</label>
+              <select class="custom-select" name="valve" formControlName="valve">
+                <option selected></option>
+                <option value="6v">6v</option>
+                <option value="8v">8v</option>
+                <option value="12v">12v</option>
+                <option value="16v">16v</option>
+              </select>
+              <label class="entry-label" for="body">Body</label>
+              <select class="custom-select" name="body" formControlName="body">
+                <option selected></option>
+                <option value="pup dropside">Pickup Dropside</option>
+                <option value="pup w/ canopy">Pickup w/ Canopy</option>
+                <option value="pup w/ double canopy">Pickup w/ Double Canopy</option>
+                <option value="mini dump">Mini Dump</option>
+                <option value="van">Van</option>
+                <option value="landy">Landy</option>
+                <option value="passenger">Passenger</option>
+                <option value="t8 van 6 or 8 seaters">T8 Van 6 or 8 Seaters</option>
+              </select>
+              <label class="entry-label" for="driveType">Transmission</label>
+              <select class="custom-select" name="driveType" formControlName="driveType">
+                <option selected></option>
+                <option value="4wd">4x4</option>
+                <option value="2wd">2x2</option>
+              </select>
+              <label class="entry-label" for="speed">Speed</label>
+              <select class="custom-select" name="speed" formControlName="speed">
+                <option selected></option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="5/man">5/Man</option>
+                <option value="3/at">3/At</option>
+              </select>
+              <label class="entry-label" for="bodyEye">Body Eye</label>
+              <select class="custom-select" name="bodyEye" formControlName="bodyEye">
+                <option selected></option>
+                <option value="big">Big</option>
+                <option value="cat">Cat</option>
+                <option value="round">Round</option>
+                <option value="square">Square</option>
+              </select>
+              <label class="entry-label" for="color">Color</label>
+              <input class="entry-form" type="text" id="color" class="form-control entry-form" placeholder="Color" formControlName="color" required>
+              <label class="entry-label" for="yard">Yard</label>
+              <select class="custom-select" name="yard" formControlName="yard">
+                <option selected></option>
+                <option value="yard 1">Yard 1</option>
+                <option value="yard 2">Yard 2</option>
+                <option value="Yard 3">Yard 3</option>
+                <option value="Yard 4">Yard 4</option>
+                <option value="Yard 5">Yard 5</option>
+              </select>
               <label for="dateOfBirth">Supplier</label>
               <div class="input-group">
                 <input
@@ -298,17 +293,18 @@
                   ></button>
                 </div>
               </div>
-              <label for="dateOfBirth">Unit Descripton</label>
-              <div class="input-group">
-                <textarea
-                  class="entry-form"
-                  type="text"
-                  id="desc"
-                  class="form-control entry-form"
-                  placeholder="Unit Description"
-                  formControlName="unitDesc"
-                ></textarea>
-              </div>
+              <label class="entry-label" for="reconCrd">Recon/Crd</label>
+              <select class="custom-select" name="reconCrd" formControlName="reconCrd">
+                <option selected></option>
+                <option value="recon">Recon</option>
+                <option value="crd">Crd</option>
+              </select>
+              <label class="entry-label" for="company">Company</label>
+              <input class="entry-form" type="text" id="company" class="form-control entry-form" placeholder="company" formControlName="company">
+              <label class="entry-label" for="chassis">Container Number</label>
+              <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+              <label class="entry-label" for="chassis">Remarks</label>
+              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
             </div>
           </ng-template>
         </form>

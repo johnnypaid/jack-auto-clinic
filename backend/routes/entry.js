@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   res.send(result);
 });
 router.get("/:option/:key", async (req, res) => {
-  console.log(req.params.key);
+  console.log(req.params);
 
   const field = req.params.option;
   const key = req.params.key;
@@ -26,8 +26,8 @@ router.get("/:option/:key", async (req, res) => {
       result = await AppEntry.find({ chassisNum: key });
     }
 
-    if (field === "supplier") {
-      result = await AppEntry.find({ supplier: key });
+    if (field === "containerNum") {
+      result = await AppEntry.find({ containerNum: key });
     }
 
     if (field === "date") {
@@ -38,8 +38,7 @@ router.get("/:option/:key", async (req, res) => {
       result = await AppEntry.find({ dateArrived: { $eq: new Date(key) } });
     }
 
-    console.log(countResult);
-    res.send({ data: result, count: countResult });
+    res.status(200).send(result);
   } catch (error) {
     res.send(error);
   }
@@ -57,7 +56,7 @@ router.post("/", async (req, res) => {
 
   try {
     console.log(req.body);
-    
+
     newEntry = new AppEntry(
       _.pick(req.body, [
         "_id",

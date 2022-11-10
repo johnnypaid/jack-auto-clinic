@@ -157,9 +157,10 @@ hr {
   }
 }
 
-.table td {
+.table th, td {
   font-size: 13px;
 }
+
 
 @media (max-width: 320px) {
   .entry {

@@ -1,17 +1,21 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ModalDismissReasons, NgbActiveModal, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ModalDismissReasons,
+  NgbActiveModal,
+  NgbDateStruct,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 import { NewEntryService } from '../service/new-entry.service';
 
 @Component({
   selector: 'app-entry-tbl',
   templateUrl: './entry-tbl.component.html',
-  styleUrls: ['./entry-tbl.component.scss']
+  styleUrls: ['./entry-tbl.component.scss'],
 })
 export class EntryTblComponent implements OnInit, OnDestroy {
-
   passport: any;
-  entryTblData: any
+  entryTblData: any;
   entryTable: any[] = [];
   closeResult = '';
   model: NgbDateStruct | undefined;
@@ -27,17 +31,25 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   supplier = '';
   unitDesc = '';
 
-  mainTable = true;
-  searchTable = false;
-
   entryFormUpdate = this.formBuilder.group({
-    id: [{value: '', isReadonly: true}],
+    id: [{ value: '', isReadonly: true }],
     chassisNum: ['', Validators.required],
     engineNum: ['', Validators.required],
     bodyCode: ['', Validators.required],
+    make: ['', Validators.required],
     supplier: ['', Validators.required],
     containerNum: ['', Validators.required],
     dateArrived: ['', Validators.required],
+    model: ['', Validators.required],
+    valve: ['', Validators.required],
+    body: ['', Validators.required],
+    driveType: ['', Validators.required],
+    speed: ['', Validators.required],
+    bodyEye: ['', Validators.required],
+    color: ['', Validators.required],
+    yard: ['', Validators.required],
+    reconCrd: ['', Validators.required],
+    company: ['', Validators.required],
     unitDesc: [''],
   });
 
@@ -54,39 +66,42 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   tableSizes = [10, 1];
   showPagination = true;
 
-
   constructor(
     private entryTbl: NewEntryService,
     private modalService: NgbModal,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
-    this.entryTbl.getAllEntry(this.passport)
-      .subscribe(resdata => {
+
+    this.entryTbl.getAllEntry(this.passport).subscribe((resdata) => {
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData;
       console.log(this.entryTable);
     });
 
-    this.mainTable = true;
-    this.searchTable = false;
     this.inputKey = true;
 
     console.log(localStorage.getItem('current'));
   }
 
   open(content: any, entry: any) {
-    // console.log(entry);
+    console.log(entry);
     this.setModalEntryValue(entry);
 
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.editSuccess = false;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this.editSuccess = false;
-    });
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+          this.editSuccess = false;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          this.editSuccess = false;
+        }
+      );
   }
 
   private getDismissReason(reason: any): string {
@@ -105,22 +120,28 @@ export class EntryTblComponent implements OnInit, OnDestroy {
 
     if (this.entryFormUpdate.valid) {
       let newCondate = this.entryFormUpdate.value.dateArrived;
-      let conDay, conMonth = ''
-      newCondate.month < 10 ? conMonth = '0' + newCondate.month : conMonth = newCondate.month;
-      newCondate.day < 10 ? conDay = '0' + newCondate.day : conDay = newCondate.day
+      let conDay,
+        conMonth = '';
+      newCondate.month < 10
+        ? (conMonth = '0' + newCondate.month)
+        : (conMonth = newCondate.month);
+      newCondate.day < 10
+        ? (conDay = '0' + newCondate.day)
+        : (conDay = newCondate.day);
       this.entryFormUpdate.value.dateArrived = `${newCondate.year}-${conMonth}-${conDay}`;
 
       try {
-        this.entryTbl.newEntryUpdate(this.entryFormUpdate.value, this.passport)
-        .subscribe(resdata => {
-          console.log(resdata.status);
-          if (resdata.status === 200) {
-            this.editSuccess = true;
-            this.editMessage = 'Succesfully edited the data.';
-            this.inputKey = false;
-            this.ngOnInit();
-          }
-        });
+        this.entryTbl
+          .newEntryUpdate(this.entryFormUpdate.value, this.passport)
+          .subscribe((resdata) => {
+            console.log(resdata);
+            if (resdata.status === 200) {
+              this.editSuccess = true;
+              this.editMessage = 'Succesfully edited the data.';
+              this.inputKey = false;
+              this.ngOnInit();
+            }
+          });
       } catch (error) {
         console.log(error);
       }
@@ -132,12 +153,25 @@ export class EntryTblComponent implements OnInit, OnDestroy {
     this.entryFormUpdate.controls.chassisNum.setValue(entry.chassisNum);
     this.entryFormUpdate.controls.engineNum.setValue(entry.engineNum);
     this.entryFormUpdate.controls.bodyCode.setValue(entry.bodyCode);
+    this.entryFormUpdate.controls.make.setValue(entry.make);
+    this.entryFormUpdate.controls.model.setValue(entry.model);
+    this.entryFormUpdate.controls.valve.setValue(entry.valve);
+    this.entryFormUpdate.controls.driveType.setValue(entry.driveType);
+    this.entryFormUpdate.controls.speed.setValue(entry.speed);
+    this.entryFormUpdate.controls.bodyEye.setValue(entry.bodyEye);
+    this.entryFormUpdate.controls.color.setValue(entry.color);
+    this.entryFormUpdate.controls.yard.setValue(entry.yard);
+    this.entryFormUpdate.controls.color.setValue(entry.color);
+    this.entryFormUpdate.controls.reconCrd.setValue(entry.reconCrd);
+    this.entryFormUpdate.controls.color.setValue(entry.color);
+    this.entryFormUpdate.controls.company.setValue(entry.company);
     this.entryFormUpdate.controls.supplier.setValue(entry.supplier);
+    this.entryFormUpdate.controls.body.setValue(entry.body);
     this.entryFormUpdate.controls.containerNum.setValue(entry.containerNum);
     this.entryFormUpdate.controls.dateArrived.setValue({
-      year: parseInt(entry.dateArrived.slice(0,4)),
-      month: parseInt(entry.dateArrived.slice(5,7)),
-      day: parseInt(entry.dateArrived.slice(8,10))
+      year: parseInt(entry.dateArrived.slice(0, 4)),
+      month: parseInt(entry.dateArrived.slice(5, 7)),
+      day: parseInt(entry.dateArrived.slice(8, 10)),
     });
     this.entryFormUpdate.controls.unitDesc.setValue(entry.unitDesc);
   }
@@ -145,14 +179,13 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   onDelete() {
     console.log(this.delId);
     if (this.delId === '' || this.delId === null) {
-      this.delMessage = 'No data to delete.'
+      this.delMessage = 'No data to delete.';
     } else {
-      this.entryTbl.delEntry(this.delId, this.passport)
-      .subscribe(resdata => {
+      this.entryTbl.delEntry(this.delId, this.passport).subscribe((resdata) => {
         console.log(resdata);
         if (resdata.status === 200) {
           this.delSuccess = true;
-          this.delMessage = 'Successfully deleted.'
+          this.delMessage = 'Successfully deleted.';
           this.delId = '';
           this.ngOnInit();
         }
@@ -166,73 +199,82 @@ export class EntryTblComponent implements OnInit, OnDestroy {
     this.engineNum = entry.engineNum;
     this.bodyCode = entry.bodyCode;
 
-    this.modalService.open(del, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-      this.delSuccess = false;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this.delSuccess = false;
-    });
+    this.modalService
+      .open(del, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+          this.delSuccess = false;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          this.delSuccess = false;
+        }
+      );
   }
 
   search() {
+    console.log(this.searchForm.value);
     let option: any;
 
-    if (this.searchForm.value.searchInput !== '' && this.searchForm.value.searhOption !== '') {
+    localStorage.setItem('searchInput', this.searchForm.value.searchInput);
+    localStorage.setItem('searhOption', this.searchForm.value.searchOption);
+
+    if (
+      this.searchForm.value.searchInput !== '' &&
+      this.searchForm.value.searhOption !== ''
+    ) {
       switch (parseInt(this.searchForm.value.searhOption)) {
-        // case 1: {
-        //   // this.inputKey = true;
-        //   option = {field: 'engineNum', keyword: this.searchForm.value.searchInput};
-        //   this.searchEntry(option);
-        //   break;
-        // }
         case 2: {
           // this.inputKey = true;
-          option = {field: 'chassisNum', keyword: this.searchForm.value.searchInput};
+          option = {
+            field: 'chassisNum',
+            keyword: this.searchForm.value.searchInput,
+          };
           this.searchEntry(option);
+          this.resetSearchForm();
           break;
         }
         case 3: {
           // this.inputKey = true;
-          this.searchForm.value.searhOption = 'supplier';
-          option = {field: 'supplier', keyword: this.searchForm.value.searchInput};
+          this.searchForm.value.searhOption = 'containerNum';
+          option = {
+            field: 'containerNum',
+            keyword: this.searchForm.value.searchInput,
+          };
           this.searchEntry(option);
-          break;
-        }
-        case 4: {
-          // this.inputKey = true;
-          this.searchForm.value.searhOption = 'date';
-          option = {field: 'date', keyword: this.searchForm.value.searchInput};
-          this.searchEntry(option);
+          this.resetSearchForm();
           break;
         }
         default: {
-          this.inputKey = true;
+          localStorage.removeItem('searchValue');
+          this.ngOnInit();
           break;
         }
       }
-    } else {
-      this.ngOnInit();
     }
   }
 
-  searchEntry (option: any) {
-    this.entryTbl.entrySearch(option, this.passport)
-      .subscribe(resdata => {
-        console.log(resdata)
-        this.entryTable = [];
-        this.entryTblData = resdata.body;
-        this.entryTable = this.entryTblData.data;
-        this.entryTbl.setTable(resdata.body);
-        this.mainTable = false;
-        this.searchTable = true;
-        this.onTableDataChange(event);
-
-        this.entryTable.length > 0 ? this.showPagination = true : this.showPagination = false;
-      });
+  resetSearchForm() {
+    this.searchForm.reset({
+      searchInput: '',
+      searhOption: '',
+    });
   }
 
-  onTableDataChange(event: any){
+  searchEntry(option: any) {
+    console.log(option);
+    this.entryTbl.entrySearch(option, this.passport).subscribe((resdata) => {
+      console.log(resdata);
+      this.entryTable = [];
+      this.entryTblData = resdata.body;
+      this.entryTable = this.entryTblData;
+      this.entryTbl.setTable(resdata.body);
+      this.onTableDataChange(event);
+    });
+  }
+
+  onTableDataChange(event: any) {
     this.page = event;
     this.entryTable = this.entryTable;
   }
@@ -240,7 +282,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    this.entryTable  = this.entryTable;
+    this.entryTable = this.entryTable;
   }
 
   ngOnDestroy() {

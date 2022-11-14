@@ -13,6 +13,11 @@ const productionSchema = new mongoose.Schema({
         requried: true,
         unique: true
     },
+    containerNum: {
+        type: String,
+        requried: true,
+        unique: true
+    },
     conversion: {
         type: String
     },
@@ -109,6 +114,7 @@ function validateEntry(entry) {
         conDate: Joi.string().allow(null, '').optional(),
         con_stat: Joi.string().allow(null, '').optional(),
         chassisNum: Joi.string().required(),
+        containerNum: Joi.string().required(),
         painting: Joi.string().allow(null, '').optional(),
         paint_started: Joi.string().allow(null, '').optional(),
         paint_stat: Joi.string().allow(null, '').optional(),

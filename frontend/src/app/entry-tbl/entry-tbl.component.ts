@@ -74,6 +74,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
+    console.log(localStorage.getItem('token'))
 
     this.entryTbl.getAllEntry(this.passport).subscribe((resdata) => {
       this.entryTblData = resdata.body;

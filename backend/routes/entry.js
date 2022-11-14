@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const express = require("express");
 const router = express.Router();
 const { AppEntry, validate } = require("../model/entry");
+const { AppProd } = require("../model/production");
 
 router.get("/", async (req, res) => {
   const result = await AppEntry.find();

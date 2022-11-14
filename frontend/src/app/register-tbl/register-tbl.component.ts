@@ -65,6 +65,7 @@ export class RegisterTblComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
+    console.log(localStorage.getItem('current'));
     this.regTbl.getAllEntry(this.passport)
       .subscribe(resdata => {
       this.entryTblData = resdata.body;

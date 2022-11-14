@@ -7,16 +7,135 @@
         <input class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
         <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option">
           <option></option>
-          <option value="1">Engine</option>
-          <option value="2">Chassis</option>
-          <option value="3">Sold To</option>
+          <option value=2>Chassis</option>
+          <option value=3>Container #</option>
         </select>
         <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
       </div>
     </form>
   </div>
 
-  <div class="row" id="print-area">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Chassis</th>
+          <th scope="col">Container</th>
+          <th scope="col">Conversion</th>
+          <th scope="col">ConDate</th>
+          <th scope="col">ConStatus</th>
+          <th scope="col">Painting</th>
+          <th scope="col">PaintDate</th>
+          <th scope="col">PaintStatus</th>
+          <th scope="col">Mechanical</th>
+          <th scope="col">MecDate</th>
+          <th scope="col">MecStatus</th>
+          <th scope="col">Electrical</th>
+          <th scope="col">ElecDate</th>
+          <th scope="col">ElecStatus</th>
+          <th scope="col">Upholstery</th>
+          <th scope="col">UpDate</th>
+          <th scope="col">UpStatus</th>
+          <th scope="col">Trimmer</th>
+          <th scope="col">TrimDate</th>
+          <th scope="col">TrimStatus</th>
+          <th scope="col">Dashboard</th>
+          <th scope="col">DashDate</th>
+          <th scope="col">DashStatus</th>
+          <th scope="col">Detailing</th>
+          <th scope="col">DetDate</th>
+          <th scope="col">DetStatus</th>
+          <th scope="col">QC</th>
+          <th scope="col">QcDate</th>
+          <th scope="col">QcStatus</th>
+          <th scope="col">SoldTo</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let entry of entryTable
+              | paginate: { itemsPerPage: tableSize, currentPage: page }
+          "
+        >
+          <td>{{ entry._id }}</td>
+          <td>{{ entry.chassisNum }}</td>
+          <td>{{ entry.containerNum }}</td>
+          <td>{{ entry.conversion }}</td>
+          <td>{{ (entry.conDate | slice:0:10) }}</td>
+          <td>{{ entry.con_stat }}</td>
+          <td>{{ entry.painting }}</td>
+          <td>{{ entry.paint_started | slice:0:10 }}</td>
+          <td>{{ entry.paint_stat }}</td>
+          <td>{{ entry.mechanical }}</td>
+          <td>{{ entry.mec_started | slice:0:10 }}</td>
+          <td>{{ entry.mec_stat }}</td>
+          <td>{{ entry.electrical }}</td>
+          <td>{{ entry.elec_started | slice:0:10 }}</td>
+          <td>{{ entry.elec_stat }}</td>
+          <td>{{ entry.upholstery }}</td>
+          <td>{{ entry.up_started | slice:0:10 }}</td>
+          <td>{{ entry.up_stat }}</td>
+          <td>{{ entry.trimmer }}</td>
+          <td>{{ entry.trim_started | slice:0:10 }}</td>
+          <td>{{ entry.trim_stat }}</td>
+          <td>{{ entry.dashboard }}</td>
+          <td>{{ entry.dash_started | slice:0:10 }}</td>
+          <td>{{ entry.dash_stat }}</td>
+          <td>{{ entry.detailing }}</td>
+          <td>{{ entry.det_started | slice:0:10 }}</td>
+          <td>{{ entry.det_stat }}</td>
+          <td>{{ entry.qc }}</td>
+          <td>{{ entry.qc_started | slice:0:10 }}</td>
+          <td>{{ entry.qc_stat }}</td>
+          <td>{{ entry.sold_to }}</td>
+          <td>
+            <a
+              type="button"
+              (click)="open(content, entry)"
+              class="btn btn-secondary entry-edit"
+              title="Update entry"
+              data-toggle="tooltip"
+              ><i-feather name="edit"></i-feather
+            ></a>
+          </td>
+          <td>
+            <a
+              tyope="button"
+              (click)="openDel(del, entry)"
+              class="btn btn-warning entry-delete"
+              data-toggle="tooltip"
+              ><i-feather name="x-octagon"></i-feather
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div> -->
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <div class="row" id="print-area">
     <div class="col-sm-4 entry-pad" *ngFor="let entry of entryTable | paginate : {
       itemsPerPage: tableSize,
       currentPage: page,
@@ -107,7 +226,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="d-flex justify-content-center" [class.entry-pagi]="pagicont" >
     <pagination-controls
       previousLabel="Prev"
@@ -362,7 +481,7 @@
 <section>
   <ng-template #del let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Delete Registration</h4>
+      <h4 class="modal-title" id="modal-basic-title">Delete Production</h4>
     </div>
     <div class="modal-body">
       <form>

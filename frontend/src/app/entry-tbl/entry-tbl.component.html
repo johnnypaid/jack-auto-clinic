@@ -33,11 +33,11 @@
       </form>
     </div>
 
-    <div *ngIf="showProdEntry" class="container float-left">
+    <div *ngIf="showProdEntry" class="container text-center data">
       <p class="">Total data: {{entryTable.length}}</p>
       <p class="">In production: [{{chasisProd.length}}]</p>
-      <ul>
-        <li *ngFor="let data of chasisProd">
+      <ul class="list-inline">
+        <li class="list-inline-item" *ngFor="let data of chasisProd">
           {{ data.chassisNum }}
         </li>
       </ul>

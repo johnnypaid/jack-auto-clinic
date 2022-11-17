@@ -163,16 +163,22 @@ td {
 }
 
 .listProd {
-  position: relative !important;
-  float: left;
   margin-right: 5px;
 }
 
-// li {
-//   list-style-type: none;
-//   padding-right: 5px;
-//   float: left;
-// }
+li {
+  list-style-type: none;
+  padding-right: 5px;
+}
+
+p {
+  margin-bottom: 0rem !important;
+}
+
+.data {
+  position: relative;
+  float: left !important;
+}
 
 @media (max-width: 320px) {
   .entry {

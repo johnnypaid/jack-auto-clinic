@@ -26,6 +26,10 @@
       position: inherit;
       float: right !important;
     }
+    &-total {
+      position: relative;
+      float: left !important;
+    }
 }
 
 label {

@@ -2,218 +2,347 @@
   <h3>Registration Data</h3>
   <div class="container entry-search text-right">
     <form [formGroup]="searchForm">
-      <div class=" ">
+      <div class="">
         <div class="input-group entry-date" *ngIf="inputKey === false">
-          <input class="form-control" placeholder="yyyy-mm-dd"
-                 name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="date">
+          <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            ngbDatepicker
+            #d="ngbDatepicker"
+            formControlName="date"
+          />
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            <button
+              class="btn btn-outline-secondary calendar"
+              (click)="d.toggle()"
+              type="button"
+            ></button>
           </div>
         </div>
-        <input *ngIf="inputKey === true" class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
-        <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option" (change)="search()">
+        <input
+          *ngIf="inputKey === true"
+          class=""
+          type="text"
+          id=""
+          class="entry-search-input"
+          placeholder="Keyword"
+          formControlName="searchInput"
+        />
+        <select
+          class="d-inline browser-default entry-select"
+          formControlName="searhOption"
+          placeholder="Option"
+          (change)="search()"
+        >
           <option [selected]="isSelected">Default</option>
           <option value="1">Engine</option>
           <option value="2">Chassis</option>
           <option value="3">Body Type</option>
           <option value="4">Date</option>
         </select>
-        <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
+        <button
+          type="button"
+          class="btn btn-outline-dark entry-search-btn"
+          (click)="search()"
+        >
+          Search
+        </button>
       </div>
     </form>
   </div>
 
-  <ng-template [ngIf]="mainTable === true">
-    <div class="row">
-      <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
-        <div class="card shadow">
-          <div class="entry-chassis">
-            <p class="lead"><small>Engine #</small></p>
-            <h5>{{ entry.engineNum }}</h5>
-          </div>
-          <div class="card-body">
-            <p class="card-text"><small class="text-muted">Chasis #</small></p>
-            <p class="entry-fields">{{entry.chassisNum}}</p>
-            <p class="card-text"><small class="text-muted">Body Type</small></p>
-            <p class="entry-fields">{{entry.bodyType}}</p>
-            <p class="card-text"><small class="text-muted">Name</small></p>
-            <p class="entry-fields">{{entry.name}}</p>
-            <p class="card-text"><small class="text-muted">Plate #</small></p>
-            <p class="entry-fields">{{entry.plateNum}}</p>
-            <p class="card-text"><small class="text-muted">MV #</small></p>
-            <p class="entry-fields">{{entry.mvNum}}</p>
-            <p class="card-text"><small class="text-muted">Color</small></p>
-            <p class="entry-fields">{{entry.color}}</p>
-            <p class="card-text"><small class="text-muted">Date</small></p>
-            <p class="entry-fields">{{entry.date | slice:0:10}}</p>
-            <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
-            <hr>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center">
-      <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-    </div>
-  </ng-template>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Date</th>
+          <th scope="col">Engine</th>
+          <th scope="col">Chassis</th>
+          <th scope="col">BodyType</th>
+          <th scope="col">Name</th>
+          <th scope="col">PlateNum</th>
+          <th scope="col">MvNum</th>
+          <th scope="col">Color</th>
+          <th scope="col">Liaison</th>
+          <th scope="col">Area</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let entry of entryTable
+              | paginate: { itemsPerPage: tableSize, currentPage: page }
+          "
+        >
+          <td>{{ entry._id }}</td>
+          <td>{{ entry.date | slice: 0:10 }}</td>
+          <td>{{ entry.engineNum }}</td>
+          <td>{{ entry.chassisNum }}</td>
+          <td>{{ entry.bodyType }}</td>
+          <td>{{ entry.name }}</td>
+          <td>{{ entry.plateNum }}</td>
+          <td>{{ entry.mvNum }}</td>
+          <td>{{ entry.color }}</td>
+          <td>{{ entry.liaison }}</td>
+          <td>{{ entry.area }}</td>
 
-  <ng-template [ngIf]="searchTable === true">
-    <div class="row">
-      <div class="col-md-4 entry-pad" *ngFor="let entry of entryTable | paginate: { itemsPerPage: tableSize, currentPage: page }">
-        <div class="card shadow">
-          <div class="entry-chassis">
-            <p class="lead"><small>Engine #</small></p>
-            <h5>{{ entry.engineNum }}</h5>
-          </div>
-          <div class="card-body">
-            <p class="card-text"><small class="text-muted">Chasis #</small></p>
-            <p class="entry-fields">{{entry.chassisNum}}</p>
-            <p class="card-text"><small class="text-muted">Body Type</small></p>
-            <p class="entry-fields">{{entry.bodyType}}</p>
-            <p class="card-text"><small class="text-muted">Name</small></p>
-            <p class="entry-fields">{{entry.name}}</p>
-            <p class="card-text"><small class="text-muted">Plate #</small></p>
-            <p class="entry-fields">{{entry.plateNum}}</p>
-            <p class="card-text"><small class="text-muted">MV #</small></p>
-            <p class="entry-fields">{{entry.mvNum}}</p>
-            <p class="card-text"><small class="text-muted">Color</small></p>
-            <p class="entry-fields">{{entry.color}}</p>
-            <p class="card-text"><small class="text-muted">Date</small></p>
-            <p class="entry-fields">{{entry.date | slice:0:10}}</p>
-            <p class="card-text"><small class="text-muted">{{ entry._id }}</small></p>
-            <hr>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-center" id="entry-pagination">
-      <pagination-controls
-        previousLabel="Prev"
-        nextLabel="Next"
-        (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-    </div>
-  </ng-template>
-</section>
+          <td>
+            <a
+              type="button"
+              (click)="open(content, entry)"
+              class="btn btn-secondary entry-edit"
+              title="Update entry"
+              data-toggle="tooltip"
+              ><i-feather name="edit"></i-feather
+            ></a>
+          </td>
+          <td>
+            <a
+              tyope="button"
+              (click)="openDel(del, entry)"
+              class="btn btn-warning entry-delete"
+              data-toggle="tooltip"
+              ><i-feather name="x-octagon"></i-feather
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
 
-<section>
-  <ng-template #content let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Registration Update</h4>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="entryFormUpdate">
-        <div *ngIf="editSuccess === true ; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock><span class="text-success">{{ editMessage }}</span></ng-template>
+  <section>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Registration Update</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="entryFormUpdate">
+          <div
+            *ngIf="editSuccess === true; then thenBlock; else elseBlock"
+          ></div>
+          <ng-template #thenBlock
+            ><span class="text-success">{{ editMessage }}</span></ng-template
+          >
           <ng-template #elseBlock>
             <div class="form-group">
               <label for="dateOfBirth">Id</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="id" class="form-control entry-form " formControlName="id">
+                <input
+                  class="entry-form"
+                  type="text"
+                  id="id"
+                  class="form-control entry-form"
+                  formControlName="id"
+                />
+              </div>
+              <label for="dateOfBirth">Date</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="container"
+                  class="form-control entry-form"
+                  placeholder=""
+                  formControlName="date"
+                  required
+                />
               </div>
               <label for="dateOfBirth">Chasis Number</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="chassis" class="form-control entry-form" formControlName="chassisNum" required>
+                <input
+                  class="entry-form"
+                  type="text"
+                  id="chassis"
+                  class="form-control entry-form"
+                  formControlName="chassisNum"
+                  required
+                />
               </div>
               <label for="dateOfBirth">Engine Numbers</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="engine" class="form-control entry-form " formControlName="engineNum" required>
+                <input
+                  class="entry-form"
+                  type="text"
+                  id="engine"
+                  class="form-control entry-form"
+                  formControlName="engineNum"
+                  required
+                />
               </div>
               <label for="dateOfBirth">Body Type</label>
               <div class="input-group">
-                <input class="form-control entry-form" list="bodyT" name="body" id="body" formControlName="bodyType" required>
+                <input
+                  class="form-control entry-form"
+                  list="bodyT"
+                  name="body"
+                  id="body"
+                  formControlName="bodyType"
+                  required
+                />
                 <datalist id="bodyT">
-                  <option value="Round">
-                  <option value="Square">
-                  <option value="Big">
+                  <option value="Round"></option>
+                  <option value="Square"></option>
+                  <option value="Big"></option>
                 </datalist>
               </div>
               <label for="dateOfBirth">Name</label>
               <div class="input-group">
-              <input class="entry-form" type="text" id="supplier" class="form-control entry-form" formControlName="name" required>
+                <input
+                  class="entry-form"
+                  type="text"
+                  id="supplier"
+                  class="form-control entry-form"
+                  formControlName="name"
+                  required
+                />
               </div>
               <label for="dateOfBirth">Plate Number</label>
               <div class="input-group">
-                <input class="entry-form" type="text" id="container" class="form-control entry-form" formControlName="plateNum" required>
+                <input
+                  class="entry-form"
+                  type="text"
+                  id="container"
+                  class="form-control entry-form"
+                  formControlName="plateNum"
+                  required
+                />
               </div>
               <label for="dateOfBirth">MV Num</label>
               <div class="input-group">
-                <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="mvNum" required>
+                <input
+                  type="text"
+                  id="container"
+                  class="form-control entry-form"
+                  placeholder=""
+                  formControlName="mvNum"
+                  required
+                />
               </div>
               <label for="dateOfBirth">Color</label>
               <div class="input-group">
-                <input class="form-control entry-form" list="colors" name="color" id="color" formControlName="color" required>
+                <input
+                  class="form-control entry-form"
+                  list="colors"
+                  name="color"
+                  id="color"
+                  formControlName="color"
+                  required
+                />
                 <datalist id="colors">
-                  <option value="White">
-                  <option value="Black">
-                  <option value="Red">
-                  <option value="Blue">
-                  <option value="Grey">
+                  <option value="White"></option>
+                  <option value="Black"></option>
+                  <option value="Red"></option>
+                  <option value="Blue"></option>
+                  <option value="Grey"></option>
                 </datalist>
               </div>
-               <label for="dateOfBirth">Date</label>
+              <label for="liaison">Liaison</label>
               <div class="input-group">
-                <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="date" required>
+                <input
+                  type="text"
+                  id="container"
+                  class="form-control entry-form"
+                  placeholder=""
+                  formControlName="liaison"
+                  required
+                />
+              </div>
+              <label for="area">Area</label>
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="container"
+                  class="form-control entry-form"
+                  placeholder=""
+                  formControlName="area"
+                  required
+                />
               </div>
             </div>
           </ng-template>
-      </form>
-    </div>
+        </form>
+      </div>
 
-    <div class="modal-footer" *ngIf="editSuccess === false">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">Save</button>
-    </div>
-    <div class="modal-footer" *ngIf="editSuccess === true">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
-    </div>
-    <div class="modal-footer">
-
-    </div>
-  </ng-template>
-  <hr>
+      <div class="modal-footer" *ngIf="editSuccess === false">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="modal.close('Save click')"
+        >
+          Cancel
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="onSubmit()">
+          Save
+        </button>
+      </div>
+      <div class="modal-footer" *ngIf="editSuccess === true">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+      </div>
+      <div class="modal-footer"></div>
+    </ng-template>
+    <hr />
+  </section>
+  <section>
+    <ng-template #del let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Registration</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="entryFormUpdate">
+          <div class="modal-body">
+            <div
+              *ngIf="delSuccess === true; then thenBlock; else elseBlock"
+            ></div>
+            <ng-template #thenBlock
+              ><span class="text-success">{{ delMessage }}</span></ng-template
+            >
+            <ng-template #elseBlock>
+              <p>Are you sure you want to delete this data?</p>
+              <p>
+                Engine #: {{ engineNum }}, Chassis #: {{ chassisNum }}, Body
+                Type: {{ bodyType }}
+              </p>
+              <p>
+                All information associated to this entry will be permanently
+                deleted.
+                <span class="text-danger"
+                  >This operation can not be undone.</span
+                >
+              </p>
+            </ng-template>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="modal.close('Save click')"
+        >
+          Cancel
+        </button>
+        <button type="button" class="btn btn-outline-dark" (click)="onDelete()">
+          Delete
+        </button>
+      </div>
+      <div class="modal-footer"></div>
+    </ng-template>
+  </section>
 </section>
-<section>
-  <ng-template #del let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Delete Registration</h4>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="entryFormUpdate">
-        <div class="modal-body">
-          <div *ngIf="delSuccess === true ; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock><span class="text-success">{{ delMessage }}</span></ng-template>
-          <ng-template #elseBlock>
-            <p>Are you sure you want to delete this data?</p>
-            <p>Engine #: {{ engineNum }}, Chassis #: {{ chassisNum }}, Body Type: {{ bodyType }}</p>
-            <p>All information associated to this entry will be permanently deleted.
-            <span class="text-danger">This operation can not be undone.</span>
-            </p>
-          </ng-template>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-dark" (click)="onDelete()">Delete</button>
-    </div>
-    <div class="modal-footer">
-
-    </div>
-  </ng-template>
-
-</section>
-
-

@@ -102,7 +102,7 @@ hr {
   }
 }
 
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
   .entry-chassis {
     max-height: 62px !important;
   }
@@ -119,9 +119,13 @@ hr {
   .entry-fields {
     margin-top: -4%;
   }
-} 
+}
 
-@media (max-width: 425px) { 
+.remarks {
+  padding: 0px;
+}
+
+@media (max-width: 425px) {
   .entry {
     &-chassis {
       max-height: 52px;
@@ -144,7 +148,7 @@ hr {
   }
 }
 
-@media (max-width: 375px) { 
+@media (max-width: 375px) {
   .entry {
     &-chassis {
       max-height: 60px;
@@ -167,7 +171,7 @@ hr {
   }
 }
 
-@media (max-width: 320px) { 
+@media (max-width: 320px) {
   .entry {
     &-search {
       margin-left: -19px;

@@ -69,6 +69,7 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
     qc_started: ['', Validators.required],
     qc_stat: ['', Validators.required],
     sold_to: ['', Validators.required],
+    remarks: [''],
   });
 
   searchForm = this.formBuilder.group({
@@ -220,6 +221,19 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
           this.prodFormUpdate.value.qc_started
         );
       }
+
+      const index = this.entryTable.findIndex((el: any) => {
+        return el.chassisNum === this.prodFormUpdate.value.chassisNum;
+      });
+
+      console.log(index)
+
+      if (index === -1) {
+      } else {
+        this.prodFormUpdate.value.containerNum = this.entryTable[index].containerNum;
+      }
+
+      console.log(this.prodFormUpdate.value)
 
       this.prodTbl
         .newEntryUpdate(this.prodFormUpdate.value, this.passport)
@@ -386,6 +400,8 @@ export class ProductionTblComponent implements OnInit, OnDestroy {
       this.prodFormUpdate.controls.qc_started.setValue('');
     }
     this.prodFormUpdate.controls.qc_stat.setValue(entry.qc_stat);
+
+    this.prodFormUpdate.controls.remarks.setValue(entry.remarks);
   }
 
   onDelete() {

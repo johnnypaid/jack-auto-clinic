@@ -40,7 +40,9 @@ export class RegisterTblComponent implements OnInit, OnDestroy {
     mvNum: ['', Validators.required],
     plateNum: ['', Validators.required],
     color: ['', Validators.required],
-    date: ['', Validators.required]
+    date: ['', Validators.required],
+    liaison: ['', Validators.required],
+    area: ['', Validators.required],
   });
 
   searchForm = this.formBuilder.group({
@@ -125,6 +127,8 @@ export class RegisterTblComponent implements OnInit, OnDestroy {
     this.entryFormUpdate.controls.color.setValue(entry.color);
     this.entryFormUpdate.controls.mvNum.setValue(entry.mvNum);
     this.entryFormUpdate.controls.name.setValue(entry.name);
+    this.entryFormUpdate.controls.liaison.setValue(entry.liaison);
+    this.entryFormUpdate.controls.area.setValue(entry.area);
     this.entryFormUpdate.controls.date.setValue(entry.date.slice(0, 10));
   }
 

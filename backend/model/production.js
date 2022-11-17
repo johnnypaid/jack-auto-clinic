@@ -15,8 +15,7 @@ const productionSchema = new mongoose.Schema({
     },
     containerNum: {
         type: String,
-        requried: true,
-        unique: true
+        requried: true
     },
     conversion: {
         type: String
@@ -101,6 +100,9 @@ const productionSchema = new mongoose.Schema({
     },
     sold_to: { 
         type: String
+    },
+    remarks: { 
+        type: String
     }
 });
 
@@ -139,7 +141,8 @@ function validateEntry(entry) {
         qc: Joi.string().allow(null, '').optional(),
         qc_started: Joi.string().allow(null, '').optional(),
         qc_stat: Joi.string().allow(null, '').optional(),
-        sold_to: Joi.string().allow(null, '').optional()
+        sold_to: Joi.string().allow(null, '').optional(),
+        remarks: Joi.string().allow(null, '').optional()
     });
 
    return schema.validate(entry);

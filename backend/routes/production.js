@@ -51,10 +51,13 @@ router.get("/:option/:key", async (req, res) => {
   var field = req.params.option;
   var key = req.params.key;
   let result = {};
+  let count = 0;
 
   try {
     if (field === "containerNum") {
       result = await AppProd.find({ containerNum: key });
+      count = await AppProd.countDocuments({ containerNum: key });
+      console.log(count);
     }
     if (field === "chassisNum") {
       result = await AppProd.find({ chassisNum: key });
@@ -111,6 +114,7 @@ router.post("/", async (req, res) => {
         "qc_started",
         "qc_stat",
         "sold_to",
+        "remarks",
       ])
     );
 
@@ -160,6 +164,7 @@ router.put("/:id", async (req, res) => {
         qc_started: req.body.qc_started,
         qc_stat: req.body.qc_stat,
         sold_to: req.body.sold_to,
+        remarks: req.body.remarks,
       },
       { new: true }
     );

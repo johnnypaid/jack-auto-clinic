@@ -11,11 +11,11 @@
     float: left;
     margin-left: 66.8%;
   }
-  &-delete :hover{
+  &-delete :hover {
     color: #343a40;
     cursor: pointer;
   }
-  &-edit :hover{
+  &-edit :hover {
     color: #343a40;
     cursor: pointer;
   }
@@ -42,8 +42,8 @@
   &-select {
     min-width: 10% !important;
     height: 37px !important;
-    margin-left: .5%;
-    margin-right: .5%;
+    margin-left: 0.5%;
+    margin-right: 0.5%;
     border-radius: 0px !important;
     border-color: #343a40 !important;
   }
@@ -56,7 +56,7 @@
     margin-bottom: 5%;
     color: #d8652b;
   }
-   &-chassis p {
+  &-chassis p {
     color: #ffffff;
     font-size: 1em;
   }
@@ -103,7 +103,7 @@ hr {
   .entry-chassis {
     max-height: 48px;
   }
-  .entry-chassis h5{
+  .entry-chassis h5 {
     margin-top: -4%;
   }
   .entry-fields {
@@ -157,10 +157,22 @@ hr {
   }
 }
 
-.table th, td {
+.table th,
+td {
   font-size: 13px;
 }
 
+.listProd {
+  position: relative !important;
+  float: left;
+  margin-right: 5px;
+}
+
+// li {
+//   list-style-type: none;
+//   padding-right: 5px;
+//   float: left;
+// }
 
 @media (max-width: 320px) {
   .entry {
@@ -173,7 +185,7 @@ hr {
     &-select {
       margin-top: 1%;
       width: 242px;
-      margin-left: -.5px;
+      margin-left: -0.5px;
     }
     &-search-btn {
       width: 242px;

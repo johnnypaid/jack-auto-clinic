@@ -23,6 +23,8 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     mvNum: ['', Validators.required],
     bodyType: ['', Validators.required],
     color: ['', Validators.required],
+    liaison: ['', Validators.required],
+    area: ['', Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder, private regService: RegistrationService, private message: PromptMessageService) { }

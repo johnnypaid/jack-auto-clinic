@@ -49,6 +49,7 @@ export class ProductionComponent implements OnInit, OnDestroy {
     qc_started: [''],
     qc_stat: [''],
     sold_to: [''],
+    remarks: [''],
   });
 
   constructor(
@@ -79,8 +80,16 @@ export class ProductionComponent implements OnInit, OnDestroy {
         return el.chassisNum === this.productionForm.value.chassisNum;
       });
 
-      console.log(this.chasData[index])
-      this.productionForm.value.containerNum = this.chasData[index].containerNum;
+      console.log(index)
+
+      if (index === -1) {
+        this.error = 'Container number is required';
+        this.showErr = true;
+      } else {
+        this.showErr = false;
+        this.productionForm.value.containerNum = this.chasData[index].containerNum;
+      }
+
 
       try {
         if (this.productionForm.value.conDate !== '') {

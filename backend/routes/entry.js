@@ -16,7 +16,7 @@ router.get("/:option/:key", async (req, res) => {
   const field = req.params.option;
   const key = req.params.key;
   let result = {};
-  let count = 0;
+  let prod = [];
 
   try {
     if (field === "engineNum") {
@@ -29,6 +29,8 @@ router.get("/:option/:key", async (req, res) => {
 
     if (field === "containerNum") {
       result = await AppEntry.find({ containerNum: key });
+      prod = await AppProd.find({ containerNum: key });
+      
     }
 
     if (field === "date") {
@@ -39,7 +41,7 @@ router.get("/:option/:key", async (req, res) => {
       result = await AppEntry.find({ dateArrived: { $eq: new Date(key) } });
     }
 
-    res.status(200).send(result);
+    res.status(200).json({data: result, results: prod});
   } catch (error) {
     res.send(error);
   }

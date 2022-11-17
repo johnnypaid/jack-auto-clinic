@@ -40,6 +40,14 @@ const registerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    liaison: { 
+        type: String,
+        required: true
+    },
+    area: { 
+        type: String,
+        required: true
+    },
 });
 
 const AppRegister = mongoose.model('AppRegister', registerSchema);
@@ -56,6 +64,8 @@ function validateEntry(entry) {
         mvNum: Joi.string().required(),
         name: Joi.string().required(),
         plateNum: Joi.string().required(),
+        liaison: Joi.string().required(),
+        area: Joi.string().required(),
     });
 
    return schema.validate(entry);

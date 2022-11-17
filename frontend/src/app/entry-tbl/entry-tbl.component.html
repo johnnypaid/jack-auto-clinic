@@ -18,20 +18,38 @@
             placeholder="Option"
           >
             <option></option>
-            <option value=2>Chassis</option>
-            <option value=3>Container #</option>
+            <option value="2">Chassis</option>
+            <option value="3">Container #</option>
           </select>
           <button
             type="button"
             class="btn btn-outline-dark entry-search-btn"
             (click)="search()"
-            style="margin-top: 0px;"
+            style="margin-top: 0px"
           >
             Search
           </button>
         </div>
       </form>
     </div>
+
+    <div *ngIf="showProdEntry" class="container float-left">
+      <p class="">Total data: {{entryTable.length}}</p>
+      <p class="">In production: [{{chasisProd.length}}]</p>
+      <ul>
+        <li *ngFor="let data of chasisProd">
+          {{ data.chassisNum }}
+        </li>
+      </ul>
+    </div>
+    <!-- <div *ngIf="showProdEntry" class="container">
+      <p class="listProd">Not in production: [{{arrIntersect.length}}]</p>
+      <ul>
+        <li *ngFor="let data of arrIntersect">
+          {{ data.chassisNum }}
+        </li>
+      </ul>
+    </div> -->
 
     <div class="table-responsive">
       <table class="table text-center table-hover">
@@ -72,7 +90,7 @@
             <td>{{ entry.make }}</td>
             <td>{{ entry.supplier }}</td>
             <td>{{ entry.containerNum }}</td>
-            <td>{{ entry.dateArrived | slice:0:10}}</td>
+            <td>{{ entry.dateArrived | slice: 0:10 }}</td>
             <td>{{ entry.model }}</td>
             <td>{{ entry.valve }}</td>
             <td>{{ entry.body }}</td>
@@ -189,16 +207,32 @@
                 <option value="mazda">Mitsubishi</option>
               </select>
               <label class="entry-label" for="chassis">Supplier</label>
-              <input class="entry-form" type="text" id="supplier" class="form-control entry-form" placeholder="Supplier" formControlName="supplier" required>
+              <input
+                class="entry-form"
+                type="text"
+                id="supplier"
+                class="form-control entry-form"
+                placeholder="Supplier"
+                formControlName="supplier"
+                required
+              />
               <label class="entry-label" for="model">Model</label>
-              <select class="custom-select" name="model" formControlName="model">
+              <select
+                class="custom-select"
+                name="model"
+                formControlName="model"
+              >
                 <option selected></option>
                 <option value="ordinary">Ordinary</option>
                 <option value="Latest">Latest</option>
                 <option value="Scrum">Scrum</option>
               </select>
               <label class="entry-label" for="valve">Valve</label>
-              <select class="custom-select" name="valve" formControlName="valve">
+              <select
+                class="custom-select"
+                name="valve"
+                formControlName="valve"
+              >
                 <option selected></option>
                 <option value="6v">6v</option>
                 <option value="8v">8v</option>
@@ -210,21 +244,33 @@
                 <option selected></option>
                 <option value="pup dropside">Pickup Dropside</option>
                 <option value="pup w/ canopy">Pickup w/ Canopy</option>
-                <option value="pup w/ double canopy">Pickup w/ Double Canopy</option>
+                <option value="pup w/ double canopy">
+                  Pickup w/ Double Canopy
+                </option>
                 <option value="mini dump">Mini Dump</option>
                 <option value="van">Van</option>
                 <option value="landy">Landy</option>
                 <option value="passenger">Passenger</option>
-                <option value="t8 van 6 or 8 seaters">T8 Van 6 or 8 Seaters</option>
+                <option value="t8 van 6 or 8 seaters">
+                  T8 Van 6 or 8 Seaters
+                </option>
               </select>
               <label class="entry-label" for="driveType">Transmission</label>
-              <select class="custom-select" name="driveType" formControlName="driveType">
+              <select
+                class="custom-select"
+                name="driveType"
+                formControlName="driveType"
+              >
                 <option selected></option>
                 <option value="4wd">4x4</option>
                 <option value="2wd">2x2</option>
               </select>
               <label class="entry-label" for="speed">Speed</label>
-              <select class="custom-select" name="speed" formControlName="speed">
+              <select
+                class="custom-select"
+                name="speed"
+                formControlName="speed"
+              >
                 <option selected></option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -233,7 +279,11 @@
                 <option value="3/at">3/At</option>
               </select>
               <label class="entry-label" for="bodyEye">Body Eye</label>
-              <select class="custom-select" name="bodyEye" formControlName="bodyEye">
+              <select
+                class="custom-select"
+                name="bodyEye"
+                formControlName="bodyEye"
+              >
                 <option selected></option>
                 <option value="big">Big</option>
                 <option value="cat">Cat</option>
@@ -241,7 +291,15 @@
                 <option value="square">Square</option>
               </select>
               <label class="entry-label" for="color">Color</label>
-              <input class="entry-form" type="text" id="color" class="form-control entry-form" placeholder="Color" formControlName="color" required>
+              <input
+                class="entry-form"
+                type="text"
+                id="color"
+                class="form-control entry-form"
+                placeholder="Color"
+                formControlName="color"
+                required
+              />
               <label class="entry-label" for="yard">Yard</label>
               <select class="custom-select" name="yard" formControlName="yard">
                 <option selected></option>
@@ -294,17 +352,43 @@
                 </div>
               </div>
               <label class="entry-label" for="reconCrd">Recon/Crd</label>
-              <select class="custom-select" name="reconCrd" formControlName="reconCrd">
+              <select
+                class="custom-select"
+                name="reconCrd"
+                formControlName="reconCrd"
+              >
                 <option selected></option>
                 <option value="recon">Recon</option>
                 <option value="crd">Crd</option>
               </select>
               <label class="entry-label" for="company">Company</label>
-              <input class="entry-form" type="text" id="company" class="form-control entry-form" placeholder="company" formControlName="company">
+              <input
+                class="entry-form"
+                type="text"
+                id="company"
+                class="form-control entry-form"
+                placeholder="company"
+                formControlName="company"
+              />
               <label class="entry-label" for="chassis">Container Number</label>
-              <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="Container #" formControlName="containerNum" required>
+              <input
+                class="entry-form"
+                type="text"
+                id="container"
+                class="form-control entry-form"
+                placeholder="Container #"
+                formControlName="containerNum"
+                required
+              />
               <label class="entry-label" for="chassis">Remarks</label>
-              <textarea class="entry-form" type="text" id="desc" class="form-control entry-form" placeholder="Unit Description" formControlName="unitDesc"></textarea>
+              <textarea
+                class="entry-form"
+                type="text"
+                id="desc"
+                class="form-control entry-form"
+                placeholder="Unit Description"
+                formControlName="unitDesc"
+              ></textarea>
             </div>
           </ng-template>
         </form>

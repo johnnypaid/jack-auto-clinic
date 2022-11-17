@@ -19,6 +19,9 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   entryTable: any[] = [];
   closeResult = '';
   model: NgbDateStruct | undefined;
+  chasisProd: any[] = [];
+  showProdEntry = false;
+  arrIntersect: any;
 
   delSuccess = false;
   editSuccess = false;
@@ -74,7 +77,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.passport = localStorage.getItem('token');
-    console.log(localStorage.getItem('token'))
+    console.log(localStorage.getItem('token'));
 
     this.entryTbl.getAllEntry(this.passport).subscribe((resdata) => {
       this.entryTblData = resdata.body;
@@ -245,10 +248,12 @@ export class EntryTblComponent implements OnInit, OnDestroy {
           };
           this.searchEntry(option);
           this.resetSearchForm();
+          this.showProdEntry = true;
           break;
         }
         default: {
           localStorage.removeItem('searchValue');
+          this.showProdEntry = false;
           this.ngOnInit();
           break;
         }
@@ -269,10 +274,19 @@ export class EntryTblComponent implements OnInit, OnDestroy {
       console.log(resdata);
       this.entryTable = [];
       this.entryTblData = resdata.body;
-      this.entryTable = this.entryTblData;
+      this.entryTable = this.entryTblData.data;
+      this.chasisProd = this.entryTblData.results;
+
+      this.entryTable.length > 0 ? this.filterArrayProd() : '';
+
       this.entryTbl.setTable(resdata.body);
       this.onTableDataChange(event);
     });
+  }
+
+  filterArrayProd() {
+    console.log(this.entryTable);
+    console.log(this.chasisProd);
   }
 
   onTableDataChange(event: any) {

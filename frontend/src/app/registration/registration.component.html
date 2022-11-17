@@ -1,49 +1,119 @@
 <section>
   <div class="container entry-user">
     <h3>Registration</h3>
-    <form class="form-entry" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-        <label class="entry-label" for="chassis">Date of Transaction</label>
-        <div class="input-group entry-date">
-          <input class="form-control reg-date" placeholder="yyyy-mm-dd"
-                 name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="date">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-          </div>
+    <form
+      class="form-entry"
+      [formGroup]="registrationForm"
+      (ngSubmit)="onSubmit()"
+    >
+      <label class="entry-label" for="chassis">Date of Transaction</label>
+      <div class="input-group entry-date">
+        <input
+          class="form-control reg-date"
+          placeholder="yyyy-mm-dd"
+          name="dp"
+          ngbDatepicker
+          #d="ngbDatepicker"
+          formControlName="date"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary calendar"
+            (click)="d.toggle()"
+            type="button"
+          ></button>
         </div>
-        <label class="entry-label" for="chassis">Name</label>
-        <input type="text" id="engine" class="form-control entry-form " placeholder="" formControlName="name" required>
-        <label class="entry-label" for="chassis">Chasis Number</label>
-        <input type="text" id="body-code" class="form-control entry-form" placeholder="" formControlName="chassisNum" required>
-        <label class="entry-label" for="chassis">Engine Number</label>
-        <input type="text" id="supplier" class="form-control entry-form" placeholder="" formControlName="engineNum" required>
-        <label class="entry-label" for="chassis">Plate Number</label>
-        <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="plateNum" required>
-        <label class="entry-label" for="chassis">MV File</label>
-        <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="mvNum" required>
-        <label class="entry-label" for="chassis">Body Type</label>
-        <!-- <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="bodyType" required> -->
-        <input class="form-control entry-form" list="bodyT" name="body" id="body" formControlName="bodyType" required>
-          <datalist id="bodyT">
-            <option value="Round">
-            <option value="Square">
-            <option value="Big">
-          </datalist>
-        <label class="entry-label" for="chassis">Color</label>
-        <!-- <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="" formControlName="color" required> -->
-        <input class="form-control entry-form" list="colors" name="color" id="color" formControlName="color" required>
-          <datalist id="colors">
-            <option value="White">
-            <option value="Black">
-            <option value="Red">
-            <option value="Blue">
-            <option value="Grey">
-          </datalist>
-        <div class="reg-error" *ngIf="showErr">
-          {{ error }}
-        </div>
-        <div>
-          <button class="btn btn-secondary reg-btn" type="submit">Submit</button>
-        </div>
-      </form>
+      </div>
+      <label class="entry-label" for="chassis">Name</label>
+      <input
+        type="text"
+        id="engine"
+        class="form-control entry-form"
+        placeholder=""
+        formControlName="name"
+        required
+      />
+      <label class="entry-label" for="chassis">Chasis Number</label>
+      <input
+        type="text"
+        id="body-code"
+        class="form-control entry-form"
+        placeholder=""
+        formControlName="chassisNum"
+        required
+      />
+      <label class="entry-label" for="chassis">Engine Number</label>
+      <input
+        type="text"
+        id="supplier"
+        class="form-control entry-form"
+        placeholder=""
+        formControlName="engineNum"
+        required
+      />
+      <label class="entry-label" for="chassis">Plate Number</label>
+      <input
+        type="text"
+        id="container"
+        class="form-control entry-form"
+        placeholder=""
+        formControlName="plateNum"
+        required
+      />
+      <label class="entry-label" for="chassis">MV File</label>
+      <input
+        type="text"
+        id="container"
+        class="form-control entry-form"
+        placeholder=""
+        formControlName="mvNum"
+        required
+      />
+      <label class="entry-label" for="chassis">Body Type</label>
+      <!-- <input type="text" id="container" class="form-control entry-form" placeholder="" formControlName="bodyType" required> -->
+      <input
+        class="form-control entry-form"
+        list="bodyT"
+        name="body"
+        id="body"
+        formControlName="bodyType"
+        required
+      />
+      <datalist id="bodyT">
+        <option value="Round"></option>
+        <option value="Square"></option>
+        <option value="Big"></option>
+      </datalist>
+
+      <label class="entry-label" for="chassis">Color</label>
+      <!-- <input class="entry-form" type="text" id="container" class="form-control entry-form" placeholder="" formControlName="color" required> -->
+      <input
+        class="form-control entry-form"
+        list="colors"
+        name="color"
+        id="color"
+        formControlName="color"
+        required
+      />
+      <datalist id="colors">
+        <option value="White"></option>
+        <option value="Black"></option>
+        <option value="Red"></option>
+        <option value="Blue"></option>
+        <option value="Grey"></option>
+      </datalist>
+
+      <label class="entry-label" for="liaison">Liaison</label>
+      <input type="text" id="liaison" class="form-control entry-form" placeholder="" formControlName="liaison" required>
+      <label class="entry-label" for="area">Liaison Area</label>
+      <input type="text" id="area" class="form-control entry-form" placeholder="" formControlName="area" required>
+
+      <div class="reg-error" *ngIf="showErr">
+        {{ error }}
+      </div>
+      <div>
+        <button class="btn btn-secondary reg-btn" type="submit">Submit</button>
+      </div>
+    </form>
   </div>
 </section>

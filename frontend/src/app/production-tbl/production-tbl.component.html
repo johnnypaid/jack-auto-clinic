@@ -3,14 +3,31 @@
 
   <div class="container entry-search text-right">
     <form [formGroup]="searchForm">
-      <div class=" ">
-        <input class="" type="text" id="" class="entry-search-input" placeholder="Keyword" formControlName="searchInput">
-        <select class="d-inline browser-default entry-select" formControlName="searhOption" placeholder="Option">
+      <div class="">
+        <input
+          class=""
+          type="text"
+          id=""
+          class="entry-search-input"
+          placeholder="Keyword"
+          formControlName="searchInput"
+        />
+        <select
+          class="d-inline browser-default entry-select"
+          formControlName="searhOption"
+          placeholder="Option"
+        >
           <option></option>
-          <option value=2>Chassis</option>
-          <option value=3>Container #</option>
+          <option value="2">Chassis</option>
+          <option value="3">Container #</option>
         </select>
-        <button type="button" class="btn btn-outline-dark entry-search-btn" (click)="search()">Search</button>
+        <button
+          type="button"
+          class="btn btn-outline-dark entry-search-btn"
+          (click)="search()"
+        >
+          Search
+        </button>
       </div>
     </form>
   </div>
@@ -50,6 +67,7 @@
           <th scope="col">QcDate</th>
           <th scope="col">QcStatus</th>
           <th scope="col">SoldTo</th>
+          <th scope="col">Remarks</th>
           <th scope="col">Edit</th>
           <th scope="col">Delete</th>
         </tr>
@@ -65,33 +83,34 @@
           <td>{{ entry.chassisNum }}</td>
           <td>{{ entry.containerNum }}</td>
           <td>{{ entry.conversion }}</td>
-          <td>{{ (entry.conDate | slice:0:10) }}</td>
+          <td>{{ entry.conDate | slice: 0:10 }}</td>
           <td>{{ entry.con_stat }}</td>
           <td>{{ entry.painting }}</td>
-          <td>{{ entry.paint_started | slice:0:10 }}</td>
+          <td>{{ entry.paint_started | slice: 0:10 }}</td>
           <td>{{ entry.paint_stat }}</td>
           <td>{{ entry.mechanical }}</td>
-          <td>{{ entry.mec_started | slice:0:10 }}</td>
+          <td>{{ entry.mec_started | slice: 0:10 }}</td>
           <td>{{ entry.mec_stat }}</td>
           <td>{{ entry.electrical }}</td>
-          <td>{{ entry.elec_started | slice:0:10 }}</td>
+          <td>{{ entry.elec_started | slice: 0:10 }}</td>
           <td>{{ entry.elec_stat }}</td>
           <td>{{ entry.upholstery }}</td>
-          <td>{{ entry.up_started | slice:0:10 }}</td>
+          <td>{{ entry.up_started | slice: 0:10 }}</td>
           <td>{{ entry.up_stat }}</td>
           <td>{{ entry.trimmer }}</td>
-          <td>{{ entry.trim_started | slice:0:10 }}</td>
+          <td>{{ entry.trim_started | slice: 0:10 }}</td>
           <td>{{ entry.trim_stat }}</td>
           <td>{{ entry.dashboard }}</td>
-          <td>{{ entry.dash_started | slice:0:10 }}</td>
+          <td>{{ entry.dash_started | slice: 0:10 }}</td>
           <td>{{ entry.dash_stat }}</td>
           <td>{{ entry.detailing }}</td>
-          <td>{{ entry.det_started | slice:0:10 }}</td>
+          <td>{{ entry.det_started | slice: 0:10 }}</td>
           <td>{{ entry.det_stat }}</td>
           <td>{{ entry.qc }}</td>
-          <td>{{ entry.qc_started | slice:0:10 }}</td>
+          <td>{{ entry.qc_started | slice: 0:10 }}</td>
           <td>{{ entry.qc_stat }}</td>
           <td>{{ entry.sold_to }}</td>
+          <td>{{ entry.remarks }}</td>
           <td>
             <a
               type="button"
@@ -123,119 +142,15 @@
       </pagination-controls>
     </div> -->
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- <div class="row" id="print-area">
-    <div class="col-sm-4 entry-pad" *ngFor="let entry of entryTable | paginate : {
-      itemsPerPage: tableSize,
-      currentPage: page,
-      totalItems: count
-    };
-    let i = index">
-      <div class="card entry-card">
-        <div class="entry-chassis">
-          <p class="lead"><small>Chassis #</small></p>
-          <h5 class="card-title text-center">{{ entry.chassisNum }}</h5>
-        </div>
-        <div class="card-body">
-          <p>
-            <button class="btn btn-secondary shadow" type="button" data-toggle="collapse" [attr.data-target]="'#collapseExample' + i" aria-expanded="false" aria-controls="collapseExample" (click)="showButton()">
-              {{btnText}}
-            </button>
-          </p>
-          <div class="collapse" [attr.id]="'collapseExample' + i">
-            <div class="card card-body">
-              <div class="card prod-card">
-                <div class="card-body shadow-lg">
-                  <p class="card-text"><small class="text-muted">Conversion</small></p>
-                  <p class="entry-fields">{{ entry.conversion || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Conversion Date</small></p>
-                  <p class="entry-fields">{{ (entry.conDate | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Conversion Status</small></p>
-                  <p class="entry-fields">{{ entry.con_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Painting</small></p>
-                  <p class="entry-fields">{{ entry.painting || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Painting Date</small></p>
-                  <p class="entry-fields" >{{ (entry.paint_started | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Painting Status</small></p>
-                  <p class="entry-fields">{{ entry.paint_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Mechanical</small></p>
-                  <p class="entry-fields">{{ entry.mechanical || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Mechanical Date</small></p>
-                  <p class="entry-fields">{{ (entry.mec_started | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Mechanical Status</small></p>
-                  <p class="entry-fields">{{ entry.mec_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Electrical</small></p>
-                  <p class="entry-fields">{{ entry.electrical || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Electrical Date</small></p>
-                  <p class="entry-fields">{{ (entry.elec_started | slice:0:10) || 'none' }}</p>
-                  <p class="card-text"><small class="text-muted">Electrical Status</small></p>
-                  <p class="entry-fields">{{ entry.elec_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Upholstery</small></p>
-                  <p class="entry-fields">{{ entry.upholstery || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Upholstery Date</small></p>
-                  <p class="entry-fields">{{ (entry.up_started | slice:0:10) || 'none' }}</p>
-                  <p class="card-text"><small class="text-muted">Upholstery Status</small></p>
-                  <p class="entry-fields">{{ entry.up_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Trimmer</small></p>
-                  <p class="entry-fields">{{ entry.trimmer || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Trimmer Date</small></p>
-                  <p class="entry-fields">{{ (entry.trim_started | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Trimmer Status</small></p>
-                  <p class="entry-fields">{{ entry.trim_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Dashboard</small></p>
-                  <p class="entry-fields">{{ entry.dashboard || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Dashboard Date</small></p>
-                  <p class="entry-fields">{{ (entry.dash_started | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Dashboard Status</small></p>
-                  <p class="entry-fields">{{ entry.dash_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Detailing</small></p>
-                  <p class="entry-fields">{{ entry.detailing || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Detailing Date</small></p>
-                  <p class="entry-fields">{{ (entry.det_started | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Detailing Status</small></p>
-                  <p class="entry-fields">{{ entry.det_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">QC</small></p>
-                  <p class="entry-fields">{{ entry.qc || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">QC Date</small></p>
-                  <p class="entry-fields">{{ (entry.qc_started | slice:0:10) || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">QC Status</small></p>
-                  <p class="entry-fields">{{ entry.qc_stat || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">Sold to</small></p>
-                  <p class="entry-fields">{{ entry.sold_to || 'none'}}</p>
-                  <p class="card-text"><small class="text-muted">ID</small></p>
-                  <p class="entry-fields"><small class="text-muted">{{ entry._id }}</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer bg-transparent border-success">
-            <a type="button" (click)="open(content, entry)" class="entry-edit" title="Update entry" data-toggle="tooltip"><i-feather name="edit"></i-feather></a>
-            <a tyope="button" (click)="openDel(del, entry)" class="entry-delete"  data-toggle="tooltip"><i-feather name="x-octagon"></i-feather></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="d-flex justify-content-center" [class.entry-pagi]="pagicont" >
+  <div class="d-flex justify-content-center" [class.entry-pagi]="pagicont">
     <pagination-controls
       previousLabel="Prev"
       nextLabel="Next"
-      (pageChange)="onTableDataChange($event)">
+      (pageChange)="onTableDataChange($event)"
+    >
     </pagination-controls>
   </div>
 </section>
-
 
 <section>
   <ng-template #content let-modal>
@@ -244,239 +159,514 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="prodFormUpdate">
-        <div *ngIf="editSuccess === true ; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock><span class="text-success">{{ editMessage }}</span></ng-template>
-          <ng-template #elseBlock>
-            <div class="form-row">
-              <div class="form-group col-md-4">
-                <label for="chassisNum">Chasis Number</label>
-                <input type="text" class="form-control" id="chassisNum" placeholder="" formControlName="chassisNum" readonly>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="chassisNum">Conversion</label>
-                <input type="text" class="form-control" id="conversion" placeholder="" formControlName="conversion" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="conDate">Conversion Date</label>
-                <div class="input-group">
-                  <input class="form-control reg-date" placeholder="yyyy-mm-dd"
-                         name="conDate" ngbDatepicker #d="ngbDatepicker" formControlName="conDate">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
-                  </div>
+        <div *ngIf="editSuccess === true; then thenBlock; else elseBlock"></div>
+        <ng-template #thenBlock
+          ><span class="text-success">{{ editMessage }}</span></ng-template
+        >
+        <ng-template #elseBlock>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="chassisNum">Chasis Number</label>
+              <input
+                type="text"
+                class="form-control"
+                id="chassisNum"
+                placeholder=""
+                formControlName="chassisNum"
+                readonly
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label for="chassisNum">Conversion</label>
+              <input
+                type="text"
+                class="form-control"
+                id="conversion"
+                placeholder=""
+                formControlName="conversion"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="conDate">Conversion Date</label>
+              <div class="input-group">
+                <input
+                  class="form-control reg-date"
+                  placeholder="yyyy-mm-dd"
+                  name="conDate"
+                  ngbDatepicker
+                  #d="ngbDatepicker"
+                  formControlName="conDate"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="d.toggle()"
+                    type="button"
+                  ></button>
                 </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="paint_stat">Conversion Status</label>
-                <input class="form-control" list="con_stats" name="con_stat" id="con_stat" formControlName="con_stat" required>
-                <datalist id="con_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="sold_to">Sold To</label>
-                <input type="text" class="form-control" id="sold_to" placeholder="" formControlName="sold_to" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="painting">Painting</label>
-                <input type="text" class="form-control" id="painting" placeholder="" formControlName="painting" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="paint_started">Painting Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="paint_started" ngbDatepicker #paint="ngbDatepicker" formControlName="paint_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="paint.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="paint_stat">Painting Status</label>
-                <input class="form-control" list="paint_stats" name="paint_stat" id="paint_stat" formControlName="paint_stat" required>
-                <datalist id="paint_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="mechanical">Mechanical</label>
-                <input type="text" class="form-control" id="mechanical" placeholder="" formControlName="mechanical" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="mec_started">Mechanical Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="mec_started" ngbDatepicker #mec_started="ngbDatepicker" formControlName="mec_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="mec_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="mec_stat">Mechanical Status</label>
-                <input class="form-control" list="mec_stats" name="mec_stat" id="mec_stat" formControlName="mec_stat" required>
-                <datalist id="mec_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="electrical">Electrical</label>
-                <input type="text" class="form-control" id="electrical" placeholder="" formControlName="electrical" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="elec_started">Electrical Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="elec_started" ngbDatepicker #elec_started="ngbDatepicker" formControlName="elec_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="elec_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="mec_stat">Electrical Status</label>
-                <input class="form-control" list="elec_stats" name="mec_stat" id="elec_stat" formControlName="elec_stat" required>
-                <datalist id="elec_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="upholstery">Upholstery</label>
-                <input type="text" class="form-control" id="upholstery" placeholder="" formControlName="upholstery" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="up_started">Upholstery Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="up_started" ngbDatepicker #up_started="ngbDatepicker" formControlName="up_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="up_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="up_stat">Upholstery Status</label>
-                <input class="form-control" list="up_stats" name="up_stat" id="up_stat" formControlName="up_stat" required>
-                <datalist id="up_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="trimmer">Trimmer</label>
-                <input type="text" class="form-control" id="trimmer" placeholder="" formControlName="trimmer" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="trim_started">Trimmer Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="trim_started" ngbDatepicker #trim_started="ngbDatepicker" formControlName="trim_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="trim_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="trim_stat">Trimmer Status</label>
-                <input class="form-control" list="trim_stats" name="trim_stat" id="trim_stat" formControlName="trim_stat" required>
-                <datalist id="trim_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="dashboard">Dashboard</label>
-                <input type="text" class="form-control" id="dashboard" placeholder="" formControlName="dashboard" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="dash_started">Dashboard Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="dash_started" ngbDatepicker #dash_started="ngbDatepicker" formControlName="dash_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="dash_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="dash_stat">Dashboard Status</label>
-                <input class="form-control" list="dash_stats" name="dash_stat" id="dash_stat" formControlName="dash_stat" required>
-                <datalist id="dash_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="detailing">Detailing</label>
-                <input type="text" class="form-control" id="detailing" placeholder="" formControlName="detailing" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="det_started">Detailing Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="det_started" ngbDatepicker #det_started="ngbDatepicker" formControlName="det_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="det_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="dash_stat">Detailing Status</label>
-                <input class="form-control" list="det_stats" name="det_stat" id="det_stat" formControlName="det_stat" required>
-                <datalist id="det_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="qc">QC</label>
-                <input type="text" class="form-control" id="qc" placeholder="" formControlName="qc" required>
-              </div>
-              <div class="form-group col-md-4">
-                <label class="entry-label" for="qc_started">QC Started</label>
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd"
-                         name="qc_started" ngbDatepicker #qc_started="ngbDatepicker" formControlName="qc_started">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="qc_started.toggle()" type="button"></button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="dash_stat">QC Status</label>
-                <input class="form-control" list="qc_stats" name="qc_stat" id="qc_stat" formControlName="qc_stat" required>
-                <datalist id="qc_stats">
-                  <option value="ongoing">
-                  <option value="onhold">
-                  <option value="done">
-                </datalist>
               </div>
             </div>
-          </ng-template>
+            <div class="form-group col-md-4">
+              <label for="paint_stat">Conversion Status</label>
+              <input
+                class="form-control"
+                list="con_stats"
+                name="con_stat"
+                id="con_stat"
+                formControlName="con_stat"
+                required
+              />
+              <datalist id="con_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="sold_to">Sold To</label>
+              <input
+                type="text"
+                class="form-control"
+                id="sold_to"
+                placeholder=""
+                formControlName="sold_to"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="painting">Painting</label>
+              <input
+                type="text"
+                class="form-control"
+                id="painting"
+                placeholder=""
+                formControlName="painting"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="paint_started"
+                >Painting Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="paint_started"
+                  ngbDatepicker
+                  #paint="ngbDatepicker"
+                  formControlName="paint_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="paint.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="paint_stat">Painting Status</label>
+              <input
+                class="form-control"
+                list="paint_stats"
+                name="paint_stat"
+                id="paint_stat"
+                formControlName="paint_stat"
+                required
+              />
+              <datalist id="paint_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="mechanical">Mechanical</label>
+              <input
+                type="text"
+                class="form-control"
+                id="mechanical"
+                placeholder=""
+                formControlName="mechanical"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="mec_started"
+                >Mechanical Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="mec_started"
+                  ngbDatepicker
+                  #mec_started="ngbDatepicker"
+                  formControlName="mec_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="mec_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="mec_stat">Mechanical Status</label>
+              <input
+                class="form-control"
+                list="mec_stats"
+                name="mec_stat"
+                id="mec_stat"
+                formControlName="mec_stat"
+                required
+              />
+              <datalist id="mec_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="electrical">Electrical</label>
+              <input
+                type="text"
+                class="form-control"
+                id="electrical"
+                placeholder=""
+                formControlName="electrical"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="elec_started"
+                >Electrical Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="elec_started"
+                  ngbDatepicker
+                  #elec_started="ngbDatepicker"
+                  formControlName="elec_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="elec_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="mec_stat">Electrical Status</label>
+              <input
+                class="form-control"
+                list="elec_stats"
+                name="mec_stat"
+                id="elec_stat"
+                formControlName="elec_stat"
+                required
+              />
+              <datalist id="elec_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="upholstery">Upholstery</label>
+              <input
+                type="text"
+                class="form-control"
+                id="upholstery"
+                placeholder=""
+                formControlName="upholstery"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="up_started"
+                >Upholstery Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="up_started"
+                  ngbDatepicker
+                  #up_started="ngbDatepicker"
+                  formControlName="up_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="up_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="up_stat">Upholstery Status</label>
+              <input
+                class="form-control"
+                list="up_stats"
+                name="up_stat"
+                id="up_stat"
+                formControlName="up_stat"
+                required
+              />
+              <datalist id="up_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="trimmer">Trimmer</label>
+              <input
+                type="text"
+                class="form-control"
+                id="trimmer"
+                placeholder=""
+                formControlName="trimmer"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="trim_started"
+                >Trimmer Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="trim_started"
+                  ngbDatepicker
+                  #trim_started="ngbDatepicker"
+                  formControlName="trim_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="trim_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="trim_stat">Trimmer Status</label>
+              <input
+                class="form-control"
+                list="trim_stats"
+                name="trim_stat"
+                id="trim_stat"
+                formControlName="trim_stat"
+                required
+              />
+              <datalist id="trim_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="dashboard">Dashboard</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dashboard"
+                placeholder=""
+                formControlName="dashboard"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="dash_started"
+                >Dashboard Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="dash_started"
+                  ngbDatepicker
+                  #dash_started="ngbDatepicker"
+                  formControlName="dash_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="dash_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dash_stat">Dashboard Status</label>
+              <input
+                class="form-control"
+                list="dash_stats"
+                name="dash_stat"
+                id="dash_stat"
+                formControlName="dash_stat"
+                required
+              />
+              <datalist id="dash_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="detailing">Detailing</label>
+              <input
+                type="text"
+                class="form-control"
+                id="detailing"
+                placeholder=""
+                formControlName="detailing"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="det_started"
+                >Detailing Started</label
+              >
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="det_started"
+                  ngbDatepicker
+                  #det_started="ngbDatepicker"
+                  formControlName="det_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="det_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dash_stat">Detailing Status</label>
+              <input
+                class="form-control"
+                list="det_stats"
+                name="det_stat"
+                id="det_stat"
+                formControlName="det_stat"
+                required
+              />
+              <datalist id="det_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="qc">QC</label>
+              <input
+                type="text"
+                class="form-control"
+                id="qc"
+                placeholder=""
+                formControlName="qc"
+                required
+              />
+            </div>
+            <div class="form-group col-md-4">
+              <label class="entry-label" for="qc_started">QC Started</label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  placeholder="yyyy-mm-dd"
+                  name="qc_started"
+                  ngbDatepicker
+                  #qc_started="ngbDatepicker"
+                  formControlName="qc_started"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary calendar"
+                    (click)="qc_started.toggle()"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="dash_stat">QC Status</label>
+              <input
+                class="form-control"
+                list="qc_stats"
+                name="qc_stat"
+                id="qc_stat"
+                formControlName="qc_stat"
+                required
+              />
+              <datalist id="qc_stats">
+                <option value="ongoing"></option>
+                <option value="onhold"></option>
+                <option value="done"></option>
+              </datalist>
+            </div>
+          </div>
+          <div class="form-group col-md-8 remarks">
+            <label class="entry-label" for="remarks">Remarks</label>
+            <textarea
+              class="entry-form"
+              type="text"
+              id="remarks"
+              class="form-control entry-form"
+              placeholder="Remarks"
+              formControlName="remarks"
+            ></textarea>
+          </div>
+        </ng-template>
       </form>
     </div>
 
     <div class="modal-footer" *ngIf="editSuccess === false">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-success" (click)="onSubmit()">Save</button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="modal.close('Save click')"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="onSubmit()"
+      >
+        Save
+      </button>
     </div>
     <div class="modal-footer" *ngIf="editSuccess === true">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="modal.close('Save click')"
+      >
+        Close
+      </button>
     </div>
   </ng-template>
-  <hr>
+  <hr />
 </section>
 <section>
   <ng-template #del let-modal>
@@ -486,27 +676,36 @@
     <div class="modal-body">
       <form>
         <div class="modal-body">
-          <div *ngIf="delSuccess === true ; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock><span class="text-success">{{ delMessage }}</span></ng-template>
+          <div
+            *ngIf="delSuccess === true; then thenBlock; else elseBlock"
+          ></div>
+          <ng-template #thenBlock
+            ><span class="text-success">{{ delMessage }}</span></ng-template
+          >
           <ng-template #elseBlock>
             <p>Are you sure you want to delete this data?</p>
             <p>Chassis #: {{ chassisNum }}</p>
-            <p>All information associated to this entry will be permanently deleted.
-            <span class="text-danger">This operation can not be undone.</span>
+            <p>
+              All information associated to this entry will be permanently
+              deleted.
+              <span class="text-danger">This operation can not be undone.</span>
             </p>
           </ng-template>
         </div>
       </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
-      <button type="button" class="btn btn-outline-danger" (click)="onDelete()">Delete</button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="modal.close('Save click')"
+      >
+        Cancel
+      </button>
+      <button type="button" class="btn btn-outline-danger" (click)="onDelete()">
+        Delete
+      </button>
     </div>
-    <div class="modal-footer">
-
-    </div>
+    <div class="modal-footer"></div>
   </ng-template>
-
 </section>
-
-

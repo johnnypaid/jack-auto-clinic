@@ -2,18 +2,17 @@
   <section>
     <h3>Entry Data</h3>
     <div class="container entry-search">
-      <form [formGroup]="searchForm">
+      <form [formGroup]="searchForm" class="form-inline float-sm-right mb-3">
         <div class="d-flex justify-content-end">
           <input
-            class=""
             type="text"
             id=""
-            class="entry-search-input"
+            class="form-control entry-search-input mx-1"
             placeholder="Keyword"
             formControlName="searchInput"
           />
           <select
-            class="d-inline browser-default entry-select"
+            class="form-control mx-1"
             formControlName="searhOption"
             placeholder="Option"
           >
@@ -23,7 +22,7 @@
           </select>
           <button
             type="button"
-            class="btn btn-outline-dark entry-search-btn"
+            class="btn btn-secondary entry-search-btn mx-1"
             (click)="search()"
             style="margin-top: 0px"
           >
@@ -33,12 +32,18 @@
       </form>
     </div>
 
-    <div *ngIf="showProdEntry" class="container text-center data">
+    <div *ngIf="showProdEntry" class="data">
       <p class="">Total data: {{entryTable.length}}</p>
-      <p class="">In production: [{{chasisProd.length}}]</p>
+      <p class="">In production: {{chasisProd.length}}</p>
       <ul class="list-inline">
         <li class="list-inline-item" *ngFor="let data of chasisProd">
           {{ data.chassisNum }}
+        </li>
+      </ul>
+      <p class="">Not in production: {{chasisNotInProd.length}}</p>
+      <ul class="list-inline">
+        <li class="list-inline-item" *ngFor="let data of chasisNotInProd">
+          {{ data }}
         </li>
       </ul>
     </div>
@@ -141,7 +146,7 @@
         <h4 class="modal-title" id="modal-basic-title">Entry Update</h4>
       </div>
       <div class="modal-body">
-        <form [formGroup]="entryFormUpdate">
+        <form [formGroup]="entryFormUpdate" class="updateForm">
           <div
             *ngIf="editSuccess === true; then thenBlock; else elseBlock"
           ></div>

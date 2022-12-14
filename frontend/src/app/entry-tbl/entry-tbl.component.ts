@@ -20,6 +20,7 @@ export class EntryTblComponent implements OnInit, OnDestroy {
   closeResult = '';
   model: NgbDateStruct | undefined;
   chasisProd: any[] = [];
+  chasisNotInProd: any[] = [];
   showProdEntry = false;
   arrIntersect: any;
 
@@ -275,18 +276,32 @@ export class EntryTblComponent implements OnInit, OnDestroy {
       this.entryTable = [];
       this.entryTblData = resdata.body;
       this.entryTable = this.entryTblData.data;
+      // chasis in production
       this.chasisProd = this.entryTblData.results;
 
-      this.entryTable.length > 0 ? this.filterArrayProd() : '';
+      this.chasisNotInProd = this.fintersection();
+      console.log(this.chasisNotInProd);
 
       this.entryTbl.setTable(resdata.body);
       this.onTableDataChange(event);
     });
   }
 
-  filterArrayProd() {
-    console.log(this.entryTable);
-    console.log(this.chasisProd);
+  fintersection() {
+    let temp1 = [];
+    let temp2: any = [];
+
+    for (let i = 0; i < this.entryTable.length; i++) {
+      temp1.push(this.entryTable[i].chassisNum);
+    }
+
+    for (let i = 0; i < this.chasisProd.length; i++) {
+      temp2.push(this.chasisProd[i].chassisNum);
+    }
+
+    return temp1.filter(function (n) {
+      return temp2.indexOf(n) === -1;
+    });
   }
 
   onTableDataChange(event: any) {
